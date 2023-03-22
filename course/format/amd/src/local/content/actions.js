@@ -346,6 +346,17 @@ export default class extends BaseComponent {
         );
 
         // Open the cm section node if possible (Bootstrap 4 uses jQuery to interact with collapsibles).
+<<<<<<< HEAD
+        // All jQuery int this code can be replaced when MDL-71979 is integrated.
+        const sectionnode = currentElement.closest(this.selectors.SECTIONNODE);
+        const toggler = jQuery(sectionnode).find(this.selectors.MODALTOGGLER);
+        let collapsibleId = toggler.data('target') ?? toggler.attr('href');
+        if (collapsibleId) {
+            // We cannot be sure we have # in the id element name.
+            collapsibleId = collapsibleId.replace('#', '');
+            jQuery(`#${collapsibleId}`).collapse('toggle');
+        }
+=======
         // All jQuery in this code can be replaced when MDL-71979 is integrated.
         cmIds.forEach(cmId => {
             const currentElement = modalBody.querySelector(`${this.selectors.CMLINK}[data-id='${cmId}']`);
@@ -359,6 +370,7 @@ export default class extends BaseComponent {
                 jQuery(expandNode).collapse('show');
             }
         });
+>>>>>>> master
 
         modalBody.addEventListener('click', (event) => {
             const target = event.target;

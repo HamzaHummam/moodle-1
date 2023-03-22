@@ -567,7 +567,11 @@ class core_backup_renderer extends plugin_renderer_base {
         if ($method != 'post') {
             $method = 'get';
         }
+<<<<<<< HEAD
+        $button = new single_button($url, get_string('continue'), $method, true);
+=======
         $button = new single_button($url, get_string('continue'), $method, single_button::BUTTON_PRIMARY);
+>>>>>>> master
         $button->class = 'continuebutton';
         return $this->render($button);
     }

@@ -124,7 +124,169 @@ $PAGE->add_body_class('limitedwidth');
 
 if ($section && $section > 0) {
 
+<<<<<<< HEAD
+    if ($section and $section > 0) {
+
+        // Get section details and check it exists.
+        $modinfo = get_fast_modinfo($course);
+        $coursesections = $modinfo->get_section_info($section, MUST_EXIST);
+
+        // Check user is allowed to see it.
+        if (!$coursesections->uservisible) {
+            // Check if coursesection has conditions affecting availability and if
+            // so, output availability info.
+            if ($coursesections->visible && $coursesections->availableinfo) {
+                $sectionname     = get_section_name($course, $coursesections);
+                $message = get_string('notavailablecourse', '', $sectionname);
+                redirect(course_get_url($course), $message, null, \core\output\notification::NOTIFY_ERROR);
+            } else {
+                // Note: We actually already know they don't have this capability
+                // or uservisible would have been true; this is just to get the
+                // correct error message shown.
+                require_capability('moodle/course:viewhiddensections', $context);
+            }
+        }
+    }
+
+    // Fix course format if it is no longer installed
+    $format = course_get_format($course);
+    $course->format = $format->get_format();
+
+    $PAGE->set_pagetype('course-view-' . $course->format);
+    $PAGE->set_other_editing_capability('moodle/course:update');
+    $PAGE->set_other_editing_capability('moodle/course:manageactivities');
+    $PAGE->set_other_editing_capability('moodle/course:activityvisibility');
+    if (course_format_uses_sections($course->format)) {
+        $PAGE->set_other_editing_capability('moodle/course:sectionvisibility');
+        $PAGE->set_other_editing_capability('moodle/course:movesections');
+    }
+
+    // Preload course format renderer before output starts.
+    // This is a little hacky but necessary since
+    // format.php is not included until after output starts
+    $format->get_renderer($PAGE);
+
+    if ($reset_user_allowed_editing) {
+        // ugly hack
+        unset($PAGE->_user_allowed_editing);
+    }
+
+    if (!isset($USER->editing)) {
+        $USER->editing = 0;
+    }
+    if ($PAGE->user_allowed_editing()) {
+        if (($edit == 1) and confirm_sesskey()) {
+            $USER->editing = 1;
+            // Redirect to site root if Editing is toggled on frontpage
+            if ($course->id == SITEID) {
+                redirect($CFG->wwwroot .'/?redirect=0');
+            } else if (!empty($return)) {
+                redirect($CFG->wwwroot . $return);
+            } else {
+                $url = new moodle_url($PAGE->url, array('notifyeditingon' => 1));
+                redirect($url);
+            }
+        } else if (($edit == 0) and confirm_sesskey()) {
+            $USER->editing = 0;
+            if(!empty($USER->activitycopy) && $USER->activitycopycourse == $course->id) {
+                $USER->activitycopy       = false;
+                $USER->activitycopycourse = NULL;
+            }
+            // Redirect to site root if Editing is toggled on frontpage
+            if ($course->id == SITEID) {
+                redirect($CFG->wwwroot .'/?redirect=0');
+            } else if (!empty($return)) {
+                redirect($CFG->wwwroot . $return);
+            } else {
+                redirect($PAGE->url);
+            }
+        }
+
+        if (has_capability('moodle/course:sectionvisibility', $context)) {
+            if ($hide && confirm_sesskey()) {
+                set_section_visible($course->id, $hide, '0');
+                redirect($PAGE->url);
+            }
+
+            if ($show && confirm_sesskey()) {
+                set_section_visible($course->id, $show, '1');
+                redirect($PAGE->url);
+            }
+        }
+
+        if (!empty($section) && !empty($move) &&
+                has_capability('moodle/course:movesections', $context) && confirm_sesskey()) {
+            $destsection = $section + $move;
+            if (move_section_to($course, $section, $destsection)) {
+                if ($course->id == SITEID) {
+                    redirect($CFG->wwwroot . '/?redirect=0');
+                } else {
+                    if ($format->get_course_display() == COURSE_DISPLAY_MULTIPAGE) {
+                        redirect(course_get_url($course));
+                    } else {
+                        redirect(course_get_url($course, $destsection));
+                    }
+                }
+            } else {
+                echo $OUTPUT->notification('An error occurred while moving a section');
+            }
+        }
+    } else {
+        $USER->editing = 0;
+    }
+
+    $SESSION->fromdiscussion = $PAGE->url->out(false);
+
+
+    if ($course->id == SITEID) {
+        // This course is not a real course.
+        redirect($CFG->wwwroot .'/?redirect=0');
+    }
+
+    // Determine whether the user has permission to download course content.
+    $candownloadcourse = \core\content::can_export_context($context, $USER);
+
+    // We are currently keeping the button here from 1.x to help new teachers figure out
+    // what to do, even though the link also appears in the course admin block.  It also
+    // means you can back out of a situation where you removed the admin block. :)
+    if ($PAGE->user_allowed_editing()) {
+        $buttons = $OUTPUT->edit_button($PAGE->url);
+        $PAGE->set_button($buttons);
+    }
+
+    // If viewing a section, make the title more specific
+    if ($section and $section > 0 and course_format_uses_sections($course->format)) {
+        $sectionname = get_string('sectionname', "format_$course->format");
+        $sectiontitle = get_section_name($course, $section);
+        $PAGE->set_title(get_string('coursesectiontitle', 'moodle', array('course' => $course->fullname, 'sectiontitle' => $sectiontitle, 'sectionname' => $sectionname)));
+    } else {
+        $PAGE->set_title(get_string('coursetitle', 'moodle', array('course' => $course->fullname)));
+    }
+
+    $PAGE->set_heading($course->fullname);
+    echo $OUTPUT->header();
+
+    if ($USER->editing == 1) {
+
+        // MDL-65321 The backup libraries are quite heavy, only require the bare minimum.
+        require_once($CFG->dirroot . '/backup/util/helper/async_helper.class.php');
+
+        if (async_helper::is_async_pending($id, 'course', 'backup')) {
+            echo $OUTPUT->notification(get_string('pendingasyncedit', 'backup'), 'warning');
+        }
+    }
+
+    // Course wrapper start.
+    echo html_writer::start_tag('div', array('class'=>'course-content'));
+
+    // make sure that section 0 exists (this function will create one if it is missing)
+    course_create_sections_if_missing($course, 0);
+
+    // get information about course modules and existing module types
+    // format.php in course formats may rely on presence of these variables
+=======
     // Get section details and check it exists.
+>>>>>>> master
     $modinfo = get_fast_modinfo($course);
     $coursesections = $modinfo->get_section_info($section, MUST_EXIST);
 

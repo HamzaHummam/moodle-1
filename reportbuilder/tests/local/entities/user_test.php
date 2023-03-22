@@ -31,6 +31,8 @@ use advanced_testcase;
 class user_test extends advanced_testcase {
 
     /**
+<<<<<<< HEAD
+=======
      * Test getting user identity column
      */
     public function test_get_identity_column(): void {
@@ -67,6 +69,7 @@ class user_test extends advanced_testcase {
     }
 
     /**
+>>>>>>> master
      * Data provider for {@see test_get_name_fields_select}
      *
      * @return array

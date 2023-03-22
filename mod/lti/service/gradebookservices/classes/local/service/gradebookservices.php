@@ -148,6 +148,8 @@ class gradebookservices extends service_base {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * For submission review, if there is a dedicated URL, use it as the target link.
      *
      * @param string $messagetype message type for this launch
@@ -184,6 +186,7 @@ class gradebookservices extends service_base {
     }
 
     /**
+>>>>>>> master
      * Return an array of key/claim mapping allowing LTI 1.1 custom parameters
      * to be transformed to LTI 1.3 claims.
      *

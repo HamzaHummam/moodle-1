@@ -31,6 +31,8 @@ function xmldb_data_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
+=======
     if ($oldversion < 2022081600) {
         // Define key userid (foreign) to be added to data_records.
         $table = new xmldb_table('data_records');
@@ -44,6 +46,7 @@ function xmldb_data_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+>>>>>>> master
 
     return true;
 }

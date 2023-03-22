@@ -24,9 +24,12 @@ namespace core_analytics;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class dataset_manager_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /** @var array Store dataset top rows. */
     protected array $sharedtoprows = [];
+>>>>>>> master
 
     /**
      * setUp

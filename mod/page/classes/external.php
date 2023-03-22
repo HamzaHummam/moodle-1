@@ -189,9 +189,21 @@ class mod_page_external extends external_api {
         return new external_single_structure(
             array(
                 'pages' => new external_multiple_structure(
+<<<<<<< HEAD
+                    new external_single_structure(
+                        array(
+                            'id' => new external_value(PARAM_INT, 'Module id'),
+                            'coursemodule' => new external_value(PARAM_INT, 'Course module id'),
+                            'course' => new external_value(PARAM_INT, 'Course id'),
+                            'name' => new external_value(PARAM_RAW, 'Page name'),
+                            'intro' => new external_value(PARAM_RAW, 'Summary'),
+                            'introformat' => new external_format_value('intro', VALUE_REQUIRED, 'Summary format'),
+                            'introfiles' => new external_files('Files in the introduction text'),
+=======
                     new external_single_structure(array_merge(
                         helper_for_get_mods_by_courses::standard_coursemodule_elements_returns(),
                         [
+>>>>>>> master
                             'content' => new external_value(PARAM_RAW, 'Page content'),
                             'contentformat' => new external_format_value('content', VALUE_REQUIRED, 'Content format'),
                             'contentfiles' => new external_files('Files in the content'),

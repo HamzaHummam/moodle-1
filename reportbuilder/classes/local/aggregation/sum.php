@@ -75,6 +75,13 @@ class sum extends base {
      * @param int $columntype
      * @return mixed
      */
+<<<<<<< HEAD
+    public static function format_value($value, array $values, array $callbacks) {
+        if (reset($values) === null) {
+            return '';
+        }
+        return (int) reset($values);
+=======
     public static function format_value($value, array $values, array $callbacks, int $columntype) {
         $firstvalue = reset($values);
         if ($firstvalue === null) {
@@ -86,5 +93,6 @@ class sum extends base {
         }
 
         return parent::format_value($value, $values, $callbacks, $columntype);
+>>>>>>> master
     }
 }

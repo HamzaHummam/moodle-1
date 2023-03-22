@@ -15,6 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_quiz;
+<<<<<<< HEAD
+
+use quiz_attempt;
+=======
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -31,7 +36,11 @@ require_once($CFG->dirroot . '/mod/quiz/report/reportlib.php');
  */
 class reportlib_test extends \advanced_testcase {
     public function test_quiz_report_index_by_keys() {
+<<<<<<< HEAD
+        $datum = array();
+=======
         $datum = [];
+>>>>>>> master
         $object = new \stdClass();
         $object->qid = 3;
         $object->aid = 101;

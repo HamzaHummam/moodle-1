@@ -104,9 +104,15 @@ abstract class WriterAbstract implements WriterInterface
          */
         $this->globalFunctionsHelper->header('Content-Type: '.static::$headerContentType);
         $this->globalFunctionsHelper->header(
+<<<<<<< HEAD:lib/spout/src/Spout/Writer/WriterAbstract.php
+            'Content-Disposition: attachment; ' .
+            'filename="' . rawurlencode($this->outputFilePath) . '"; ' .
+            'filename*=UTF-8\'\'' . rawurlencode($this->outputFilePath)
+=======
             'Content-Disposition: attachment; '.
             'filename="'.rawurlencode($this->outputFilePath).'"; '.
             'filename*=UTF-8\'\''.rawurlencode($this->outputFilePath)
+>>>>>>> master:lib/openspout/src/Writer/WriterAbstract.php
         );
 
         /*

@@ -354,7 +354,11 @@ class local_structure_slot_random_test extends \advanced_testcase {
 
         // Create a quiz.
         $quizgenerator = $this->getDataGenerator()->get_plugin_generator('mod_quiz');
+<<<<<<< HEAD
+        $quiz = $quizgenerator->create_instance(array('course' => $SITE->id, 'questionsperpage' => 3, 'grade' => 100.0));
+=======
         $quiz = $quizgenerator->create_instance(['course' => $SITE->id, 'questionsperpage' => 3, 'grade' => 100.0]);
+>>>>>>> master
         $quizcontext = \context_module::instance($quiz->cmid);
 
         // Create a question category in the system context.

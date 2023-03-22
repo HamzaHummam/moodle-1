@@ -104,6 +104,11 @@ class get_bigbluebuttonbns_by_courses extends external_api {
                         helper_for_get_mods_by_courses::standard_coursemodule_elements_returns(),
                         [
                             'meetingid' => new external_value(PARAM_RAW, 'Meeting id'),
+<<<<<<< HEAD
+                            'introformat' => new external_format_value('intro', VALUE_REQUIRED, 'Summary format'),
+                            'introfiles' => new external_files('Files in the introduction text'),
+=======
+>>>>>>> master
                             'timemodified' => new external_value(PARAM_INT, 'Last time the instance was modified'),
                         ]
                     ))

@@ -852,6 +852,8 @@ foreach ($pluginswithfunction as $plugins) {
 \core\session\manager::start();
 // Prevent ignoresesskey hack from getting carried over to a next page.
 unset($USER->ignoresesskey);
+<<<<<<< HEAD
+=======
 
 if (!empty($CFG->proxylogunsafe) || !empty($CFG->proxyfixunsafe)) {
     if (!empty($CFG->proxyfixunsafe)) {
@@ -881,6 +883,7 @@ if (!empty($CFG->proxylogunsafe) || !empty($CFG->proxyfixunsafe)) {
     }
 
 }
+>>>>>>> master
 
 // Set default content type and encoding, developers are still required to use
 // echo $OUTPUT->header() everywhere, anything that gets set later should override these headers.

@@ -1000,7 +1000,11 @@ if ($mformpost->is_cancelled()) {
 
         foreach ($groupstopostto as $group) {
             if (!$capabilitymanager->can_create_discussions($USER, $group)) {
+<<<<<<< HEAD
+                print_error('cannotcreatediscussion', 'forum');
+=======
                 throw new \moodle_exception('cannotcreatediscussion', 'forum');
+>>>>>>> master
             }
 
             $discussion->groupid = $group;

@@ -331,14 +331,22 @@ Feature: Perform basic calendar functionality
     And I click on "My own user event" "link"
     Then I should see "User event"
     And I should not see "Group 1"
+<<<<<<< HEAD
+    And I click on "Edit" "button"
+=======
     And I click on "Edit" "button" in the "My own user event" "dialogue"
+>>>>>>> master
     And I set the following fields to these values:
       | Event title | Site event |
       | Type of event | site |
     And I press "Save"
     And I click on "Site event" "link"
     And I should see "Site event"
+<<<<<<< HEAD
+    And I click on "Edit" "button"
+=======
     And I click on "Edit" "button" in the "Site event" "dialogue"
+>>>>>>> master
     And I set the following fields to these values:
       | Event title | Course 1 event |
       | Type of event | course |
@@ -347,7 +355,11 @@ Feature: Perform basic calendar functionality
     And I press "Save"
     And I click on "Course 1 event" "link"
     And I should see "Course event"
+<<<<<<< HEAD
+    And I click on "Edit" "button"
+=======
     And I click on "Edit" "button" in the "Course 1 event" "dialogue"
+>>>>>>> master
     And I set the following fields to these values:
       | Event title | Category event |
       | Type of event | category |

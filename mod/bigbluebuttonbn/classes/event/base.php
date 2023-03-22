@@ -79,6 +79,7 @@ abstract class base extends \core\event\base {
      */
     public function get_url() {
         return new moodle_url('/mod/bigbluebuttonbn/view.php', ['id' => $this->contextinstanceid]);
+<<<<<<< HEAD
     }
 
     /**
@@ -91,6 +92,43 @@ abstract class base extends \core\event\base {
         $this->data['crud'] = $crud;
         $this->data['edulevel'] = $edulevel;
         $this->data['objecttable'] = 'bigbluebuttonbn';
+    }
+
+    /**
+     * Return legacy data for add_to_log().
+     *
+     * @return array
+     */
+    protected function get_legacy_logdata() {
+        if (isset($this->legacylogdata)) {
+            return $this->legacylogdata;
+        }
+
+        return null;
+=======
+>>>>>>> master
+    }
+
+    /**
+     * Init method.
+     *
+     * @param string $crud
+     * @param int $edulevel
+     */
+<<<<<<< HEAD
+    public function set_legacy_logdata($action = '', $info = '', $url = '') {
+        $fullurl = 'view.php?id=' . $this->contextinstanceid;
+        if ($url != '') {
+            $fullurl .= '&' . $url;
+        }
+
+        $this->legacylogdata = [$this->courseid, 'bigbluebuttonbn', $action, $fullurl, $info, $this->contextinstanceid];
+=======
+    protected function init($crud = 'r', $edulevel = self::LEVEL_PARTICIPATING) {
+        $this->data['crud'] = $crud;
+        $this->data['edulevel'] = $edulevel;
+        $this->data['objecttable'] = 'bigbluebuttonbn';
+>>>>>>> master
     }
 
     /**

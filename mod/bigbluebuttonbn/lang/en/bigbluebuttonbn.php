@@ -48,7 +48,11 @@ $string['bigbluebuttondisablednotification_subject'] = 'BigBlueButton activity m
 $string['bigbluebuttondisablednotification'] = 'The BigBlueButton activity module has been disabled and any existing BigBlueButton course activities are currently not accessible. Prior to re-enabling this plugin, please ensure that you have read and accepted the <a href="{$a}" target="_blank">data processing agreement</a> with Blindside Networks Inc.';
 $string['cannotperformaction'] = 'Cannot perform action {$a} on this recording';
 $string['enablingbigbluebutton'] = 'Enabling BigBlueButton activity';
+<<<<<<< HEAD
+$string['enablingbigbluebuttondpainfo'] = 'In order to meet your data protection obligations, before enabling this plugin, you must confirm that you have read and accepted the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
+=======
 $string['enablingbigbluebuttondpainfo'] = 'In order to meet your data protection obligations, prior to enabling this plugin, you may need to ensure that you have read and accepted the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
+>>>>>>> master
 $string['dpainfonotsigned'] = 'Before enabling this plugin, you must confirm that you have read and accepted the <a href="{$a}">Blindside Networks data processing agreement</a>.';
 $string['indicator:cognitivedepth'] = 'BigBlueButton cognitive';
 $string['indicator:cognitivedepth_help'] = 'This indicator is based on the cognitive depth reached by the student in a BigBlueButton activity.';
@@ -131,10 +135,13 @@ $string['minute'] = 'minute';
 $string['minutes'] = 'minutes';
 
 $string['config_dpa_note'] = 'Note: In order to meet your data protection obligations, before using a service provider for this plugin, you must ensure that you have read and accepted the service provider\'s data processing agreement. For the default free BigBlueButton service, this is the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
+<<<<<<< HEAD
+=======
 
 $string['config_guestaccess_enabled'] = 'External guest access';
 $string['config_guestaccess_enabled_description'] = 'Allow users without an account on your site to access the room.';
 
+>>>>>>> master
 $string['config_general'] = 'General settings';
 $string['config_general_description'] = 'These settings are always used.';
 $string['config_server_url'] = 'BigBlueButton server URL';
@@ -417,9 +424,15 @@ $string['mod_form_field_disablepublicchat'] = 'Disable public chat';
 $string['mod_form_field_disablenote'] = 'Disable shared notes';
 $string['mod_form_field_hideuserlist'] = 'Hide user list';
 $string['mod_form_locksettings'] = 'Lock settings';
+<<<<<<< HEAD
+$string['report_join_info']  = 'Has joined the room {$a} time(s)';
+$string['report_play_recording_info']  = 'Has played a recording {$a} time(s)';
+$string['report_room_view']  = 'Has viewed the room';
+=======
 $string['report_join_info']  = '{$a} meeting(s)';
 $string['report_play_recording_info']  = '{$a} recording(s) played';
 $string['report_room_view']  = 'viewed';
+>>>>>>> master
 $string['starts_at'] = 'Starts';
 $string['started_at'] = 'Started';
 $string['ends_at'] = 'Ends';

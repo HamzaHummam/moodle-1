@@ -153,9 +153,19 @@ if (($launchcontainer == LTI_LAUNCH_CONTAINER_WINDOW)) {
     echo html_writer::end_tag('p');
 } else {
     $content = '';
+<<<<<<< HEAD
+    if ($config->lti_ltiversion === LTI_VERSION_1P3) {
+        $content = lti_initiate_login($cm->course, $id, $lti, $config);
+    }
+
+    // Build the allowed URL, since we know what it will be from $toolurl.
+    // If the specified URL is invalid, the iframe won't load, but we still want to avoid parse related errors here.
+    // So we set an empty default allowed URL, and only build a real one if the parse is successful.
+=======
     // Build the allowed URL, since we know what it will be from $lti->toolurl,
     // If the specified toolurl is invalid the iframe won't load, but we still want to avoid parse related errors here.
     // So we set an empty default allowed url, and only build a real one if the parse is successful.
+>>>>>>> master
     $ltiallow = '';
     $urlparts = parse_url($toolurl);
     if ($urlparts && array_key_exists('scheme', $urlparts) && array_key_exists('host', $urlparts)) {

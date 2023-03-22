@@ -385,6 +385,8 @@ Feature: Group assignment submissions
     And I am on the "Assign 2" "assign activity" page logged in as student2
     And I should see "Submitted for grading" in the "Submission status" "table_row"
     And I should not see "Users who need to submit"
+<<<<<<< HEAD
+=======
 
   Scenario: Group submission does not use non-participation groups
     Given the following "courses" exist:
@@ -415,3 +417,4 @@ Feature: Group assignment submissions
     When I am on the "Test assignment name" Activity page logged in as student1
     Then I should see "Default group"
     And I should not see "Group 1"
+>>>>>>> master

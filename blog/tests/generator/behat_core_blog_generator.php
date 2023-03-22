@@ -15,6 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+<<<<<<<< HEAD:blog/tests/generator/behat_core_blog_generator.php
  * Behat data generator for core_blog.
  *
  * @package    core_blog
@@ -47,5 +48,41 @@ class behat_core_blog_generator extends behat_generator_base {
                 'switchids' => ['user' => 'userid'],
             ],
         ];
+========
+ * Cleanup adhoc task metadata.
+ *
+ * @package    core
+ * @copyright  2022 Catalyst IT Australia Pty Ltd
+ * @author     Cameron Ball <cameron@cameron1729.xyz>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace core\task;
+
+/**
+ * Adhoc task metadata cleanup task.
+ *
+ * @package    core
+ * @copyright  2022 Catalyst IT Australia Pty Ltd
+ * @author     Cameron Ball <cameron@cameron1729.xyz>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class task_lock_cleanup_task extends scheduled_task {
+
+    /**
+     * Get a descriptive name for this task.
+     *
+     * @return string
+     */
+    public function get_name() {
+        return get_string('tasklockcleanuptask', 'admin');
+    }
+
+    /**
+     * Processes task.
+     */
+    public function execute() {
+        \core\task\manager::cleanup_metadata();
+>>>>>>>> master:lib/classes/task/task_lock_cleanup_task.php
     }
 }

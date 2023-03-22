@@ -15,7 +15,10 @@ Feature: Custom profile fields creation using UI
 
     Examples:
       | shortname | name       |
+<<<<<<< HEAD
+=======
       | checkbox  | Checkbox   |
+>>>>>>> master
       | datetime  | Date/Time  |
       | textarea  | Text area  |
       | textinput | Text input |
@@ -38,7 +41,11 @@ Feature: Custom profile fields creation using UI
     Then I should see "Drop-down menu field"
 
   @javascript
+<<<<<<< HEAD
+  Scenario: Manual creation of checkbox and social custom profile field type
+=======
   Scenario: Manual creation of social custom profile field type
+>>>>>>> master
     Given I log in as "admin"
     And I navigate to "Users > Accounts > User profile fields" in site administration
     And I click on "Create a new profile field" "link"
@@ -48,3 +55,13 @@ Feature: Custom profile fields creation using UI
       | Short name    | social    |
     When I click on "Save changes" "button"
     Then I should see "Web page"
+<<<<<<< HEAD
+    And I click on "Create a new profile field" "link"
+    And I click on "Checkbox" "link"
+    And I set the following fields to these values:
+      | Short name                    | checkbox  |
+      | Name                          | Checkbox  |
+    When I click on "Save changes" "button"
+    Then I should see "Checkbox"
+=======
+>>>>>>> master

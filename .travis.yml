@@ -39,8 +39,13 @@ jobs:
         # First all the lowest php ones (8.0)
         - php: 8.0
           env: DB=none     TASK=CITEST
+<<<<<<< HEAD
+        - php: 7.3
+          env: DB=none     TASK=GRUNT    NVM_VERSION='lts/gallium'
+=======
         - php: 8.0
           env: DB=none     TASK=GRUNT
+>>>>>>> master
 
         - if: env(MOODLE_DATABASE) = "pgsql" OR env(MOODLE_DATABASE) = "all" OR env(MOODLE_DATABASE) IS NOT present
           php: 8.0
@@ -55,8 +60,13 @@ jobs:
           php: 8.1
           env: DB=none     TASK=CITEST
         - if: env(MOODLE_PHP) = "all"
+<<<<<<< HEAD
+          php: 8.0
+          env: DB=none     TASK=GRUNT    NVM_VERSION='lts/gallium'
+=======
           php: 8.1
           env: DB=none     TASK=GRUNT
+>>>>>>> master
 
         - if: env(MOODLE_PHP) = "all" AND (env(MOODLE_DATABASE) = "pgsql" OR env(MOODLE_DATABASE) = "all" OR env(MOODLE_DATABASE) IS NOT present)
           php: 8.1
@@ -103,8 +113,13 @@ install:
             sudo mount -t tmpfs -o size=1024m tmpfs /mnt/ramdisk
             sudo mv /var/lib/postgresql /mnt/ramdisk
             sudo ln -s /mnt/ramdisk/postgresql /var/lib/postgresql
+<<<<<<< HEAD
+            sudo service postgresql start 9.6
+            sh -c 'until pg_isready -p 5432; do echo "Waiting for the DB to be up..."; sleep 2; done'
+=======
             sudo service postgresql start
             sh -c 'until pg_isready -p $PGPORT; do echo "Waiting for the DB to be up..."; sleep 2; done'
+>>>>>>> master
         fi
     - >
         if [ "$TASK" = 'PHPUNIT' ];

@@ -16,8 +16,13 @@
 
 namespace quiz_responses;
 
+<<<<<<< HEAD
+use question_bank;
+use quiz_attempt;
+=======
 use mod_quiz\quiz_attempt;
 use question_bank;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

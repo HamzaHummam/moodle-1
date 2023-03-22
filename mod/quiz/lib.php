@@ -28,6 +28,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
+use core_question\statistics\questions\all_calculated_for_qubaid_condition;
+
+require_once($CFG->dirroot . '/calendar/lib.php');
+=======
 use mod_quiz\access_manager;
 use mod_quiz\form\add_random_form;
 use mod_quiz\grade_calculator;
@@ -38,6 +43,7 @@ use mod_quiz\question\qubaids_for_users_attempts;
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
 use mod_quiz\quiz_attempt;
 use mod_quiz\quiz_settings;
+>>>>>>> master
 
 require_once($CFG->dirroot . '/calendar/lib.php');
 

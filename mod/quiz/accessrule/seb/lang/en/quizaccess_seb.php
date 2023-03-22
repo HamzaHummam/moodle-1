@@ -49,7 +49,11 @@ $string['duplicatetemplate'] = 'A template with the same name already exists.';
 $string['edittemplate'] = 'Edit template';
 $string['enabled'] = 'Enabled';
 $string['error:ws:nokeyprovided'] = 'At least one Safe Exam Browser key must be provided.';
+<<<<<<< HEAD
+$string['error:ws:quiznotexists'] = 'Quiz not found matching course module id: {$a}';
+=======
 $string['error:ws:quiznotexists'] = 'Quiz not found matching course module ID: {$a}';
+>>>>>>> master
 $string['event:accessprevented'] = "Quiz access was prevented";
 $string['event:templatecreated'] = 'SEB template was created';
 $string['event:templatedeleted'] = 'SEB template was deleted';
@@ -180,7 +184,11 @@ $string['seb_use_upload'] = 'Yes – Upload my own config';
 $string['seb_userconfirmquit'] = 'Ask user to confirm quitting';
 $string['seb_userconfirmquit_help'] = 'If enabled, users have to confirm quitting of SEB when a quit link is detected.';
 $string['sebdownloadbutton'] = 'Download Safe Exam Browser';
+<<<<<<< HEAD
+$string['sebkeysvalidationfailed'] = 'SEB keys validation failed';
+=======
 $string['sebkeysvalidationfailed'] = 'Error validating SEB keys';
+>>>>>>> master
 $string['seblinkbutton'] = 'Launch Safe Exam Browser';
 $string['sebrequired'] = "This quiz has been configured so that students may only attempt it using the Safe Exam Browser.";
 $string['setting:autoreconfigureseb'] = 'Auto-configure SEB';

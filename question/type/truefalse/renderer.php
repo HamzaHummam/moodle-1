@@ -100,6 +100,11 @@ class qtype_truefalse_renderer extends qtype_renderer {
                 array('class' => 'qtext'));
 
         $result .= html_writer::start_tag('fieldset', array('class' => 'ablock'));
+<<<<<<< HEAD
+        $questionnumber = $options->add_question_identifier_to_label(get_string('selectone', 'qtype_truefalse'), true, true);
+        $result .= html_writer::tag('legend', $questionnumber,
+            array('class' => 'prompt h6 font-weight-normal'));
+=======
         $legendclass = 'sr-only';
         if (!empty($question->showstandardinstruction)) {
             $legendclass = '';
@@ -107,6 +112,7 @@ class qtype_truefalse_renderer extends qtype_renderer {
         $questionnumber = $options->add_question_identifier_to_label(get_string('selectone', 'qtype_truefalse'), true, true);
         $result .= html_writer::tag('legend', $questionnumber,
             array('class' => 'prompt h6 font-weight-normal ' . $legendclass));
+>>>>>>> master
 
         $result .= html_writer::start_tag('div', array('class' => 'answer'));
         $result .= html_writer::tag('div', $radiotrue . ' ' . $truefeedbackimg,

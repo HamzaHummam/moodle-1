@@ -35,7 +35,11 @@ class behat_mod_data_generator extends behat_generator_base {
                 'singular' => 'entry',
                 'datagenerator' => 'entry',
                 'required' => ['database'],
+<<<<<<< HEAD
+                'switchids' => ['database' => 'databaseid'],
+=======
                 'switchids' => ['database' => 'databaseid', 'user' => 'userid', 'group' => 'groupid'],
+>>>>>>> master
             ],
             'fields' => [
                 'singular' => 'field',
@@ -49,12 +53,15 @@ class behat_mod_data_generator extends behat_generator_base {
                 'required' => ['database', 'name'],
                 'switchids' => ['database' => 'databaseid'],
             ],
+<<<<<<< HEAD
+=======
             'presets' => [
                 'singular' => 'preset',
                 'datagenerator' => 'preset',
                 'required' => ['database', 'name'],
                 'switchids' => ['database' => 'databaseid', 'user' => 'userid'],
             ],
+>>>>>>> master
         ];
     }
 
@@ -81,6 +88,8 @@ class behat_mod_data_generator extends behat_generator_base {
         $database = $DB->get_record('data', ['id' => $data['databaseid']], '*', MUST_EXIST);
 
         unset($data['databaseid']);
+<<<<<<< HEAD
+=======
         $userid = 0;
         if (array_key_exists('userid', $data)) {
             $userid = $data['userid'];
@@ -92,6 +101,7 @@ class behat_mod_data_generator extends behat_generator_base {
         } else {
             $groupid = 0;
         }
+>>>>>>> master
 
         $data = array_reduce(array_keys($data), function ($fields, $fieldname) use ($data, $database) {
             global $DB;
@@ -103,7 +113,11 @@ class behat_mod_data_generator extends behat_generator_base {
             return $fields;
         }, []);
 
+<<<<<<< HEAD
+        $this->get_data_generator()->create_entry($database, $data);
+=======
         $this->get_data_generator()->create_entry($database, $data, $groupid, [], null, $userid);
+>>>>>>> master
     }
 
     /**
@@ -142,6 +156,8 @@ class behat_mod_data_generator extends behat_generator_base {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Saves a preset.
      *
      * @param array $data Preset data.
@@ -155,6 +171,7 @@ class behat_mod_data_generator extends behat_generator_base {
     }
 
     /**
+>>>>>>> master
      * Get the module data generator.
      *
      * @return mod_data_generator Database data generator.

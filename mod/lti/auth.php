@@ -122,7 +122,11 @@ if ($ok) {
         require_capability('mod/lti:view', $context);
         $lti = $DB->get_record('lti', array('id' => $cm->instance), '*', MUST_EXIST);
         $lti->cmid = $cm->id;
+<<<<<<< HEAD
+        list($endpoint, $params) = lti_get_launch_data($lti, $nonce);
+=======
         list($endpoint, $params) = lti_get_launch_data($lti, $nonce, $messagetype, $foruserid);
+>>>>>>> master
     } else {
         require_login($course);
         $context = context_course::instance($courseid);

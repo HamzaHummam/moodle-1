@@ -86,6 +86,8 @@ class behat_user extends behat_base {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Convert page names to URLs for steps like 'When I am on the "[page name]" page'.
      *
      * Recognised page names are:
@@ -108,6 +110,7 @@ class behat_user extends behat_base {
     }
 
     /**
+>>>>>>> master
      * Convert page names to URLs for steps like 'When I am on the "[identifier]" "[page type]" page'.
      *
      * Recognised page names are:

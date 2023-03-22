@@ -18,7 +18,10 @@ namespace core_grades;
 
 use grade_plugin_return;
 use grade_report_grader;
+<<<<<<< HEAD
+=======
 use mod_quiz\quiz_settings;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

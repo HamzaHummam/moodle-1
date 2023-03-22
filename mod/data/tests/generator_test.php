@@ -120,6 +120,19 @@ class generator_test extends \advanced_testcase {
         }
 
         $this->assertEquals(count($fieldtypes), $DB->count_records('data_fields', ['dataid' => $data->id]));
+<<<<<<< HEAD
+
+        $addtemplate = $DB->get_record('data', ['id' => $data->id], 'addtemplate');
+        $addtemplate = $addtemplate->addtemplate;
+
+        for ($i = 1; $i < $count; $i++) {
+            $fieldname = 'field-' . $i;
+            $position = strpos($addtemplate, '[[' . $fieldname . ']]');
+            $this->assertIsNumeric($position);
+            $this->assertGreaterThanOrEqual(0, $position);
+        }
+=======
+>>>>>>> master
     }
 
     /**
@@ -238,6 +251,8 @@ class generator_test extends \advanced_testcase {
             ['Cats', 'mice'],
             array_values(\core_tag_tag::get_item_tags_array('mod_data', 'data_records', $datarecordid))
         );
+<<<<<<< HEAD
+=======
     }
 
     /**
@@ -346,5 +361,6 @@ class generator_test extends \advanced_testcase {
                 ],
             ],
         ];
+>>>>>>> master
     }
 }

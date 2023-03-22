@@ -710,6 +710,12 @@ class manager_test extends \advanced_testcase {
         $grouptwo = $this->getDataGenerator()->create_group(['courseid' => $course->id]);
         $this->getDataGenerator()->create_group_member(['groupid' => $grouptwo->id, 'userid' => $usertwo->id]);
 
+<<<<<<< HEAD
+        $activity = $this->getDataGenerator()->create_module('h5pactivity', ['course' => $course]);
+        $manager = manager::create_from_instance($activity);
+
+        // Admin user can view all participants.
+=======
         // User three in no group.
         $userthree = $this->getDataGenerator()->create_and_enrol($course, 'student');
 
@@ -722,12 +728,17 @@ class manager_test extends \advanced_testcase {
         $manager = manager::create_from_instance($activity);
 
         // Admin user can view all participants (any group and none).
+>>>>>>> master
         $usersjoin = $manager->get_active_users_join(true, 0);
         $users = $DB->get_fieldset_sql("SELECT u.username FROM {user} u {$usersjoin->joins} WHERE {$usersjoin->wheres}",
             $usersjoin->params);
 
+<<<<<<< HEAD
+        $this->assertEqualsCanonicalizing([$teacher->username, $userone->username, $usertwo->username], $users);
+=======
         $this->assertEqualsCanonicalizing(
                 [$teacher->username, $userone->username, $usertwo->username, $userthree->username, $userfour->username], $users);
+>>>>>>> master
 
         // Switch to teacher, who cannot view all participants.
         $this->setUser($teacher);

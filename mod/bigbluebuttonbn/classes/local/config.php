@@ -39,6 +39,8 @@ class config {
     /** @var string Default bigbluebutton data processing agreement url */
     public const DEFAULT_DPA_URL = 'https://blindsidenetworks.com/dpa-moodle-free-tier';
 
+<<<<<<< HEAD
+=======
     /** @var string the default bigbluebutton checksum algorithm */
     public const DEFAULT_CHECKSUM_ALGORITHM = 'SHA1';
 
@@ -49,6 +51,7 @@ class config {
         'SHA512'
     ];
 
+>>>>>>> master
     /**
      * Returns moodle version.
      *
@@ -121,8 +124,11 @@ class config {
             'hideuserlist_editable' => true,
             'welcome_default' => '',
             'default_dpa_accepted' => false,
+<<<<<<< HEAD
+=======
             'poll_interval' => bigbluebutton_proxy::DEFAULT_POLL_INTERVAL,
             'checksum_algorithm' => self::DEFAULT_CHECKSUM_ALGORITHM,
+>>>>>>> master
         ];
     }
 
@@ -226,10 +232,17 @@ class config {
             'disablenote_default' => self::get('disablenote_default'),
             'hideuserlist_editable' => self::get('hideuserlist_editable'),
             'hideuserlist_default' => self::get('hideuserlist_default'),
+<<<<<<< HEAD
+            'lockonjoin_editable' => self::get('lockonjoin_editable'),
+            'lockonjoin_default' => self::get('lockonjoin_default'),
+            'welcome_default' => self::get('welcome_default'),
+            'welcome_editable' => self::get('welcome_editable'),
+=======
             'welcome_default' => self::get('welcome_default'),
             'welcome_editable' => self::get('welcome_editable'),
             'poll_interval' => self::get('poll_interval'),
             'guestaccess_enabled' => self::get('guestaccess_enabled'),
+>>>>>>> master
         ];
     }
 

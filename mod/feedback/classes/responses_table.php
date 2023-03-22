@@ -310,7 +310,11 @@ class mod_feedback_responses_table extends table_sql {
             if ($columnscount++ < self::TABLEJOINLIMIT) {
                 // Mysql has a limit on the number of tables in the join, so we only add limited number of columns here,
                 // the rest will be added in {@link self::build_table()} and {@link self::build_table_chunk()} functions.
+<<<<<<< HEAD
+                $this->sql->fields .= ", " . $DB->sql_order_by_text("v{$nr}.value", 1024) . " AS val{$nr}";
+=======
                 $this->sql->fields .= ", " . $DB->sql_cast_to_char("v{$nr}.value") . " AS val{$nr}";
+>>>>>>> master
                 $this->sql->from .= " LEFT OUTER JOIN {feedback_value} v{$nr} " .
                     "ON v{$nr}.completed = c.id AND v{$nr}.item = :itemid{$nr}";
                 $this->sql->params["itemid{$nr}"] = $item->id;
@@ -562,7 +566,11 @@ class mod_feedback_responses_table extends table_sql {
             $from = '{feedback_completed} c';
             $params = [];
             foreach ($columnsgroup as $nr => $item) {
+<<<<<<< HEAD
+                $fields .= ", " . $DB->sql_order_by_text("v{$nr}.value", 1024) . " AS val{$nr}";
+=======
                 $fields .= ", " . $DB->sql_cast_to_char("v{$nr}.value") . " AS val{$nr}";
+>>>>>>> master
                 $from .= " LEFT OUTER JOIN {feedback_value} v{$nr} " .
                     "ON v{$nr}.completed = c.id AND v{$nr}.item = :itemid{$nr}";
                 $params["itemid{$nr}"] = $item->id;

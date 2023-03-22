@@ -142,11 +142,17 @@ class cohort extends base {
             $this->get_entity_name()
         ))
             ->add_joins($this->get_joins())
+<<<<<<< HEAD:cohort/classes/local/entities/cohort.php
+            ->set_type(column::TYPE_LONGTEXT)
+            ->add_field($descriptionfieldsql, 'description')
+            ->add_fields("{$tablealias}.descriptionformat, {$tablealias}.id, {$tablealias}.contextid")
+=======
             ->add_join("JOIN {context} {$contextalias} ON {$contextalias}.id = {$tablealias}.contextid")
             ->set_type(column::TYPE_LONGTEXT)
             ->add_field($descriptionfieldsql, 'description')
             ->add_fields("{$tablealias}.descriptionformat, {$tablealias}.id, {$tablealias}.contextid")
             ->add_fields(context_helper::get_preload_record_columns_sql($contextalias))
+>>>>>>> master:cohort/classes/reportbuilder/local/entities/cohort.php
             ->add_callback(static function(?string $description, stdClass $cohort): string {
                 global $CFG;
                 require_once("{$CFG->libdir}/filelib.php");
@@ -155,10 +161,14 @@ class cohort extends base {
                     return '';
                 }
 
+<<<<<<< HEAD:cohort/classes/local/entities/cohort.php
+                $description = file_rewrite_pluginfile_urls($description, 'pluginfile.php', $cohort->contextid, 'cohort',
+=======
                 context_helper::preload_from_record($cohort);
                 $context = context::instance_by_id($cohort->contextid);
 
                 $description = file_rewrite_pluginfile_urls($description, 'pluginfile.php', $context->id, 'cohort',
+>>>>>>> master:cohort/classes/reportbuilder/local/entities/cohort.php
                     'description', $cohort->id);
 
                 return format_text($description, $cohort->descriptionformat, ['context' => $context->id]);

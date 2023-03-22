@@ -77,6 +77,10 @@ $renamedclasses = [
     'core_question\\form\\tags' => 'qbank_tagquestion\\form\\tags_form',
     'context_to_string_translator' => 'core_question\\local\\bank\\context_to_string_translator',
     'question_edit_contexts' => 'core_question\\local\\bank\\question_edit_contexts',
+<<<<<<< HEAD
+    // Since Moodle 4.0.5.
+    'core_block\\local\\views\\secondary' => 'core_block\\navigation\\views\\secondary',
+=======
     // Since Moodle 4.1.
     'core_admin\\local\\systemreports\\task_logs' => 'core_admin\\reportbuilder\\local\\systemreports\\task_logs',
     'core_admin\\local\\entities\\task_log' => 'core_admin\\reportbuilder\\local\\entities\\task_log',
@@ -86,4 +90,5 @@ $renamedclasses = [
     'core_block\\local\\views\\secondary' => 'core_block\\navigation\\views\\secondary',
     // Since Moodle 4.2.
     'Box\\Spout' => 'OpenSpout',
+>>>>>>> master
 ];

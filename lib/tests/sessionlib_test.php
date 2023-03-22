@@ -26,10 +26,13 @@ namespace core;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class sessionlib_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /**
      * @covers ::cron_setup_user
      */
+>>>>>>> master
     public function test_cron_setup_user() {
         // This function uses the $GLOBALS super global. Disable the VariableNameLowerCase sniff for this function.
         // phpcs:disable moodle.NamingConventions.ValidVariableName.VariableNameLowerCase

@@ -34,6 +34,15 @@ use moodle_exception;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class fetch_test extends advanced_testcase {
+<<<<<<< HEAD
+
+    public static function setupBeforeClass(): void {
+        global $CFG;
+        require_once("{$CFG->libdir}/externallib.php");
+    }
+
+=======
+>>>>>>> master
     /**
      * Ensure that an execute with an invalid component is rejected.
      */

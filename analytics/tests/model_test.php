@@ -42,12 +42,15 @@ require_once(__DIR__ . '/fixtures/test_analysis.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class model_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /** @var model Store Model. */
     protected $model;
 
     /** @var \stdClass Store model object. */
     protected $modelobj;
+>>>>>>> master
 
     public function setUp(): void {
 

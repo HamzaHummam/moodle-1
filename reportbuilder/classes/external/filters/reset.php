@@ -18,9 +18,15 @@ declare(strict_types=1);
 
 namespace core_reportbuilder\external\filters;
 
+<<<<<<< HEAD
+use external_api;
+use external_function_parameters;
+use external_value;
+=======
 use core_external\external_api;
 use core_external\external_value;
 use core_external\external_function_parameters;
+>>>>>>> master
 use core_reportbuilder\manager;
 use core_reportbuilder\permission;
 use core_reportbuilder\local\helpers\user_filter_manager;

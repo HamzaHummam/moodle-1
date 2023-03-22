@@ -308,6 +308,8 @@ Feature: Course index depending on role
     And I follow "Switch role to..." in the user menu
     And I press "Student"
     Then I should not see "Topic 1" in the "courseindex-content" "region"
+<<<<<<< HEAD
+=======
 
   @javascript
   Scenario: Course index behaviour for activities without url
@@ -329,3 +331,4 @@ Feature: Course index depending on role
     And I click on "Test label" "link" in the "#courseindex" "css_element"
     And I should see "Test label" in the "region-main" "region"
     And I should see "Activity sample 2" in the "region-main" "region"
+>>>>>>> master

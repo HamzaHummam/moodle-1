@@ -1100,6 +1100,8 @@ class modinfolib_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Test get_cm() method to output course module id in the exception text.
      *
      * @covers \course_modinfo::get_cm
@@ -1130,6 +1132,7 @@ class modinfolib_test extends advanced_testcase {
     }
 
     /**
+>>>>>>> master
      * Tests that if the modinfo cache returns a newer-than-expected version, Moodle won't rebuild
      * it.
      *

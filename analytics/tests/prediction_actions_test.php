@@ -29,6 +29,8 @@ require_once(__DIR__ . '/fixtures/test_target_shortname.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class prediction_actions_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /** @var model Store Model. */
     protected $model;
@@ -53,6 +55,7 @@ class prediction_actions_test extends \advanced_testcase {
 
     /** @var \stdClass Teacher 3 user record. */
     protected $teacher3;
+>>>>>>> master
 
     /**
      * Common startup tasks

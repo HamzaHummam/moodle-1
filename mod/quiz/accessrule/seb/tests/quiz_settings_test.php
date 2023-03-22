@@ -15,9 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace quizaccess_seb;
+<<<<<<< HEAD
+=======
 
 use context_module;
 use moodle_url;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -181,7 +184,11 @@ class quiz_settings_test extends \advanced_testcase {
      * @dataProvider filter_rules_provider
      */
     public function test_filter_rules_added_to_config(\stdClass $settings, string $expectedxml) {
+<<<<<<< HEAD
+        $quizsettings = new quiz_settings(0, $settings);
+=======
         $quizsettings = new seb_quiz_settings(0, $settings);
+>>>>>>> master
         $config = $quizsettings->get_config();
         $this->assertEquals($expectedxml, $config);
     }

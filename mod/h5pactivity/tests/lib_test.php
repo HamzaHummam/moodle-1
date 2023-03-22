@@ -23,7 +23,10 @@ use mod_h5pactivity\local\manager;
 /**
  * Unit tests for (some of) mod/h5pactivity/lib.php.
  *
+<<<<<<< HEAD
+=======
  * @package    mod_h5pactivity
+>>>>>>> master
  * @copyright  2021 Ilya Tregubov <ilya@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -38,6 +41,8 @@ class lib_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Test that h5pactivity_delete_instance removes data.
      *
      * @covers ::h5pactivity_delete_instance
@@ -107,6 +112,7 @@ class lib_test extends advanced_testcase {
     }
 
     /**
+>>>>>>> master
      * Test that assign_print_recent_activity shows ungraded submitted assignments.
      *
      * @covers ::h5pactivity_print_recent_activity

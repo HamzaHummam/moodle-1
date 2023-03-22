@@ -71,6 +71,11 @@ class report_access_list extends system_report {
      */
     protected function can_view(): bool {
         $reportid = $this->get_parameter('id', 0, PARAM_INT);
+<<<<<<< HEAD
+        $report = report::get_record(['id' => $reportid]);
+
+        return $report && permission::can_edit_report($report);
+=======
         $report = report::get_record(['id' => $reportid], MUST_EXIST);
 
         return permission::can_edit_report($report);
@@ -104,6 +109,7 @@ class report_access_list extends system_report {
         foreach ($identityfields as $identityfield) {
             $this->add_filter($userentity->get_identity_filter($identityfield));
         }
+>>>>>>> master
     }
 
     /**

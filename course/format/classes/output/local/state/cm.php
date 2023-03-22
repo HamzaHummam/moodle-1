@@ -72,7 +72,12 @@ class cm implements renderable {
      * @return stdClass data context for a mustache template
      */
     public function export_for_template(renderer_base $output): stdClass {
+<<<<<<< HEAD
+        global $USER, $CFG;
+        require_once($CFG->libdir . '/externallib.php');
+=======
         global $CFG, $USER;
+>>>>>>> master
 
         $format = $this->format;
         $section = $this->section;

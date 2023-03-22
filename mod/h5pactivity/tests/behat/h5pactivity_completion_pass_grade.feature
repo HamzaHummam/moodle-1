@@ -27,6 +27,10 @@ Feature: Pass grade activity completion information in the h5p activity
     And the following "activity" exists:
       | activity            | h5pactivity                          |
       | course              | C1                                   |
+<<<<<<< HEAD
+      | section             | 1                                    |
+=======
+>>>>>>> master
       | name                | Music history                        |
       | completion          | 2                                    |
       | completionview      | 1                                    |

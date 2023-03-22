@@ -21,7 +21,10 @@ use core\oauth2\api;
 use core\oauth2\endpoint;
 use core\oauth2\issuer;
 use core\oauth2\system_account;
+<<<<<<< HEAD
+=======
 use \core\oauth2\user_field_mapping;
+>>>>>>> master
 
 /**
  * Tests for oauth2 apis (\core\oauth2\*).

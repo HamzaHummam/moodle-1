@@ -3853,7 +3853,11 @@ EOD;
                 if ($langtype !== $currentlang) {
                     $attributes[] = [
                         'key' => 'lang',
+<<<<<<< HEAD
+                        'value' => str_replace('_', '-', $langtype),
+=======
                         'value' => get_html_lang_attribute_value($langtype),
+>>>>>>> master
                     ];
                 }
                 $this->language->add($langname, new moodle_url($this->page->url, ['lang' => $langtype]), null, null, $attributes);
@@ -4244,9 +4248,13 @@ EOD;
 
         $liferingicon = $this->pix_icon('t/life-ring', '', 'moodle', ['class' => 'fa fa-life-ring']);
         $newwindowicon = $this->pix_icon('i/externallink', get_string('opensinnewwindow'), 'moodle', ['class' => 'ml-1']);
+<<<<<<< HEAD
+        $link = 'https://moodle.com/help/?utm_source=CTA-banner&utm_medium=platform&utm_campaign=name~Moodle4+cat~lms+mp~no';
+=======
         $link = !empty($CFG->servicespage)
             ? $CFG->servicespage
             : 'https://moodle.com/help/?utm_source=CTA-banner&utm_medium=platform&utm_campaign=name~Moodle4+cat~lms+mp~no';
+>>>>>>> master
         $content = $liferingicon . get_string('moodleservicesandsupport') . $newwindowicon;
 
         return html_writer::tag('a', $content, ['target' => '_blank', 'href' => $link]);

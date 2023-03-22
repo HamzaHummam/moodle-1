@@ -1022,7 +1022,10 @@ function data_get_tag_title_field($dataid) {
  */
 function data_get_tag_title_for_entry($field, $entry) {
     global $CFG, $DB;
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
     if (!isset($field->type)) {
         return null;
     }

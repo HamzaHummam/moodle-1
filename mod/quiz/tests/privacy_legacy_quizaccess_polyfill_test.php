@@ -22,6 +22,16 @@
  */
 
 namespace mod_quiz;
+<<<<<<< HEAD
+
+use quiz;
+
+defined('MOODLE_INTERNAL') || die();
+
+global $CFG;
+require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
+=======
+>>>>>>> master
 
 /**
  * Unit tests for the privacy legacy polyfill for quiz access rules.

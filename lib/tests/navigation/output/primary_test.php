@@ -182,7 +182,12 @@ class primary_test extends \advanced_testcase {
 
         $actual = $method->invoke($output, $renderer);
         $custommenufilter($actual);
+<<<<<<< HEAD
+
+        $this->assertEquals($expected, $actual);
+=======
         return $actual;
+>>>>>>> master
     }
 
     /**

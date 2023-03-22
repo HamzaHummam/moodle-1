@@ -27,7 +27,11 @@ require_once(__DIR__ . '/test_helper_trait.php');
  * @author    Andrew Madden <andrewmadden@catalyst-au.net>
  * @copyright 2020 Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
+ * @covers \quizaccess_seb\access_manager
+=======
  * @covers \quizaccess_seb\seb_access_manager
+>>>>>>> master
  */
 class access_manager_test extends \advanced_testcase {
     use \quizaccess_seb_test_helper_trait;
@@ -171,7 +175,11 @@ class access_manager_test extends \advanced_testcase {
         $url = 'https://www.example.com/moodle';
         $accessmanager = $this->get_access_manager();
 
+<<<<<<< HEAD
+        $configkey = quiz_settings::get_record(['quizid' => $this->quiz->id])->get_config_key();
+=======
         $configkey = seb_quiz_settings::get_record(['quizid' => $this->quiz->id])->get_config_key();
+>>>>>>> master
         $fullconfigkey = hash('sha256', $url . $configkey);
 
         $this->assertTrue($accessmanager->validate_config_key($fullconfigkey, $url));
@@ -263,7 +271,11 @@ class access_manager_test extends \advanced_testcase {
     public function test_browser_exam_keys_match_provided_browser_exam_key() {
         $this->quiz = $this->create_test_quiz($this->course, settings_provider::USE_SEB_CLIENT_CONFIG);
         $url = 'https://www.example.com/moodle';
+<<<<<<< HEAD
+        $settings = quiz_settings::get_record(['quizid' => $this->quiz->id]);
+=======
         $settings = seb_quiz_settings::get_record(['quizid' => $this->quiz->id]);
+>>>>>>> master
         $browserexamkey = hash('sha256', 'browserexamkey');
         $fullbrowserexamkey = hash('sha256', $url . $browserexamkey);
         $settings->set('allowedbrowserexamkeys', $browserexamkey); // Add a hashed BEK.

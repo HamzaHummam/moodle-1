@@ -42,6 +42,8 @@ function xmldb_tool_monitor_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
+=======
     if ($oldversion < 2022053000) {
 
         // Define key courseid (foreign) to be added to tool_monitor_events.
@@ -71,6 +73,7 @@ function xmldb_tool_monitor_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+>>>>>>> master
 
     return true;
 }

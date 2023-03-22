@@ -153,6 +153,13 @@ class user_profile_fields {
                 $columnfieldsql = $DB->sql_order_by_text($columnfieldsql, 1024);
             }
 
+            $columntype = $this->get_user_field_type($profilefield->field->datatype);
+
+            $columnfieldsql = "{$userinfotablealias}.data";
+            if ($DB->get_dbfamily() === 'oracle') {
+                $columnfieldsql = $DB->sql_order_by_text($columnfieldsql, 1024);
+            }
+
             $column = (new column(
                 'profilefield_' . core_text::strtolower($profilefield->field->shortname),
                 new lang_string('customfieldcolumn', 'core_reportbuilder',
@@ -161,7 +168,13 @@ class user_profile_fields {
                 $this->entityname
             ))
                 ->add_joins($this->get_joins())
+<<<<<<< HEAD
+                ->add_join("LEFT JOIN {user_info_data} {$userinfotablealias} " .
+                    "ON {$userinfotablealias}.userid = {$this->usertablefieldalias} " .
+                    "AND {$userinfotablealias}.fieldid = {$profilefield->fieldid}")
+=======
                 ->add_join($this->get_table_join($profilefield))
+>>>>>>> master
                 ->add_field($columnfieldsql, 'data')
                 ->set_type($columntype)
                 ->set_is_sortable($columntype !== column::TYPE_LONGTEXT)

@@ -421,8 +421,12 @@ abstract class moodle_database {
      *
      * @param string $sql The query string.
      * @param array|null $params An array of parameters.
+<<<<<<< HEAD
+     * @param int $type The type of query. ( SQL_QUERY_SELECT | SQL_QUERY_AUX | SQL_QUERY_INSERT | SQL_QUERY_UPDATE | SQL_QUERY_STRUCTURE )
+=======
      * @param int $type The type of query ( SQL_QUERY_SELECT | SQL_QUERY_AUX_READONLY | SQL_QUERY_AUX |
      *                  SQL_QUERY_INSERT | SQL_QUERY_UPDATE | SQL_QUERY_STRUCTURE ).
+>>>>>>> master
      * @param mixed $extrainfo This is here for any driver specific extra information.
      * @return void
      */

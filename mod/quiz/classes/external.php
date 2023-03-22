@@ -1055,7 +1055,11 @@ class mod_quiz_external extends external_api {
      * @return array of warnings and the attempt data, next page, message and questions
      * @since Moodle 3.1
      */
+<<<<<<< HEAD
+    public static function get_attempt_data($attemptid, $page, $preflightdata = array()) {
+=======
     public static function get_attempt_data($attemptid, $page, $preflightdata = []) {
+>>>>>>> master
         global $PAGE;
 
         $warnings = [];
@@ -1079,7 +1083,11 @@ class mod_quiz_external extends external_api {
         // Set a default URL to stop the debugging output.
         $PAGE->set_url('/fake/url');
 
+<<<<<<< HEAD
+        $result = array();
+=======
         $result = [];
+>>>>>>> master
         $result['attempt'] = $attemptobj->get_attempt();
         $result['messages'] = $messages;
         $result['nextpage'] = $nextpage;

@@ -344,8 +344,12 @@ abstract class datasource extends base {
 
             // Ensure the condition is still present and available.
             if ($instance !== null && $instance->get_is_available()) {
+<<<<<<< HEAD
+                $conditions[$instance->get_unique_identifier()] = $instance->set_persistent($condition);
+=======
                 $this->activeconditions['values'][$instance->get_unique_identifier()] =
                     $instance->set_persistent($condition);
+>>>>>>> master
             }
         }
 

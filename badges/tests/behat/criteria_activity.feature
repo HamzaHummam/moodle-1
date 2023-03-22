@@ -97,7 +97,11 @@ Feature: Award badges based on activity completion
     And I set the field "False" to "1"
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
+<<<<<<< HEAD
+    And I click on "Submit all and finish" "button" in the "Confirmation" "dialogue"
+=======
     And I click on "Submit" "button" in the "Submit all your answers and finish?" "dialogue"
+>>>>>>> master
     And I log out
 
     # Pass grade with student1
@@ -107,7 +111,11 @@ Feature: Award badges based on activity completion
     And I set the field "False" to "0"
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
+<<<<<<< HEAD
+    And I click on "Submit all and finish" "button" in the "Confirmation" "dialogue"
+=======
     And I click on "Submit" "button" in the "Submit all your answers and finish?" "dialogue"
+>>>>>>> master
     And I log out
 
     # Enable badge access once all students have completed an activity.

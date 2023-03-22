@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
+<XMLDB PATH="lib/db" VERSION="20221020" COMMENT="XMLDB file for core Moodle tables"
+=======
 <XMLDB PATH="lib/db" VERSION="20230307" COMMENT="XMLDB file for core Moodle tables"
+>>>>>>> master
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../lib/xmldb/xmldb.xsd"
 >

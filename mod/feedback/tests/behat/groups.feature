@@ -74,7 +74,10 @@ Feature: Feedbacks in courses with groups
       | feedback1 | user5 | Yes of course            |
       | feedback1 | user6 | Not at all               |
       | feedback1 | user7 | I don't know             |
+<<<<<<< HEAD
+=======
       | feedback1 | user8 | Yes of course            |
+>>>>>>> master
     # View analysis, user1 should only see one group - group 1
     When I am on the "Course feedback" "feedback activity" page logged in as user1
     And I follow "Analysis"
@@ -189,7 +192,10 @@ Feature: Feedbacks in courses with groups
       | feedback2 | user5 | Yes of course            |
       | feedback2 | user6 | Not at all               |
       | feedback2 | user7 | I don't know             |
+<<<<<<< HEAD
+=======
       | feedback2 | user8 | Yes of course            |
+>>>>>>> master
     # View analysis, user1 should only see one group - group 1
     When I am on the "Course anon feedback" "feedback activity" page logged in as user1
     And I follow "Analysis"

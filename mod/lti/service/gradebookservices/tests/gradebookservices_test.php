@@ -25,7 +25,10 @@ use ltiservice_gradebookservices\local\service\gradebookservices;
  * @category   test
  * @copyright  2020 Claude Vervoort <claude.vervoort@cengage.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
+=======
  * @coversDefaultClass \mod_lti\service\gradebookservices\local\gradebookservices
+>>>>>>> master
  */
 class gradebookservices_test extends \advanced_testcase {
 

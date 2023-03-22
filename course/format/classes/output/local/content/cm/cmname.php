@@ -64,14 +64,22 @@ class cmname implements named_templatable, renderable {
      * @param course_format $format the course format
      * @param section_info $section the section info
      * @param cm_info $mod the course module ionfo
+<<<<<<< HEAD
+     * @param bool|null $editable if it is editable (not used)
+=======
      * @param null $unused This parameter has been deprecated since 4.1 and should not be used anymore.
+>>>>>>> master
      * @param array $displayoptions optional extra display options
      */
     public function __construct(
         course_format $format,
         section_info $section,
         cm_info $mod,
+<<<<<<< HEAD
+        ?bool $editable = null,
+=======
         ?bool $unused = null,
+>>>>>>> master
         array $displayoptions = []
     ) {
         if ($unused !== null) {

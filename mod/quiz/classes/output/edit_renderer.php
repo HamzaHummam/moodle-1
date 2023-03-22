@@ -402,9 +402,15 @@ class edit_renderer extends \plugin_renderer_base {
             $sectionheading = html_writer::span($sectionheadingtext, 'instancesection sr-only');
         }
 
+<<<<<<< HEAD
+        $output .= html_writer::start_tag('li', array('id' => 'section-'.$section->id,
+            'class' => 'section main clearfix'.$sectionstyle, 'role' => 'presentation',
+            'data-sectionname' => $sectionheadingtext));
+=======
         $output .= html_writer::start_tag('li', ['id' => 'section-'.$section->id,
             'class' => 'section main clearfix'.$sectionstyle, 'role' => 'presentation',
             'data-sectionname' => $sectionheadingtext]);
+>>>>>>> master
 
         $output .= html_writer::start_div('content');
 
@@ -417,8 +423,13 @@ class edit_renderer extends \plugin_renderer_base {
         } else {
             $editsectionheadingicon = html_writer::link(new \moodle_url('#'),
                 $this->pix_icon('t/editstring', get_string('sectionheadingedit', 'quiz', $sectionheadingtext),
+<<<<<<< HEAD
+                        'moodle', array('class' => 'editicon visibleifjs')),
+                        array('class' => 'editing_section', 'data-action' => 'edit_section_title', 'role' => 'button'));
+=======
                         'moodle', ['class' => 'editicon visibleifjs']),
                         ['class' => 'editing_section', 'data-action' => 'edit_section_title', 'role' => 'button']);
+>>>>>>> master
         }
         $output .= html_writer::div($headingtext . $editsectionheadingicon, 'instancesectioncontainer');
 

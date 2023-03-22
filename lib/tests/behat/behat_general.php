@@ -189,6 +189,22 @@ class behat_general extends behat_base {
     }
 
     /**
+     * Switches to a second window.
+     *
+     * @Given /^I switch to a second window$/
+     * @throws DriverException If there aren't exactly 2 windows open.
+     */
+    public function switch_to_second_window() {
+        $names = $this->getSession()->getWindowNames();
+
+        if (count($names) !== 2) {
+            throw new DriverException('Expected to see 2 windows open, found ' . count($names));
+        }
+
+        $this->getSession()->switchToWindow($names[1]);
+    }
+
+    /**
      * Switches to the main Moodle frame.
      *
      * @Given /^I switch to the main frame$/
@@ -2262,7 +2278,11 @@ EOF;
         }
 
         // Make the provided editor the default one in $CFG->texteditors by
+<<<<<<< HEAD
+        // moving it to the first [editor],atto,tiny,tinymce,textarea on the list.
+=======
         // moving it to the first [editor],atto,tiny,textarea on the list.
+>>>>>>> master
         $list = explode(',', $CFG->texteditors);
         array_unshift($list, $editor);
         $list = array_unique($list);

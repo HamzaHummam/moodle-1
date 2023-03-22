@@ -480,7 +480,14 @@ final class column {
      * fields, $additionalarguments are those passed to this method, and $aggregation indicates the current aggregation type
      * being applied to the column):
      *
+<<<<<<< HEAD
+     * The type of the $value parameter passed to the callback is determined by calling {@see set_type}, however note that
+     * if the column is part of a report source and can be aggregated using one of the "Group concatenation" methods then the
+     * type should be omitted if it's not string
+     * For entities that can to be left joined to a report, the first argument to their column callbacks must be nullable.
+=======
      * function($value, stdClass $row, $additionalarguments, ?string $aggregation): string
+>>>>>>> master
      *
      * The type of the $value parameter passed to the callback is determined by calling {@see set_type}, this type is preserved
      * if the column is part of a report source and is being aggregated. For entities that can be left joined to a report, the

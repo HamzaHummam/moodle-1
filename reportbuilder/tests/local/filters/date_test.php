@@ -244,7 +244,10 @@ class date_test extends advanced_testcase {
             'Last two years' => [date::DATE_LAST, 2, date::DATE_UNIT_YEAR, '-15 month'],
 
             // Current week is tested separately.
+<<<<<<< HEAD
+=======
             'Current hour' => [date::DATE_CURRENT, null, date::DATE_UNIT_HOUR],
+>>>>>>> master
             'Current day' => [date::DATE_CURRENT, null, date::DATE_UNIT_DAY],
             'Current month' => [date::DATE_CURRENT, null, date::DATE_UNIT_MONTH],
             'Current year' => [date::DATE_CURRENT, null, date::DATE_UNIT_YEAR],

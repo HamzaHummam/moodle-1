@@ -2672,7 +2672,11 @@ privatefiles,moodle|/user/files.php';
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
+    if ($oldversion < 2022041900.03) {
+=======
     if ($oldversion < 2022042900.01) {
+>>>>>>> master
         // Social custom fields could had been created linked to category id = 1. Let's check category 1 exists.
         if (!$DB->get_record('user_info_category', ['id' => 1])) {
             // Let's check if we have any custom field linked to category id = 1.
@@ -2687,6 +2691,12 @@ privatefiles,moodle|/user/files.php';
         }
 
         // Main savepoint reached.
+<<<<<<< HEAD
+        upgrade_main_savepoint(true, 2022041900.03);
+    }
+
+    if ($oldversion < 2022041901.05) {
+=======
         upgrade_main_savepoint(true, 2022042900.01);
     }
 
@@ -2742,6 +2752,7 @@ privatefiles,moodle|/user/files.php';
     }
 
     if ($oldversion < 2022060300.01) {
+>>>>>>> master
 
         // Changing precision of field hidden on table grade_categories to (10).
         $table = new xmldb_table('grade_categories');
@@ -2758,10 +2769,17 @@ privatefiles,moodle|/user/files.php';
         $dbman->change_field_precision($table, $field);
 
         // Main savepoint reached.
+<<<<<<< HEAD
+        upgrade_main_savepoint(true, 2022041901.05);
+    }
+
+    if ($oldversion < 2022041901.07) {
+=======
         upgrade_main_savepoint(true, 2022060300.01);
     }
 
     if ($oldversion < 2022061000.01) {
+>>>>>>> master
         // Iterate over custom user menu items configuration, removing pix icon references.
         $customusermenuitems = str_replace(["\r\n", "\r"], "\n", $CFG->customusermenuitems);
 
@@ -2775,6 +2793,23 @@ privatefiles,moodle|/user/files.php';
 
         set_config('customusermenuitems', implode("\n", $lines));
 
+<<<<<<< HEAD
+        upgrade_main_savepoint(true, 2022041901.07);
+    }
+
+    if ($oldversion < 2022041904.03) {
+
+        // Remove any orphaned tag instance records (pointing to non-existing context).
+        $DB->delete_records_select('tag_instance', 'NOT EXISTS (
+            SELECT ctx.id FROM {context} ctx WHERE ctx.id = {tag_instance}.contextid
+        )');
+
+        // Main savepoint reached.
+        upgrade_main_savepoint(true, 2022041904.03);
+    }
+
+    if ($oldversion < 2022041904.14) {
+=======
         upgrade_main_savepoint(true, 2022061000.01);
     }
 
@@ -2811,6 +2846,7 @@ privatefiles,moodle|/user/files.php';
     }
 
     if ($oldversion < 2022091000.01) {
+>>>>>>> master
         $table = new xmldb_table('h5p');
         $indexpathnamehash = new xmldb_index('pathnamehash_idx', XMLDB_INDEX_NOTUNIQUE, ['pathnamehash']);
 
@@ -2818,6 +2854,12 @@ privatefiles,moodle|/user/files.php';
             $dbman->add_index($table, $indexpathnamehash);
         }
         // Main savepoint reached.
+<<<<<<< HEAD
+        upgrade_main_savepoint(true, 2022041904.14);
+    }
+
+    if ($oldversion < 2022041905.07) {
+=======
         upgrade_main_savepoint(true, 2022091000.01);
     }
 
@@ -2942,6 +2984,7 @@ privatefiles,moodle|/user/files.php';
     // Put any upgrade step following this.
 
     if ($oldversion < 2022120900.01) {
+>>>>>>> master
 
         // Remove any orphaned role assignment records (pointing to non-existing roles).
         $DB->delete_records_select('role_assignments', 'NOT EXISTS (
@@ -2949,6 +2992,9 @@ privatefiles,moodle|/user/files.php';
         )');
 
         // Main savepoint reached.
+<<<<<<< HEAD
+        upgrade_main_savepoint(true, 2022041905.07);
+=======
         upgrade_main_savepoint(true, 2022120900.01);
     }
 
@@ -3199,6 +3245,7 @@ privatefiles,moodle|/user/files.php';
 
         // Main savepoint reached.
         upgrade_main_savepoint(true, 2023031400.02);
+>>>>>>> master
     }
 
     return true;

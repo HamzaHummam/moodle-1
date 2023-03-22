@@ -145,6 +145,13 @@ function xmldb_forum_upgrade($oldversion) {
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
+    if ($oldversion < 2022041901) {
+        // Some very old discussions from early Moodle versions may have the usermodified set to zero.
+        $DB->execute("UPDATE {forum_discussions} SET usermodified = userid WHERE usermodified = 0");
+
+        upgrade_mod_savepoint(true, 2022041901, 'forum');
+=======
     if ($oldversion < 2022062700) {
         // Unset $CFG->forum_usecoursefullname.
         unset_config('forum_usecoursefullname');
@@ -181,6 +188,7 @@ function xmldb_forum_upgrade($oldversion) {
         $DB->execute("UPDATE {forum_discussions} SET usermodified = userid WHERE usermodified = 0");
 
         upgrade_mod_savepoint(true, 2022112801, 'forum');
+>>>>>>> master
     }
 
     return true;

@@ -25,6 +25,10 @@
 
 import $ from 'jquery';
 import CustomEvents from 'core/custom_interaction_events';
+<<<<<<< HEAD
+import {dispatchEvent} from 'core/event_dispatcher';
+=======
+>>>>>>> master
 import 'core/inplace_editable';
 import Notification from 'core/notification';
 import Pending from 'core/pending';

@@ -48,7 +48,11 @@ class screen_test extends \advanced_testcase {
         // Create a course, users and groups.
         $course = $this->getDataGenerator()->create_course();
         $coursecontext = \context_course::instance($course->id);
+<<<<<<< HEAD
+        $group = $this->getDataGenerator()->create_group(array('courseid' => $course->id));
+=======
         $group = $this->getDataGenerator()->create_group(['courseid' => $course->id]);
+>>>>>>> master
         $teacher = $this->getDataGenerator()->create_user();
         $user1 = $this->getDataGenerator()->create_user();
         $user2 = $this->getDataGenerator()->create_user();

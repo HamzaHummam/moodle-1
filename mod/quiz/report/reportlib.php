@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/mod/quiz/lib.php');
+require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
 require_once($CFG->libdir . '/filelib.php');
 
 use mod_quiz\question\display_options;
@@ -90,12 +91,20 @@ function quiz_has_questions($quizid) {
 
 /**
  * Get the slots of real questions (not descriptions) in this quiz, in order.
+<<<<<<< HEAD
+ * @param object $quiz the quiz.
+=======
  * @param stdClass $quiz the quiz.
+>>>>>>> master
  * @return array of slot => objects with fields
  *      ->slot, ->id, ->qtype, ->length, ->number, ->maxmark, ->category (for random questions).
  */
 function quiz_report_get_significant_questions($quiz) {
+<<<<<<< HEAD
+    $quizobj = \quiz::create($quiz->id);
+=======
     $quizobj = mod_quiz\quiz_settings::create($quiz->id);
+>>>>>>> master
     $structure = \mod_quiz\structure::create_for_quiz($quizobj);
     $slots = $structure->get_slots();
 

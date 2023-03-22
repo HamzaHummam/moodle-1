@@ -36,11 +36,17 @@ class search_identity extends external_api {
     /**
      * Describes the external function parameters.
      *
-     * @return external_function_parameters
+     * @return \external_function_parameters
      */
+<<<<<<< HEAD
+    public static function execute_parameters(): \external_function_parameters {
+        return new \external_function_parameters([
+            'query' => new \external_value(PARAM_RAW, 'The search query', VALUE_REQUIRED),
+=======
     public static function execute_parameters(): external_function_parameters {
         return new external_function_parameters([
             'query' => new external_value(PARAM_RAW, 'The search query', VALUE_REQUIRED),
+>>>>>>> master
         ]);
     }
 
@@ -112,7 +118,7 @@ class search_identity extends external_api {
     /**
      * Describes the external function result value.
      *
-     * @return external_description
+     * @return \external_description
      */
     public static function execute_returns(): external_description {
 

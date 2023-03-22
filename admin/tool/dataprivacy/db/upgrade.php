@@ -71,6 +71,8 @@ function xmldb_tool_dataprivacy_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
+=======
     if ($oldversion < 2022053000) {
 
         // Define key usermodified (foreign) to be added to tool_dataprivacy_purposerole.
@@ -86,6 +88,7 @@ function xmldb_tool_dataprivacy_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+>>>>>>> master
 
     return true;
 }

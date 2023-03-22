@@ -21,6 +21,9 @@ Feature: Users can use predefined presets
       | database | type | name              | description              |
       | data1    | text | Test field name   | Test field description   |
 
+<<<<<<< HEAD
+  Scenario: If Teacher use another preset then the previous fields are removed
+=======
   Scenario: Using a preset on a non empty database could create new fields
     Given the following "mod_data > fields" exist:
       | database | type | name    |
@@ -240,15 +243,23 @@ Feature: Users can use predefined presets
     And I should see "If fields to be deleted are of the same type as new fields in the preset"
 
   Scenario: Teacher can use a preset on a non-empty database and previous fields will be removed
+>>>>>>> master
     Given I am on the "Mountain landscapes" "data activity" page logged in as teacher1
     And I follow "Fields"
     And I should see "Test field name"
     And I follow "Presets"
     And I click on "fullname" "radio" in the "Image gallery" "table_row"
+<<<<<<< HEAD
+    And I click on "Use preset" "button"
+    When I click on "Continue" "button"
+    Then I should see "The preset has been successfully applied."
+    And I follow "Fields"
+=======
     And I click on "Use this preset" "button"
     And I should see "Existing fields to be deleted: Test field name"
     When I click on "Apply preset" "button"
     Then I should see "Preset applied."
+>>>>>>> master
     And I should see "image"
     And I should see "title"
     And I should not see "Test field name"

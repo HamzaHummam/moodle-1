@@ -24,6 +24,11 @@
 
 namespace mod_quiz;
 
+<<<<<<< HEAD
+use quiz;
+
+=======
+>>>>>>> master
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -107,7 +112,11 @@ class repaginate_test extends \advanced_testcase {
         quiz_add_quiz_question($match->id, $quiz);
 
         // Return the quiz object.
+<<<<<<< HEAD
+        $quizobj = new quiz($quiz, $cm, $SITE);
+=======
         $quizobj = new quiz_settings($quiz, $cm, $SITE);
+>>>>>>> master
         return structure::create_for_quiz($quizobj);
     }
 
@@ -259,7 +268,11 @@ class repaginate_test extends \advanced_testcase {
         $this->set_quiz_slots();
         $slotfrom = 1;
         $type = repaginate::LINK;
+<<<<<<< HEAD
+        $expected = array();
+=======
         $expected = [];
+>>>>>>> master
         foreach ($this->quizslots as $slot) {
             if ($slot->slot > $slotfrom) {
                 $slot->page = $slot->page - 1;
@@ -279,7 +292,11 @@ class repaginate_test extends \advanced_testcase {
         }
 
         $type = repaginate::UNLINK;
+<<<<<<< HEAD
+        $expected = array();
+=======
         $expected = [];
+>>>>>>> master
         foreach ($this->quizslots as $slot) {
             if ($slot->slot > ($slotfrom - 1)) {
                 $slot->page = $slot->page - 1;

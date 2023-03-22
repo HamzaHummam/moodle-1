@@ -637,6 +637,8 @@ abstract class moodleform_mod extends moodleform {
             $mform->addHelpButton('cmidnumber', 'idnumbermod');
         }
 
+<<<<<<< HEAD
+=======
         if (has_capability('moodle/course:setforcedlanguage', $this->get_context())) {
             $languages = ['' => get_string('forceno')];
             $languages += get_string_manager()->get_list_of_translations();
@@ -644,6 +646,7 @@ abstract class moodleform_mod extends moodleform {
             $mform->addElement('select', 'lang', get_string('forcelanguage'), $languages);
         }
 
+>>>>>>> master
         if ($CFG->downloadcoursecontentallowed) {
                 $choices = [
                     DOWNLOAD_COURSE_CONTENT_DISABLED => get_string('no'),

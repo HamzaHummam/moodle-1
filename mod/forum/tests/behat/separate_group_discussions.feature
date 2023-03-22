@@ -63,7 +63,10 @@ Feature: Posting to all groups in a separate group discussion is restricted to u
     And the "Separate groups" select box should contain "Group A"
     And the "Separate groups" select box should contain "Group B"
     And the "Separate groups" select box should contain "Group C"
+<<<<<<< HEAD
+=======
     And the "Separate groups" select box should not contain "Group D"
+>>>>>>> master
     And I select "All participants" from the "Separate groups" singleselect
     And I should see "Initial Disc ALL"
     And I should see "Initial Disc G1"

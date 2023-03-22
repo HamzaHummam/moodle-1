@@ -310,11 +310,15 @@ All rights reserved.</copyright>
     <description>PHP library for displaying mustache templates.</description>
     <version>2.14.2</version>
     <license>MIT</license>
+<<<<<<< HEAD
+    <version>2.14.1</version>
+=======
     <repository>https://github.com/bobthecow/mustache.php</repository>
     <copyrights>
       <copyright>2010-2016 Justin Hileman</copyright>
     </copyrights>
     <customised/>
+>>>>>>> master
   </library>
   <library>
     <location>amd/src/mustache.js</location>

@@ -24,11 +24,16 @@
 
 namespace core;
 
+<<<<<<< HEAD
+defined('MOODLE_INTERNAL') || die();
+global $CFG;
+=======
 use core_external\external_format_value;
 use core_external\external_multiple_structure;
 use core_external\external_settings;
 use core_external\external_single_structure;
 use core_external\external_value;
+>>>>>>> master
 
 /**
  * Exporter testcase.
@@ -155,7 +160,7 @@ class exporter_test extends \advanced_testcase {
         $syscontext = \context_system::instance();
         $coursecontext = \context_course::instance($course->id);
 
-        external_settings::get_instance()->set_filter(true);
+        \external_settings::get_instance()->set_filter(true);
         filter_set_global_state('urltolink', TEXTFILTER_OFF);
         filter_set_local_state('urltolink', $coursecontext->id, TEXTFILTER_ON);
         set_config('formats', FORMAT_MARKDOWN, 'filter_urltolink');

@@ -1346,7 +1346,11 @@ class external_test extends externallib_advanced_testcase {
 
         // Now, get the summary.
         $result = mod_quiz_external::get_attempt_summary($attempt->id);
+<<<<<<< HEAD
+        $result = \external_api::clean_returnvalue(mod_quiz_external::get_attempt_summary_returns(), $result);
+=======
         $result = external_api::clean_returnvalue(mod_quiz_external::get_attempt_summary_returns(), $result);
+>>>>>>> master
 
         // Check it's marked as completed only the first one.
         $this->assertEquals('complete', $result['questions'][0]['state']);
@@ -1651,7 +1655,11 @@ class external_test extends externallib_advanced_testcase {
         $this->assertNotEmpty($event->get_name());
 
         // Now, force the quiz with QUIZ_NAVMETHOD_SEQ (sequential) navigation method.
+<<<<<<< HEAD
+        $DB->set_field('quiz', 'navmethod', QUIZ_NAVMETHOD_SEQ, array('id' => $quiz->id));
+=======
         $DB->set_field('quiz', 'navmethod', QUIZ_NAVMETHOD_SEQ, ['id' => $quiz->id]);
+>>>>>>> master
         // Quiz requiring preflightdata.
         $DB->set_field('quiz', 'password', 'abcdef', ['id' => $quiz->id]);
         $preflightdata = [["name" => "quizpassword", "value" => 'abcdef']];
@@ -2017,7 +2025,11 @@ class external_test extends externallib_advanced_testcase {
         $this->setUser($this->student);
 
         $result = mod_quiz_external::get_quiz_required_qtypes($quiz->id);
+<<<<<<< HEAD
+        $result = \external_api::clean_returnvalue(mod_quiz_external::get_quiz_required_qtypes_returns(), $result);
+=======
         $result = external_api::clean_returnvalue(mod_quiz_external::get_quiz_required_qtypes_returns(), $result);
+>>>>>>> master
 
         $expected = ['numerical', 'shortanswer', 'truefalse'];
         ksort($result['questiontypes']);
@@ -2030,7 +2042,11 @@ class external_test extends externallib_advanced_testcase {
 
         $this->setUser($this->student);
         $result = mod_quiz_external::get_quiz_required_qtypes($quiz->id);
+<<<<<<< HEAD
+        $result = \external_api::clean_returnvalue(mod_quiz_external::get_quiz_required_qtypes_returns(), $result);
+=======
         $result = external_api::clean_returnvalue(mod_quiz_external::get_quiz_required_qtypes_returns(), $result);
+>>>>>>> master
 
         // The new question from the new category is returned as a potential random question for the quiz.
         $expected = ['essay', 'numerical', 'shortanswer', 'truefalse'];
@@ -2052,7 +2068,11 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::view_attempt($attemptobj->get_attemptid(), 3, []);
             $this->fail('Exception expected due to out of sequence access.');
+<<<<<<< HEAD
+        } catch (\moodle_exception $e) {
+=======
         } catch (moodle_exception $e) {
+>>>>>>> master
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
     }
@@ -2083,7 +2103,11 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::get_attempt_data($attemptobj->get_attemptid(), 2);
             $this->fail('Exception expected due to out of sequence access.');
+<<<<<<< HEAD
+        } catch (\moodle_exception $e) {
+=======
         } catch (moodle_exception $e) {
+>>>>>>> master
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
         // Now we moved to page 1, we should see page 2 and 1 but not 0 or 3.
@@ -2092,14 +2116,22 @@ class external_test extends externallib_advanced_testcase {
         try {
             mod_quiz_external::get_attempt_data($attemptobj->get_attemptid(), 0);
             $this->fail('Exception expected due to out of sequence access.');
+<<<<<<< HEAD
+        } catch (\moodle_exception $e) {
+=======
         } catch (moodle_exception $e) {
+>>>>>>> master
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
 
         try {
             mod_quiz_external::get_attempt_data($attemptobj->get_attemptid(), 3);
             $this->fail('Exception expected due to out of sequence access.');
+<<<<<<< HEAD
+        } catch (\moodle_exception $e) {
+=======
         } catch (moodle_exception $e) {
+>>>>>>> master
             $this->assertStringContainsString('quiz/Out of sequence access', $e->getMessage());
         }
 
@@ -2112,9 +2144,15 @@ class external_test extends externallib_advanced_testcase {
     /**
      * Prepare quiz for sequential navigation tests
      *
+<<<<<<< HEAD
+     * @return quiz
+     */
+    private function prepare_sequential_quiz(): quiz {
+=======
      * @return quiz_settings
      */
     private function prepare_sequential_quiz(): quiz_settings {
+>>>>>>> master
         // Create a new quiz with 5 questions and one attempt started.
         // Create a new quiz with attempts.
         $quizgenerator = $this->getDataGenerator()->get_plugin_generator('mod_quiz');
@@ -2137,10 +2175,17 @@ class external_test extends externallib_advanced_testcase {
             quiz_add_quiz_question($question->id, $quiz, $pageindex);
         }
 
+<<<<<<< HEAD
+        $quizobj = quiz::create($quiz->id, $this->student->id);
+        // Set grade to pass.
+        $item = \grade_item::fetch(array('courseid' => $this->course->id, 'itemtype' => 'mod',
+            'itemmodule' => 'quiz', 'iteminstance' => $quiz->id, 'outcomeid' => null));
+=======
         $quizobj = quiz_settings::create($quiz->id, $this->student->id);
         // Set grade to pass.
         $item = \grade_item::fetch(['courseid' => $this->course->id, 'itemtype' => 'mod',
             'itemmodule' => 'quiz', 'iteminstance' => $quiz->id, 'outcomeid' => null]);
+>>>>>>> master
         $item->gradepass = 80;
         $item->update();
         return $quizobj;
@@ -2149,6 +2194,16 @@ class external_test extends externallib_advanced_testcase {
     /**
      * Create question attempt
      *
+<<<<<<< HEAD
+     * @param quiz $quizobj
+     * @param int|null $userid
+     * @param bool|null $ispreview
+     * @return quiz_attempt
+     * @throws \moodle_exception
+     */
+    private function create_quiz_attempt_object(quiz $quizobj, ?int $userid = null, ?bool $ispreview = false): quiz_attempt {
+        global $USER;
+=======
      * @param quiz_settings $quizobj
      * @param int|null $userid
      * @param bool|null $ispreview
@@ -2162,6 +2217,7 @@ class external_test extends externallib_advanced_testcase {
     ): quiz_attempt {
         global $USER;
 
+>>>>>>> master
         $timenow = time();
         // Now, do one attempt.
         $quba = \question_engine::make_questions_usage_by_activity('mod_quiz', $quizobj->get_context());

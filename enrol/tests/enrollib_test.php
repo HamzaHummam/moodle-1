@@ -1475,6 +1475,8 @@ class enrollib_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Test last_time_enrolments_synced not recorded with "force" option for enrol_check_plugins.
      * @covers ::enrol_check_plugins
      */
@@ -1567,6 +1569,7 @@ class enrollib_test extends advanced_testcase {
     }
 
     /**
+>>>>>>> master
      * Test enrol_selfenrol_available function behavior.
      *
      * @covers ::enrol_selfenrol_available

@@ -1,5 +1,7 @@
 This files describes API changes for code that uses the question API.
 
+<<<<<<< HEAD
+=======
 === 4.2 ===
 
 1) The question/qengine.js has been deprecated. We create core_question/question_engine
@@ -31,6 +33,7 @@ This files describes API changes for code that uses the question API.
 
 1) get_bulk_action_key() in core_question\local\bank\bulk_action_base class is deprecated and renamed to get_key().
 
+>>>>>>> master
 === 4.0.5 ===
 
 1) Question bank plugins can now define more than one bulk action. Therefore, plugin_features_base::get_bulk_actions has been

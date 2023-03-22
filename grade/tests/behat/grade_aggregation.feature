@@ -430,8 +430,11 @@ Feature: We can use calculated grade totals
     And I turn editing mode on
     And I set the following settings for grade item "Manual item 2":
       | Rescale existing grades | No |
+<<<<<<< HEAD
+=======
       | Maximum grade | 200 |
       | Extra credit  | 0   |
+>>>>>>> master
     # Change window size to ultra-wide to avoid 'out-of-bounds' random failures.
     And I change window size to "5120x2160"
     And I give the grade "21.00" to the user "Student 1" for the grade item "Manual item 2"
@@ -443,8 +446,11 @@ Feature: We can use calculated grade totals
     And I turn editing mode on
     And I set the following settings for grade item "Manual item 2":
       | Rescale existing grades | No |
+<<<<<<< HEAD
+=======
       | Maximum grade | 100 |
       | Extra credit  | 0   |
+>>>>>>> master
     # Change window size to ultra-wide to avoid 'out-of-bounds' random failures.
     And I change window size to "5120x2160"
     And I give the grade "21.00" to the user "Student 1" for the grade item "Manual item 2"

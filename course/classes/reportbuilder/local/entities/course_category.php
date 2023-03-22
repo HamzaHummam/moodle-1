@@ -103,6 +103,11 @@ class course_category extends base {
             ->add_join($this->get_context_join())
             ->set_type(column::TYPE_TEXT)
             ->add_fields("{$tablealias}.name, {$tablealias}.id")
+<<<<<<< HEAD:course/classes/local/entities/course_category.php
+            ->add_callback(static function(?string $name, stdClass $category): string {
+                return empty($category->id) ? '' :
+                    core_course_category::get($category->id, MUST_EXIST, true)->get_formatted_name();
+=======
             ->add_fields(context_helper::get_preload_record_columns_sql($tablealiascontext))
             ->add_callback(static function(?string $name, stdClass $category): string {
                 if (empty($category->id)) {
@@ -136,6 +141,7 @@ class course_category extends base {
                 $url = new moodle_url('/course/management.php', ['categoryid' => $category->id]);
                 return html_writer::link($url,
                     format_string($category->name, true, ['context' => $context]));
+>>>>>>> master:course/classes/reportbuilder/local/entities/course_category.php
             })
             ->set_is_sortable(true);
 
@@ -177,11 +183,21 @@ class course_category extends base {
             $this->get_entity_name()
         ))
             ->add_joins($this->get_joins())
+<<<<<<< HEAD:course/classes/local/entities/course_category.php
+            ->add_join("
+                JOIN {context} {$tablealiascontext}
+                  ON {$tablealiascontext}.instanceid = {$tablealias}.id
+                 AND {$tablealiascontext}.contextlevel = " . CONTEXT_COURSECAT)
+            ->set_type(column::TYPE_LONGTEXT)
+            ->add_field($descriptionfieldsql, 'description')
+            ->add_fields("{$tablealias}.descriptionformat, {$tablealiascontext}.id AS contextid")
+=======
             ->add_join($this->get_context_join())
             ->set_type(column::TYPE_LONGTEXT)
             ->add_field($descriptionfieldsql, 'description')
             ->add_fields("{$tablealias}.descriptionformat, {$tablealias}.id")
             ->add_fields(context_helper::get_preload_record_columns_sql($tablealiascontext))
+>>>>>>> master:course/classes/reportbuilder/local/entities/course_category.php
             ->add_callback(static function(?string $description, stdClass $category): string {
                 global $CFG;
                 require_once("{$CFG->libdir}/filelib.php");
@@ -190,10 +206,14 @@ class course_category extends base {
                     return '';
                 }
 
+<<<<<<< HEAD:course/classes/local/entities/course_category.php
+                $description = file_rewrite_pluginfile_urls($description, 'pluginfile.php', $category->contextid, 'coursecat',
+=======
                 context_helper::preload_from_record($category);
                 $context = context_coursecat::instance($category->id);
 
                 $description = file_rewrite_pluginfile_urls($description, 'pluginfile.php', $context->id, 'coursecat',
+>>>>>>> master:course/classes/reportbuilder/local/entities/course_category.php
                     'description', null);
 
                 return format_text($description, $category->descriptionformat, ['context' => $context->id]);

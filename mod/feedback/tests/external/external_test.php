@@ -434,7 +434,11 @@ class external_test extends externallib_advanced_testcase {
         }
 
         $result = mod_feedback_external::get_items($feedback->id);
+<<<<<<< HEAD
+        $result = \external_api::clean_returnvalue(mod_feedback_external::get_items_returns(), $result);
+=======
         $result = external_api::clean_returnvalue(mod_feedback_external::get_items_returns(), $result);
+>>>>>>> master
         if ($warning) {
             $this->assertEmpty($result['items']);
             $this->assertCount(1, $result['warnings']);
@@ -638,7 +642,11 @@ class external_test extends externallib_advanced_testcase {
         }
 
         $result = mod_feedback_external::get_page_items($feedback->id, 0);
+<<<<<<< HEAD
+        $result = \external_api::clean_returnvalue(mod_feedback_external::get_items_returns(), $result);
+=======
         $result = external_api::clean_returnvalue(mod_feedback_external::get_items_returns(), $result);
+>>>>>>> master
         if ($warning) {
             $this->assertEmpty($result['items']);
             $this->assertCount(1, $result['warnings']);

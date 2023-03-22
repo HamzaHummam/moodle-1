@@ -34,6 +34,16 @@ class question_name_idnumber_tags_column extends viewquestionname_column_helper 
         global $OUTPUT;
 
         echo \html_writer::start_tag('div', ['class' => 'd-inline-flex flex-nowrap overflow-hidden w-100']);
+<<<<<<< HEAD
+
+        $questionname = format_string($question->name);
+        $labelfor = $this->label_for($question);
+        if ($labelfor) {
+            echo \html_writer::label($questionname, $labelfor);
+        } else {
+            // Question name.
+            echo \html_writer::span($questionname, 'questionname flex-grow-1 flex-shrink-1 text-truncate');
+=======
         $questiondisplay = $OUTPUT->render(new \qbank_viewquestionname\output\questionname($question));
         $labelfor = $this->label_for($question);
         if ($labelfor) {
@@ -44,6 +54,7 @@ class question_name_idnumber_tags_column extends viewquestionname_column_helper 
             echo \html_writer::start_span('questionname flex-grow-1 flex-shrink-1 text-truncate');
             echo $questiondisplay;
             echo \html_writer::end_span();
+>>>>>>> master
         }
 
         // Question idnumber.

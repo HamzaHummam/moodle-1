@@ -85,7 +85,10 @@ class custom_report_table extends base_report_table {
         $columns = $this->get_active_columns();
         if (empty($columns)) {
             $this->init_sql("{$maintablealias}.*", "{{$maintable}} {$maintablealias}", $joins, '1=0', []);
+<<<<<<< HEAD
+=======
             $this->define_columns([0]);
+>>>>>>> master
             return;
         }
 
@@ -340,7 +343,11 @@ class custom_report_table extends base_report_table {
             // We need a cleaned version (without tags/entities) of the first row column to use as toggle button.
             $rowfirstcolumn = strip_tags((string) reset($row));
             $buttontitle = $rowfirstcolumn !== ''
+<<<<<<< HEAD
+                ? get_string('showhide', 'core_reportbuilder', html_entity_decode($rowfirstcolumn))
+=======
                 ? get_string('showhide', 'core_reportbuilder', html_entity_decode($rowfirstcolumn, ENT_COMPAT))
+>>>>>>> master
                 : get_string('showhidecard', 'core_reportbuilder');
 
             $button = html_writer::tag('button', $buttonicon, [

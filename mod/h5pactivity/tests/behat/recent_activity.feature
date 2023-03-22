@@ -24,7 +24,13 @@ Feature: Users can see the H5P recent activity from the recent activity block
     And the following "activity" exists:
       | activity        | h5pactivity                                |
       | course          | C1                                         |
+<<<<<<< HEAD
+      | section         | 1                                          |
       | name            | Awesome H5P package                        |
+      | intro           | Description                                |
+=======
+      | name            | Awesome H5P package                        |
+>>>>>>> master
       | packagefilepath | h5p/tests/fixtures/multiple-choice-2-6.h5p |
     And I log in as "teacher1"
     And I am on "Course 1" course homepage with editing mode on

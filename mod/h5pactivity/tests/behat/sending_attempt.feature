@@ -22,7 +22,13 @@ Feature: Do a H5P attempt
     And the following "activity" exists:
       | activity        | h5pactivity                                |
       | course          | C1                                         |
+<<<<<<< HEAD
+      | section         | 1                                          |
       | name            | Awesome H5P package                        |
+      | intro           | Description                                |
+=======
+      | name            | Awesome H5P package                        |
+>>>>>>> master
       | packagefilepath | h5p/tests/fixtures/multiple-choice-2-6.h5p |
       | grademethod     | 2                                          |
 
@@ -85,7 +91,11 @@ Feature: Do a H5P attempt
     And "4" row "Score" column of "table" table should contain "1"
     And I am on the "Course 1" course page logged in as teacher1
     And I navigate to "View > User report" in the course gradebook
+<<<<<<< HEAD
+    And I set the field "Select all or one user" to "Student 1"
+=======
     And I click on "Student 1" in the "user" search widget
+>>>>>>> master
     Then the following should exist in the "user-grade" table:
       | Grade item          | Grade | Percentage  |
       | Awesome H5P package | 50.00 | 50.00 %     |

@@ -45,6 +45,8 @@ Feature: Configure access to reports based on intended audience
     Then I should see "My report" in the "reportbuilder-table" "table"
     And I click on "My report" "link" in the "My report" "table_row"
     And I should see "User 1" in the "reportbuilder-table" "table"
+<<<<<<< HEAD
+=======
 
   Scenario: Configure report audience with administrator audience type
     Given I am on the "My report" "reportbuilder > Editor" page logged in as "admin"
@@ -57,6 +59,7 @@ Feature: Configure access to reports based on intended audience
     And I should not see "User 1" in the "reportbuilder-table" "table"
     And I should not see "User 2" in the "reportbuilder-table" "table"
     And I should not see "User 3" in the "reportbuilder-table" "table"
+>>>>>>> master
 
   Scenario: Configure report audience with has system role audience type
     Given the following "roles" exist:
@@ -192,6 +195,8 @@ Feature: Configure access to reports based on intended audience
     And I should see "User 2" in the "reportbuilder-table" "table"
     And I should not see "User 3" in the "reportbuilder-table" "table"
 
+<<<<<<< HEAD
+=======
   Scenario: View configured user identity fields on the access tab
     Given the following config values are set as admin:
       | showuseridentity | email,profile_field_fruit |
@@ -222,6 +227,7 @@ Feature: Configure access to reports based on intended audience
     And I should see "User 2" in the "reportbuilder-table" "table"
     And I should not see "User 3" in the "reportbuilder-table" "table"
 
+>>>>>>> master
   Scenario: View report as a user with edit capability
     Given the following "roles" exist:
       | shortname       | name      | archetype |

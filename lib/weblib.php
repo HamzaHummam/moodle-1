@@ -1129,6 +1129,15 @@ function page_get_doc_link_path(moodle_page $page) {
  */
 function validate_email($address) {
     global $CFG;
+<<<<<<< HEAD
+
+    if ($address === null || $address === false || $address === '') {
+        return false;
+    }
+
+    require_once("{$CFG->libdir}/phpmailer/moodle_phpmailer.php");
+=======
+>>>>>>> master
 
     if ($address === null || $address === false || $address === '') {
         return false;
@@ -2283,7 +2292,11 @@ function get_html_lang($dir = false) {
     }
 
     // Accessibility: added the 'lang' attribute to $direction, used in theme <html> tag.
+<<<<<<< HEAD
+    $language = str_replace('_', '-', $currentlang);
+=======
     $language = get_html_lang_attribute_value($currentlang);
+>>>>>>> master
     @header('Content-Language: '.$language);
     return ($direction.' lang="'.$language.'" xml:lang="'.$language.'"');
 }

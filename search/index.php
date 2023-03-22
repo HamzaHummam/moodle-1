@@ -165,9 +165,12 @@ $PAGE->set_url($url);
 
 // We are ready to render.
 echo $OUTPUT->header();
+<<<<<<< HEAD
+=======
 
 // Unlock the session only after outputting the header as this modifies the session cachestore.
 \core\session\manager::write_close();
+>>>>>>> master
 
 // Get the results.
 if ($data) {

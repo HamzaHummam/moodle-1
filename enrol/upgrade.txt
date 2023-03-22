@@ -1,7 +1,11 @@
 This files describes API changes in /enrol/* - plugins,
 information provided here is intended especially for developers.
 
+<<<<<<< HEAD
+=== 4.0.6 ===
+=======
 === 4.2 ===
+>>>>>>> master
 
 * New is_self_enrol_available() function has been created. Similar to can_self_enrol but without checking user capabilities.
 

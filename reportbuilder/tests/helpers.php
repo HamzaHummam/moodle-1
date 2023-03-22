@@ -19,7 +19,10 @@ declare(strict_types=1);
 use core_reportbuilder\manager;
 use core_reportbuilder\local\helpers\aggregation;
 use core_reportbuilder\local\helpers\report;
+<<<<<<< HEAD
+=======
 use core_reportbuilder\local\helpers\user_filter_manager;
+>>>>>>> master
 use core_reportbuilder\table\custom_report_table_view;
 
 /**

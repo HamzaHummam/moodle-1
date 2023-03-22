@@ -1,6 +1,30 @@
 This files describes API changes in core libraries and APIs,
 information provided here is intended especially for developers.
 
+<<<<<<< HEAD
+=== 4.0.7 ===
+
+* The method `flexible_table::set_columnsattributes` now can be used with 'class' key to add custom classes to the DOM.
+* A new constant COMPLETION_COMPLETE_FAIL_HIDDEN is introduced to mark that user has received a failing grade
+  for a hidden grade item. This state returned by internal_get_grade_state() and is only used by get_core_completion_state()
+  for processing the passgrade completion data.
+
+=== 4.0.6 ===
+
+* There is a new helper function mtrace_exception to help with reporting exceptions you have caught in scheduled tasks.
+
+=== 4.0.5 ===
+
+* For plugins that override secondary navigation, the namespace for the custom secondary navigation class has
+  changed. It was (for example) mod_mymodule\local\views\secondary but is now
+  mod_mymodule\navigation\views\secondary. The old location will continue to work, but will be deprecated in 4.1.
+* When exporting table content, HTML tags/entities will be removed when the selected dataformat does not support HTML
+* New DML driver methods `$DB->sql_regex_get_word_beginning_boundary_marker` and `$DB->sql_regex_get_word_end_boundary_marker`
+  for managing word boundary markers in a database driver supporting regex syntax when searching.
+
+=== 4.0.2 ===
+* The core renderer `edit_button` method now accepts an optional `$method` argument (get/post) for the button
+=======
 === 4.2 ===
 
 * A new constant COMPLETION_COMPLETE_FAIL_HIDDEN is introduced to mark that user has received a failing grade
@@ -142,10 +166,13 @@ information provided here is intended especially for developers.
 * For plugins that override secondary navigation, the namespace for the custom secondary navigation class has
   changed. It was (for example) mod_mymodule\local\views\secondary but is now
   mod_mymodule\navigation\views\secondary. The old location will continue to work, but is deprecated.
+>>>>>>> master
 * The check for $plugin->incompatible was found to be incorrect. The $plugin->incompatible attribute is meant to define the minimum
   Moodle version the plugin is incompatible with but the implemented logic for the check was the opposite. Plugins declaring this
   attribute may encounter different behaviours between older Moodle versions (<v3.11.8, <v4.0.2) and the later ones. We recommend
   plugin developers to not use this attribute for Moodle versions 4.0 and below in order to avoid this problem.
+<<<<<<< HEAD
+=======
 * Added $CFG->proxylogunsafe and proxyfixunsafe to detect code which doesn't honor the proxy config
 * Function admin_externalpage_setup() now has additional option 'nosearch' allowing to remove Site administration search form.
 * The function print_error has been deprecated. Kindly use moodle_exception.
@@ -164,6 +191,7 @@ information provided here is intended especially for developers.
 * The plugin_functions cache in core has been made localisable by prefixing the
   key it uses with the all versions hash, which only changes when there are code
   changes.
+>>>>>>> master
 
 === 4.0 ===
 

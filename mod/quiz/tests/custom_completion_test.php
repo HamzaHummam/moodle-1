@@ -463,6 +463,16 @@ class custom_completion_test extends advanced_testcase {
     /**
      * Set up moduleinfo object sample data for quiz instance.
      *
+<<<<<<< HEAD
+     * @param object $cm course-module instance
+     * @param object $quiz quiz instance data.
+     * @param object $course Course related data.
+     * @param int $gradepass Grade to pass and completed completion.
+     * @param string $grademethod grade attempt method.
+     * @return \stdClass
+     */
+    private function prepare_module_info(object $cm, object $quiz, object $course, int $gradepass, string $grademethod): \stdClass {
+=======
      * @param cm_info $cm course-module instance
      * @param stdClass $quiz quiz instance data.
      * @param stdClass $course Course related data.
@@ -472,6 +482,7 @@ class custom_completion_test extends advanced_testcase {
      */
     private function prepare_module_info(cm_info $cm, stdClass $quiz, stdClass $course,
             int $gradepass, string $grademethod): \stdClass {
+>>>>>>> master
         $grouping = $this->getDataGenerator()->create_grouping(['courseid' => $course->id]);
         // Module test values.
         $moduleinfo = new \stdClass();

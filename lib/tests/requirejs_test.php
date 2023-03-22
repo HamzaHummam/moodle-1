@@ -49,6 +49,25 @@ class requirejs_test extends \advanced_testcase {
         foreach ($result as $key => $path) {
             // Lets verify the first part of the key is a valid component name and the second part correctly contains "min" or not.
             list($component, $template) = explode('/', $key, 2);
+<<<<<<< HEAD
+            // Can we resolve it to a valid dir?
+            $dir = \core_component::get_component_directory($component);
+            $this->assertNotEmpty($dir);
+
+            // Only "core" is allowed to have no _ in component names.
+            if (strpos($component, '_') === false) {
+                $this->assertEquals('core', $component);
+            }
+            $this->assertStringNotContainsString('.min', $path);
+        }
+
+        // Find all modules - debugging.
+        $result = core_requirejs::find_all_amd_modules(false);
+        foreach ($result as $key => $path) {
+            // Lets verify the first part of the key is a valid component name and the second part correctly contains "min" or not.
+            list($component, $template) = explode('/', $key, 2);
+=======
+>>>>>>> master
             $dir = \core_component::get_component_directory($component);
             $this->assertNotEmpty($dir);
             // Only "core" is allowed to have no _ in component names.

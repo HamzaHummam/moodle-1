@@ -22,10 +22,24 @@ Feature: Users can add entries to database activities
 
   @javascript
   Scenario: Students can add entries to a database
+<<<<<<< HEAD
+    Given I am on the "Course 1" course page logged in as teacher1
+    And I add a "Short text" field to "Test database name" database and I fill the form with:
+      | Field name | Test field name |
+      | Field description | Test field description |
+    And I add a "Short text" field to "Test database name" database and I fill the form with:
+      | Field name | Test field 2 name |
+      | Field description | Test field 2 description |
+    # To generate the default templates.
+    And I navigate to "Templates" in current page administration
+    And I wait until the page is ready
+    And I log out
+=======
     Given the following "mod_data > fields" exist:
       | database | type | name              | description              |
       | data1    | text | Test field name   | Test field description   |
       | data1    | text | Test field 2 name | Test field 2 description |
+>>>>>>> master
     When I am on the "Course 1" course page logged in as student1
     And I add an entry to "Test database name" database with:
       | Test field name | Student original entry |

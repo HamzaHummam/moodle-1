@@ -38,8 +38,13 @@ $string['areacontent'] = 'Fields';
 $string['ascending'] = 'Ascending';
 $string['asearchtemplate'] = 'Advanced search template';
 $string['atmaxentry'] = 'You have entered the maximum number of entries allowed!';
+<<<<<<< HEAD
+$string['authorfirstname'] = 'Author first name';
+$string['authorlastname'] = 'Author last name';
+=======
 $string['authorfirstname'] = 'First name';
 $string['authorlastname'] = 'Last name';
+>>>>>>> master
 $string['autogenallforms'] = 'Generate all default templates';
 $string['autolinkurl'] = 'Autolink the URL';
 $string['availablefromdate'] = 'Available from';
@@ -78,9 +83,12 @@ $string['configenablerssfeeds'] = 'This switch will enable the possibility of RS
 $string['confirmdeletefield'] = 'You are about to delete this field, are you sure?';
 $string['confirmdeleterecord'] = 'Are you sure you want to delete this entry?';
 $string['confirmdeleterecords'] = 'Are you sure you want to delete these entries?';
+<<<<<<< HEAD
+=======
 $string['createactivity'] = 'Create your own fields to collect data, or use a preset which includes fields already.';
 $string['createfields'] = 'Create fields to collect different types of data.';
 $string['createtemplates'] = 'Templates define the interface of your activity. Once you create fields, templates will be created automatically. Alternatively, you can use a preset, which includes fields and templates.';
+>>>>>>> master
 $string['csstemplate'] = 'Custom CSS';
 $string['csvfailed'] = 'Unable to read the raw data from the CSV file';
 $string['csvfile'] = 'CSV file';
@@ -178,6 +186,10 @@ $string['fieldenclosure'] = 'Field enclosure';
 $string['fieldheight'] = 'Height';
 $string['fieldheightlistview'] = 'Height (in pixels) in list view';
 $string['fieldheightsingleview'] = 'Height (in pixels) in single view';
+<<<<<<< HEAD
+$string['fieldids'] = 'Field ids';
+=======
+>>>>>>> master
 $string['fieldmappings'] = 'Field mappings';
 $string['fieldmappings_help'] = 'This menu allows you to keep the data from the existing database. To preserve the data in a field, you must map it to a new field, where the data will appear. Any field can also be left blank, with no information copied into it. Any old field not mapped to a new one will be lost and all its data removed.
 You can only map fields of the same type, so each drop-down menu will have different fields in it. Also, you must be careful not to try and map one old field to more than one new field.';
@@ -215,7 +227,10 @@ $string['headerlisttemplate'] = 'Define the appearance of List view.';
 $string['headerrsstemplate'] = 'Define the appearance of entries in RSS feeds.';
 $string['headersingletemplate'] = 'Define the appearance of Single view.';
 $string['checkbox'] = 'Checkboxes';
+<<<<<<< HEAD
+=======
 $string['id'] = 'Entry ID';
+>>>>>>> master
 $string['chooseexportfields'] = 'Choose the fields you wish to export';
 $string['chooseexportformat'] = 'Choose the format you wish to export to';
 $string['chooseorupload'] = 'Choose file';
@@ -254,9 +269,12 @@ $string['unknown'] = 'Unknown field';
 $string['invalidpreset'] = '{$a} is not a preset.';
 $string['invalidrecord'] = 'Incorrect record';
 $string['invalidurl'] = 'The URL you just entered is not valid';
+<<<<<<< HEAD
+=======
 $string['importandapply'] = 'Import preset and apply';
 $string['importpreset_desc'] = 'The preset will be applied to this activity, creating fields and templates.
  It won\'t appear in the list of presets.';
+>>>>>>> master
 $string['jstemplate'] = 'Custom JavaScript';
 $string['latitude'] = 'Latitude';
 $string['latlong'] = 'Coordinates';
@@ -272,6 +290,10 @@ $string['longitude'] = 'Longitude';
 $string['manageapproved'] = 'Allow editing of approved entries';
 $string['manageapproved_help'] = 'Allow students to edit or delete their entries after they’ve been approved. Edited entries will need to be reapproved.';
 $string['managefields'] = 'Manage fields';
+<<<<<<< HEAD
+$string['manageapproved_help'] = 'Allow students to edit or delete their entries after they’ve been approved. Edited entries will need to be reapproved.';
+=======
+>>>>>>> master
 $string['mapexistingfield'] = 'Map to {$a}';
 $string['mapnewfield'] = 'Create a new field';
 $string['mappingwarning'] = 'All old fields not mapped to a new field will be lost and all data in that field will be removed.';
@@ -429,7 +451,10 @@ $string['showmore'] = 'Show more';
 $string['single'] = 'View single';
 $string['singleview'] = 'Single view';
 $string['singletemplate'] = 'Single view template';
+<<<<<<< HEAD
+=======
 $string['startbuilding'] = 'Start building your activity';
+>>>>>>> master
 $string['subplugintype_datafield'] = 'Database field type';
 $string['subplugintype_datafield_plural'] = 'Database field types';
 $string['subplugintype_datapreset'] = 'Preset';

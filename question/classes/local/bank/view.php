@@ -209,10 +209,13 @@ class view {
             $pluginentrypoint = new $plugin();
             $bulkactions = $pluginentrypoint->get_bulk_actions();
             if (!is_array($bulkactions)) {
+<<<<<<< HEAD
+=======
                 debugging("The method {$componentname}::get_bulk_actions() must return an " .
                     "array of bulk actions instead of a single bulk action. " .
                     "Please update your implementation of get_bulk_actions() to return an array. " .
                     "Check out the qbank_bulkmove plugin for a working example.", DEBUG_DEVELOPER);
+>>>>>>> master
                 $bulkactions = [$bulkactions];
             }
 

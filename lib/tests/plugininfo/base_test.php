@@ -14,7 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+<<<<<<< HEAD
+declare(strict_types = 1);
+=======
 declare(strict_types=1);
+>>>>>>> master
 
 namespace core\plugininfo;
 

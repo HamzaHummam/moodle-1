@@ -54,7 +54,10 @@ Feature: Posting to all groups in a visible group discussion is restricted to us
     And the "Visible groups" select box should contain "Group A"
     And the "Visible groups" select box should contain "Group B"
     And the "Visible groups" select box should contain "Group C"
+<<<<<<< HEAD
+=======
     And the "Visible groups" select box should not contain "Group D"
+>>>>>>> master
     And I select "All participants" from the "Visible groups" singleselect
     And I should see "Initial Disc ALL"
     And I should see "Initial Disc G1"
@@ -182,7 +185,10 @@ Feature: Posting to all groups in a visible group discussion is restricted to us
     And the "Visible groups" select box should contain "Group A"
     And the "Visible groups" select box should contain "Group B"
     And the "Visible groups" select box should contain "Group C"
+<<<<<<< HEAD
+=======
     And the "Visible groups" select box should not contain "Group D"
+>>>>>>> master
     And I select "All participants" from the "Visible groups" singleselect
     And I should see "Initial Disc ALL"
     And I should see "Initial Disc G1"

@@ -3608,7 +3608,11 @@ class custom_menu_item implements renderable, templatable {
      * @param array $attributes Array of other HTML attributes for the custom menu item.
      */
     public function __construct($text, moodle_url $url = null, $title = null, $sort = null, custom_menu_item $parent = null,
+<<<<<<< HEAD
+                                array $attributes = []) {
+=======
         array $attributes = []) {
+>>>>>>> master
         $this->text = $text;
         $this->url = $url;
         $this->title = $title;
@@ -3760,12 +3764,20 @@ class custom_menu_item implements renderable, templatable {
 
         $context = new stdClass();
         $context->moremenuid = uniqid();
+<<<<<<< HEAD
+        $context->text = external_format_string($this->text, $syscontext->id);
+=======
         $context->text = \core_external\util::format_string($this->text, $syscontext->id);
+>>>>>>> master
         $context->url = $this->url ? $this->url->out() : null;
         // No need for the title if it's the same with text.
         if ($this->text !== $this->title) {
             // Show the title attribute only if it's different from the text.
+<<<<<<< HEAD
+            $context->title = external_format_string($this->title, $syscontext->id);
+=======
             $context->title = \core_external\util::format_string($this->title, $syscontext->id);
+>>>>>>> master
         }
         $context->sort = $this->sort;
         if (!empty($this->attributes)) {

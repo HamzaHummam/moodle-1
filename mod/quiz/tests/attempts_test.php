@@ -16,11 +16,17 @@
 
 namespace mod_quiz;
 
+<<<<<<< HEAD
+use mod_quiz_overdue_attempt_updater;
+use question_engine;
+use quiz;
+=======
 use core_question_generator;
 use mod_quiz\task\update_overdue_attempts;
 use mod_quiz_generator;
 use question_engine;
 use mod_quiz\quiz_settings;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

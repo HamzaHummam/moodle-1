@@ -50,7 +50,11 @@ class access_prevented extends base {
      * @param string|null $browserexamkey A Safe Exam Browser browser exam key.
      * @return base
      */
+<<<<<<< HEAD
+    public static function create_strict(access_manager $accessmanager, string $reason,
+=======
     public static function create_strict(seb_access_manager $accessmanager, string $reason,
+>>>>>>> master
             ?string $configkey = null, ?string $browserexamkey = null) : base {
         global $USER;
 

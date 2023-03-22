@@ -127,8 +127,12 @@ class user extends base {
      */
     public function get_sample_values(): array {
         return [
+<<<<<<< HEAD
+            "{$this->name}_operator" => self::USER_CURRENT,
+=======
             "{$this->name}_operator" => self::USER_SELECT,
             "{$this->name}_value" => [1],
+>>>>>>> master
         ];
     }
 }

@@ -47,11 +47,19 @@ class format {
      * @param bool|null $value
      * @return string
      */
+<<<<<<< HEAD
+    public static function boolean_as_text($value): string {
+        if ($value === null) {
+            return '';
+        }
+        return (bool) $value ? get_string('yes') : get_string('no');
+=======
     public static function boolean_as_text(?bool $value): string {
         if ($value === null) {
             return '';
         }
         return $value ? get_string('yes') : get_string('no');
+>>>>>>> master
     }
 
     /**
@@ -60,10 +68,18 @@ class format {
      * @param float|null $value
      * @return string
      */
+<<<<<<< HEAD
+    public static function percent($value): string {
+        if ($value === null) {
+            return '';
+        }
+        return get_string('percents', 'moodle', format_float((float) $value));
+=======
     public static function percent(?float $value): string {
         if ($value === null) {
             return '';
         }
         return get_string('percents', 'moodle', format_float($value));
+>>>>>>> master
     }
 }

@@ -339,12 +339,16 @@ class pgsql_native_moodle_database extends moodle_database {
         error_reporting($this->last_error_reporting);
         try {
             $this->read_slave_query_end($result);
+<<<<<<< HEAD
+            if ($this->savepointpresent and $this->last_type != SQL_QUERY_AUX and $this->last_type != SQL_QUERY_SELECT) {
+=======
             if ($this->savepointpresent &&
                     !in_array(
                         $this->last_type,
                         [SQL_QUERY_AUX, SQL_QUERY_AUX_READONLY, SQL_QUERY_SELECT],
                         true
                     )) {
+>>>>>>> master
                 $res = @pg_query($this->pgsql, "RELEASE SAVEPOINT moodle_pg_savepoint; SAVEPOINT moodle_pg_savepoint");
                 if ($res) {
                     pg_free_result($res);

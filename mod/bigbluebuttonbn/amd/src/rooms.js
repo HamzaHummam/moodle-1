@@ -31,6 +31,11 @@ import {
 
 import {eventTypes, notifyCurrentSessionEnded} from './events';
 
+<<<<<<< HEAD
+const timeoutjoin = 5000;
+
+export const init = (bigbluebuttonbnid) => {
+=======
 /**
  * Init the room
  *
@@ -38,6 +43,7 @@ import {eventTypes, notifyCurrentSessionEnded} from './events';
  * @param {Number} pollInterval poll interval in miliseconds
  */
 export const init = (bigbluebuttonbnid, pollInterval) => {
+>>>>>>> master
     const completionElement = document.querySelector('a[href*=completion_validate]');
     if (completionElement) {
         completionElement.addEventListener("click", () => {
@@ -50,10 +56,17 @@ export const init = (bigbluebuttonbnid, pollInterval) => {
         if (joinButton) {
             window.open(joinButton.href, 'bigbluebutton_conference');
             e.preventDefault();
+<<<<<<< HEAD
+            // Gives the user a bit of time to go into the meeting.
+            setTimeout(() => {
+                roomUpdater.updateRoom(true);
+                }, timeoutjoin);
+=======
             // Gives the user a bit of time to go into the meeting before polling the room.
             setTimeout(() => {
                 roomUpdater.updateRoom(true);
             }, pollInterval);
+>>>>>>> master
         }
     });
 
@@ -69,7 +82,21 @@ export const init = (bigbluebuttonbnid, pollInterval) => {
         fetchNotifications();
     });
     // Room update.
+<<<<<<< HEAD
+    roomUpdater.start();
+};
+
+/**
+ * Handle autoclosing of the window.
+ */
+const autoclose = () => {
+    window.opener.setTimeout(() => {
+        roomUpdater.updateRoom(true);
+    }, timeoutjoin);
+    window.removeEventListener('onbeforeunload', autoclose);
+=======
     roomUpdater.start(pollInterval);
+>>>>>>> master
 };
 
 /**

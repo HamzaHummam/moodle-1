@@ -27,7 +27,10 @@ require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
 
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
+<<<<<<< HEAD
+=======
 use mod_bigbluebuttonbn\instance;
+>>>>>>> master
 use Moodle\BehatExtension\Exception\SkippedException;
 
 /**

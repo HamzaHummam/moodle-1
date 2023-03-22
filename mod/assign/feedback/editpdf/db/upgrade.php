@@ -58,6 +58,9 @@ function xmldb_assignfeedback_editpdf_upgrade($oldversion) {
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
+    if ($oldversion < 2022041901) {
+=======
     if ($oldversion < 2022061000) {
         $table = new xmldb_table('assignfeedback_editpdf_queue');
         if ($dbman->table_exists($table)) {
@@ -83,6 +86,7 @@ function xmldb_assignfeedback_editpdf_upgrade($oldversion) {
     }
 
     if ($oldversion < 2022082200) {
+>>>>>>> master
         // Conversion records need to be removed in order for conversions to restart.
         $DB->delete_records('file_conversion');
 
@@ -90,6 +94,17 @@ function xmldb_assignfeedback_editpdf_upgrade($oldversion) {
         $task = new \assignfeedback_editpdf\task\bump_submission_for_stale_conversions();
         \core\task\manager::queue_adhoc_task($task);
 
+<<<<<<< HEAD
+        upgrade_plugin_savepoint(true, 2022041901, 'assignfeedback', 'editpdf');
+    }
+
+    if ($oldversion < 2022041902) {
+        $task = new \assignfeedback_editpdf\task\remove_orphaned_editpdf_files();
+        \core\task\manager::queue_adhoc_task($task);
+
+        upgrade_plugin_savepoint(true, 2022041902, 'assignfeedback', 'editpdf');
+    }
+=======
         upgrade_plugin_savepoint(true, 2022082200, 'assignfeedback', 'editpdf');
     }
 
@@ -103,5 +118,6 @@ function xmldb_assignfeedback_editpdf_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2022112801, 'assignfeedback', 'editpdf');
     }
 
+>>>>>>> master
     return true;
 }

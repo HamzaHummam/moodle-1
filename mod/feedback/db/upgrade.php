@@ -51,6 +51,8 @@ function xmldb_feedback_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
+=======
     if ($oldversion < 2022053000) {
         // Define key courseid (foreign) to be added to feedback_completed.
          $table = new xmldb_table('feedback_completed');
@@ -65,6 +67,7 @@ function xmldb_feedback_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+>>>>>>> master
 
     return true;
 }

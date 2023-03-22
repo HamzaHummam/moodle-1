@@ -25,6 +25,10 @@
 $string['countparticipantsfound'] = '{$a} participants found';
 $string['moodlenetprofile'] = 'MoodleNet profile ID';
 $string['moodlenetprofile_help'] = 'Your MoodleNet profile ID links your MoodleNet profile with this site.';
+<<<<<<< HEAD
+$string['placeholdertypeorselect'] = 'Type or select...';
+=======
+>>>>>>> master
 $string['placeholdertype'] = 'Type...';
 $string['privacy:courserequestpath'] = 'Requested courses';
 $string['privacy:descriptionpath'] = 'Profile description';

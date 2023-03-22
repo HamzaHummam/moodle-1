@@ -169,6 +169,8 @@ function bigbluebuttonbn_delete_instance($id) {
         // Do not log any issue when testing.
         if (!(defined('PHPUNIT_TEST') && PHPUNIT_TEST) && !defined('BEHAT_SITE_RUNNING')) {
             debugging($e->getMessage(), DEBUG_DEVELOPER, $e->getTrace());
+<<<<<<< HEAD
+=======
         }
     }
     // Get all possible groups (course and course module).
@@ -189,6 +191,7 @@ function bigbluebuttonbn_delete_instance($id) {
             $meeting->end_meeting();
         } catch (moodle_exception $e) {
             debugging($e->getMessage() . ' for group ' . $groupid, DEBUG_NORMAL, $e->getTrace());
+>>>>>>> master
         }
     }
 

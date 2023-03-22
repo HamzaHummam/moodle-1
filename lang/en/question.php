@@ -247,6 +247,10 @@ $string['movingquestionsnofiles'] = 'Are you sure you want to move question(s) {
 $string['needtochoosecat'] = 'You need to choose a category to move this question to or press \'cancel\'.';
 $string['nocate'] = 'No such category {$a}!';
 $string['nopermissionadd'] = 'You don\'t have permission to add questions here.';
+<<<<<<< HEAD
+$string['nopermissionmove'] = 'You don\'t have permission to move questions from here. You must save the question in this category or save it as a new question.';
+=======
+>>>>>>> master
 $string['nopermissionedit'] = 'You don\'t have permission to edit questions from here.';
 $string['noprobs'] = 'No problems found in your question database.';
 $string['noquestions'] = 'No questions were found that could be exported. Make sure that you have selected a category to export that contains questions.';
@@ -446,6 +450,7 @@ $string['questionnamecopy'] = '{$a} (copy)';
 $string['questionpreviewdefaults'] = 'Question preview defaults';
 $string['questionpreviewdefaults_desc'] = 'These defaults are used when a user first previews a question in the question bank. Once a user has previewed a question, their personal preferences are stored as user preferences.';
 $string['questions'] = 'Questions';
+$string['question_version'] = 'Question version';
 $string['questionx'] = 'Question {$a}';
 $string['questiontext'] = 'Question text';
 $string['requiresgrading'] = 'Requires grading';

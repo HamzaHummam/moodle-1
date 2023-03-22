@@ -59,9 +59,13 @@ Feature: We can use Single view
 
   Scenario: I can update grades, add feedback and exclude grades.
     Given I navigate to "View > Single view" in the course gradebook
+<<<<<<< HEAD
+    And I select "Student" from the "Select a user above to view all their grades" singleselect
+=======
     And I click on "Users" "link" in the ".page-toggler" "css_element"
     And I click on "Student" in the "user" search widget
     And I turn editing mode on
+>>>>>>> master
     And I set the field "Override for Test assignment one" to "1"
     When I set the following fields to these values:
         | Grade for Test assignment one | 10.00 |
@@ -88,7 +92,11 @@ Feature: We can use Single view
     Then I should see "Grades were set for 2 items"
     And the field "Grade for Ann, Jill, Grainne, Beauchamp" matches value "12.05"
     And the field "Exclude for Jane, Nina, Niamh, Cholmondely" matches value "1"
+<<<<<<< HEAD
+    And I select "new grade item 1" from the "Select a grade item above" singleselect
+=======
     And I click on "new grade item 1" in the "grade" search widget
+>>>>>>> master
     And I set the field "Grade for Ann, Jill, Grainne, Beauchamp" to "Very good"
     And I press "Save"
     Then I should see "Grades were set for 1 items"
@@ -99,9 +107,13 @@ Feature: We can use Single view
     And I log in as "teacher2"
     And I am on "Course 1" course homepage
     Given I navigate to "View > Single view" in the course gradebook
+<<<<<<< HEAD
+    And I select "Student" from the "Select a user above to view all their grades" singleselect
+=======
     And I click on "Users" "link" in the ".page-toggler" "css_element"
     And I click on "Student" in the "user" search widget
     And I turn editing mode on
+>>>>>>> master
     And the "Exclude for Test assignment one" "checkbox" should be disabled
     And the "Override for Test assignment one" "checkbox" should be enabled
 
@@ -114,6 +126,13 @@ Feature: We can use Single view
 
   Scenario: I can bulk update grades.
     Given I follow "Single view for Ann, Jill, Grainne, Beauchamp"
+<<<<<<< HEAD
+    Then I should see "Gronya,Beecham"
+    When I set the field "For" to "All grades"
+    And I set the field "Insert new grade" to "1.0"
+    And I set the field "Perform bulk insert" to "1"
+    And I press "Save"
+=======
     And I should see "Gronya,Beecham"
     When I turn editing mode on
     And I click on "Actions" "link"
@@ -122,6 +141,7 @@ Feature: We can use Single view
     And I click on "All grades" "radio"
     And I set the field "Insert new grade" to "1.0"
     And I click on "Save" "button" in the ".modal-dialog" "css_element"
+>>>>>>> master
     Then I should see "Grades were set for 6 items"
 
   Scenario: I can bulk update grades with custom decimal separator
@@ -130,6 +150,12 @@ Feature: We can use Single view
       | core_langconfig | decsep   | #     |
     And I follow "Single view for Ann, Jill, Grainne, Beauchamp"
     And I should see "Gronya,Beecham"
+<<<<<<< HEAD
+    When I set the field "For" to "All grades"
+    And I set the field "Insert new grade" to "1#25"
+    And I set the field "Perform bulk insert" to "1"
+    And I press "Save"
+=======
     When I turn editing mode on
     And I click on "Actions" "link"
     And I click on "Bulk insert" "link"
@@ -137,6 +163,7 @@ Feature: We can use Single view
     And I click on "All grades" "radio"
     And I set the field "Insert new grade" to "1#25"
     And I click on "Save" "button" in the ".modal-dialog" "css_element"
+>>>>>>> master
     Then I should see "Grades were set for 6 items"
     # Custom scale, cast to int
     And the field "Grade for new grade item 1" matches value "Disappointing"

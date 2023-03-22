@@ -193,8 +193,51 @@ if (!$rid){
 $template = $manager->get_template($mode);
 echo $template->parse_add_entry($processeddata, $rid, $datarecord);
 
+<<<<<<< HEAD
+    ///then we generate strings to replace
+    foreach ($possiblefields as $eachfield) {
+        $field = data_get_field($eachfield, $data);
+        // To skip unnecessary calls to display_add_field().
+        if (strpos($data->addtemplate, "[[" . $field->field->name . "]]") !== false) {
+            // Display an error in case the field type is not found.
+            $errors = '';
+            if (!empty($fieldnotifications[$field->field->name])) {
+                foreach ($fieldnotifications[$field->field->name] as $notification) {
+                    $errors .= $OUTPUT->notification($notification);
+                }
+            }
+            // Replace the field tag.
+            $fielddisplay = '';
+            if ($field->type === 'unknown') {
+                if (has_capability('mod/data:manageentries', $context)) {
+                    // Display notification for users that can manage entries.
+                    $errors .= $OUTPUT->notification(get_string('missingfieldtype', 'data',
+                    (object)['name' => $field->field->name]));
+                }
+            } else {
+                $fielddisplay = $field->display_add_field($rid, $datarecord);
+            }
+            $patterns[] = "[[" . $field->field->name . "]]";
+            $replacements[] = $errors . $fielddisplay;
+        }    // Replace the field id tag.
+        $patterns[] = "[[" . $field->field->name . "#id]]";
+        $replacements[] = 'field_' . $field->field->id;
+    }
+
+    if (core_tag_tag::is_enabled('mod_data', 'data_records')) {
+        $patterns[] = "##tags##";
+        $replacements[] = data_generate_tag_form($rid);
+    }
+
+    $newtext = str_ireplace($patterns, $replacements, $data->{$mode});
+
+} else {    //if the add template is not yet defined, print the default form!
+    echo data_generate_default_template($data, 'addtemplate', $rid, true, false);
+    $newtext = '';
+=======
 if (empty($redirectbackto)) {
     $redirectbackto = new \moodle_url('/mod/data/view.php', ['id' => $cm->id]);
+>>>>>>> master
 }
 
 $actionbuttons = html_writer::link(

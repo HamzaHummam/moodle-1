@@ -154,7 +154,11 @@ Feature: Allow students to redo questions in a practice quiz, without starting a
     And I press "Try another question like this one"
     And I press "Finish attempt ..."
     And I press "Submit all and finish"
+<<<<<<< HEAD
+    And I click on "Submit all and finish" "button" in the "Confirmation" "dialogue"
+=======
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
+>>>>>>> master
     And I follow "Finish review"
     And I press "Re-attempt quiz"
     And I click on "True" "radio" in the "First question" "question"

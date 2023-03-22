@@ -31,7 +31,10 @@ $string['blanks'] = 'Empty grades';
 $string['bulkappliesto'] = 'For';
 $string['bulkinsertvalue'] = 'Insert new grade';
 $string['bulklegend'] = 'Bulk insert grades';
+<<<<<<< HEAD
+=======
 $string['bulkchoice'] = 'Bulk insert lets you replace multiple grades at once. Choose the grades you want to replace:';
+>>>>>>> master
 $string['bulkperform'] = 'Perform bulk insert';
 $string['bulkfor'] = 'Grades for {$a}';
 $string['entrypage'] = 'Grade user or grade item';
@@ -66,6 +69,11 @@ $string['removeoverridesave'] = 'Remove overrides';
 $string['savegrades'] = 'Saving grades';
 $string['save'] = 'Save';
 $string['savegradessuccess'] = 'Grades were set for {$a} items';
+<<<<<<< HEAD
+$string['selectgrade'] = 'Select a grade item above';
+$string['selectuser'] = 'Select a user above to view all their grades';
+=======
+>>>>>>> master
 $string['singleview:view'] = 'View single view';
 $string['summarygrade'] = 'A table of users, with columns for range, grade, feedback, and whether to override or exclude a particular grade.';
 $string['summaryuser'] = 'A table of grade items, with columns for grade category, range, grade, feedback, and whether to override or exclude a particular grade.';

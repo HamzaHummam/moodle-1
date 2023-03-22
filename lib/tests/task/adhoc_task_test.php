@@ -30,6 +30,8 @@ require_once(__DIR__ . '/../fixtures/task_fixtures.php');
  * @coversDefaultClass \core\task\manager
  */
 class adhoc_task_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /**
      * Test getting name of task that implements it's own get_name method
@@ -50,6 +52,7 @@ class adhoc_task_test extends \advanced_testcase {
         $task = new \mod_fake\task\adhoc_component_task();
         $this->assertEquals('Adhoc component task', $task->get_name());
     }
+>>>>>>> master
 
     /**
      * Test basic adhoc task execution.

@@ -1695,9 +1695,12 @@ class block_manager {
         } else if (class_exists("block_{$block->name()}\\local\\views\\secondary")) {
             // For backwards compatibility, support the old location for this class (it was in a
             // 'local' namespace which shouldn't be used for core APIs).
+<<<<<<< HEAD
+=======
             debugging("The class block_{$block->name()}\\local\\views\\secondary uses a deprecated " .
                     "namespace. Please move it to block_{$block->name()}\\navigation\\views\\secondary.",
                     DEBUG_DEVELOPER);
+>>>>>>> master
             $class = "block_{$block->name()}\\local\\views\\secondary";
         }
         $secondarynav = new $class($this->page);

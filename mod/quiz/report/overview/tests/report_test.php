@@ -18,10 +18,17 @@ namespace quiz_overview;
 
 use core_question\local\bank\question_version_status;
 use mod_quiz\external\submit_question_version;
+<<<<<<< HEAD
+use question_engine;
+use quiz;
+use quiz_attempt;
+use quiz_attempts_report;
+=======
 use mod_quiz\quiz_attempt;
 use question_engine;
 use mod_quiz\quiz_settings;
 use mod_quiz\local\reports\attempts_report;
+>>>>>>> master
 use quiz_overview_options;
 use quiz_overview_report;
 use quiz_overview_table;

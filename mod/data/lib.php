@@ -400,12 +400,18 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         if (empty($this->field)) {   // No field has been defined yet, try and make one
             $this->define_default_field();
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
         // Throw an exception if field type doen't exist. Anyway user should never access to edit a field with an unknown fieldtype.
         if ($this->type === 'unknown') {
             throw new \moodle_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
         echo $OUTPUT->box_start('generalbox boxaligncenter boxwidthwide');
 
         echo '<form id="editfield" action="'.$CFG->wwwroot.'/mod/data/field.php" method="post">'."\n";
@@ -422,6 +428,15 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
         echo $OUTPUT->heading($this->name(), 3);
 
         $filepath = $CFG->dirroot.'/mod/data/field/'.$this->type.'/mod.html';
+<<<<<<< HEAD
+
+        if (!file_exists($filepath)) {
+            throw new \moodle_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
+        } else {
+            require_once($filepath);
+        }
+=======
+>>>>>>> master
 
         if (!file_exists($filepath)) {
             throw new \moodle_exception(get_string('missingfieldtype', 'data', (object)['name' => $this->field->name]));
@@ -465,6 +480,8 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Return the data_content of the field, or generate it if it is in preview mode.
      *
      * @param int $recordid the record id
@@ -482,6 +499,7 @@ class data_field_base {     // Base class for Database Field Types (see field/*/
     }
 
     /**
+>>>>>>> master
      * Display the content of the field in browse mode
      *
      * @global object
@@ -1805,7 +1823,10 @@ function data_print_preference_form($data, $perpage, $search, $sort='', $order='
         $fieldname = $field->field->name;
         $fieldname = preg_quote($fieldname, '/');
         $searchfield = data_get_field_from_id($field->field->id, $data);
+<<<<<<< HEAD
+=======
 
+>>>>>>> master
         if ($searchfield->type === 'unknown') {
             continue;
         }

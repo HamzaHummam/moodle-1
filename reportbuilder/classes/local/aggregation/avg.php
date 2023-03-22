@@ -75,6 +75,13 @@ class avg extends base {
      * @param int $columntype
      * @return mixed
      */
+<<<<<<< HEAD
+    public static function format_value($value, array $values, array $callbacks) {
+        if (reset($values) === null) {
+            return null;
+        }
+        return format_float((float) reset($values), 1);
+=======
     public static function format_value($value, array $values, array $callbacks, int $columntype) {
         if (reset($values) === null) {
             return null;
@@ -84,5 +91,6 @@ class avg extends base {
         }
 
         return parent::format_value($value, $values, $callbacks, $columntype);
+>>>>>>> master
     }
 }

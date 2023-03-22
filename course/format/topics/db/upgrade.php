@@ -39,6 +39,8 @@ function xmldb_format_topics_upgrade($oldversion) {
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
 
+<<<<<<< HEAD
+=======
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
 
@@ -53,5 +55,6 @@ function xmldb_format_topics_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023030700, 'format', 'topics');
     }
 
+>>>>>>> master
     return true;
 }

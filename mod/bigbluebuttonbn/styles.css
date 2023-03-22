@@ -34,6 +34,8 @@
 .bbb_index_form {
     display: inline-block;
 }
+<<<<<<< HEAD
+=======
 
 .bigbluebuttonbn_icon_btn i.icon {
     margin-right: auto;
@@ -43,3 +45,4 @@ input.form-control[readonly][name="guestpassword"],
 input.form-control[readonly][name="guestjoinurl"] {
     background: initial;
 }
+>>>>>>> master

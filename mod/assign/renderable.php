@@ -295,8 +295,11 @@ class assign_feedback_status implements renderable {
     public $canviewfullnames = false;
     /** @var string gradingcontrollergrade The grade information rendered by a grade controller */
     public $gradingcontrollergrade;
+<<<<<<< HEAD
+=======
     /** @var array information for the given plugins. */
     public $plugins = [];
+>>>>>>> master
 
     /**
      * Constructor

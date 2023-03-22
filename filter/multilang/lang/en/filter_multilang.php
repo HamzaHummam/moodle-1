@@ -24,6 +24,9 @@
  */
 
 $string['filtername'] = 'Multi-language content';
+<<<<<<< HEAD
+=======
 $string['forceoldsyntax'] = 'Force old syntax';
 $string['forceoldsyntax_desc'] = 'Force old multi-language syntax: &lt;span&gt; without the class="multilang" and &lt;lang&gt;.';
+>>>>>>> master
 $string['privacy:metadata'] = 'The Multi-language content plugin does not store any personal data.';

@@ -28,6 +28,23 @@ Feature: Users can view and search database entries
       | database | type | name              | description              |
       | data1    | text | Test field name   | Test field description   |
       | data1    | text | Test field 2 name | Test field 2 description |
+<<<<<<< HEAD
+    And the following "mod_data > templates" exist:
+      | database | name            |
+      | data1    | singletemplate  |
+      | data1    | listtemplate    |
+      | data1    | addtemplate     |
+      | data1    | asearchtemplate |
+      | data1    | rsstemplate     |
+
+  @javascript
+  Scenario: Students can add view, list and search entries
+    Given the following "mod_data > entries" exist:
+      | database | Test field name | Test field 2 name |
+      | data1    | Student entry 1 |                   |
+      | data1    | Student entry 2 |                   |
+      | data1    | Student entry 3 |                   |
+=======
       | data1    | url  | Test field 3 name | Test field 3 description |
 
   @javascript
@@ -37,6 +54,7 @@ Feature: Users can view and search database entries
       | data1    | Student entry 1 |                   | https://moodledev.io   |
       | data1    | Student entry 2 |                   |                        |
       | data1    | Student entry 3 |                   |                        |
+>>>>>>> master
     When I log in as "student1"
     And I am on the "Test database name" "data activity" page
     Then I should see "Student entry 1"
@@ -126,10 +144,16 @@ Feature: Users can view and search database entries
     Then I should see "Found 1 out of 2 records."
     And I should see "Student entry 1"
     And I should not see "Student entry 2"
+<<<<<<< HEAD
+    And I set the field "Author first name" to ""
+    And I set the field "Author last name" to "2"
+    And I press "Save settings"
+=======
     And I set the field "First name" to ""
     And I set the field "Last name" to "2"
     And I click on "Save settings" "button" in the "data_adv_form" "region"
     And I should see "Found 1 out of 2 records."
+>>>>>>> master
     And I should not see "Student entry 1"
     And I should see "Student entry 2"
     # Search: no records found.

@@ -19,6 +19,15 @@ namespace core_h5p;
 use core_h5p\local\library\autoloader;
 
 /**
+<<<<<<< HEAD
+* Test class covering the h5p data generator class.
+*
+* @package    core_h5p
+* @category   test
+* @copyright  2019 Mihail Geshoski <mihail@moodle.com>
+* @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+* @runTestsInSeparateProcesses
+=======
  * Test class covering the h5p data generator class.
  *
  * @package    core_h5p
@@ -27,6 +36,7 @@ use core_h5p\local\library\autoloader;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @runTestsInSeparateProcesses
  * @covers     \core_h5p_generator
+>>>>>>> master
 */
 class generator_test extends \advanced_testcase {
 

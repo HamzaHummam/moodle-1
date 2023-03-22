@@ -16,6 +16,17 @@
 
 namespace mod_quiz;
 
+<<<<<<< HEAD
+use mod_quiz\question\bank\qbank_helper;
+use quiz;
+
+defined('MOODLE_INTERNAL') || die();
+
+global $CFG;
+require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
+
+=======
+>>>>>>> master
 /**
  * Unit tests for quiz events.
  *

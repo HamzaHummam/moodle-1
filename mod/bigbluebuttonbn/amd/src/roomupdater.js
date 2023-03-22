@@ -26,6 +26,14 @@ import Templates from "core/templates";
 import {exception as displayException} from 'core/notification';
 import {getMeetingInfo} from './repository';
 
+<<<<<<< HEAD
+const timeout = 5000;
+const maxFactor = 10;
+
+let updateCount = 0;
+let updateFactor = 1;
+=======
+>>>>>>> master
 let timerReference = null;
 let timerRunning = false;
 let pollInterval = 0;
@@ -68,12 +76,22 @@ const poll = () => {
         // The poller has been stopped.
         return;
     }
+<<<<<<< HEAD
+    if ((updateCount % updateFactor) === 0) {
+        updateRoom()
+        .then(() => {
+            if (updateFactor >= maxFactor) {
+                updateFactor = 1;
+            } else {
+                updateFactor++;
+=======
     updateRoom()
         .then((updateOk) => {
             if (!updateOk) {
                 pollIntervalFactor = (pollIntervalFactor < MAX_POLL_INTERVAL_FACTOR) ?
                     pollIntervalFactor + 1 : MAX_POLL_INTERVAL_FACTOR;
                 // We make sure if there is an error that we do not try too often.
+>>>>>>> master
             }
             timerReference = setTimeout(() => poll(), pollInterval * pollIntervalFactor);
             return true;
@@ -88,7 +106,11 @@ const poll = () => {
  * @returns {Promise}
  */
 export const updateRoom = (updatecache = false) => {
+<<<<<<< HEAD
+    const bbbRoomViewElement = document.getElementById('bbb-room-view');
+=======
     const bbbRoomViewElement = document.getElementById('bigbluebuttonbn-room-view');
+>>>>>>> master
     if (bbbRoomViewElement === null) {
         return Promise.resolve(false);
     }
@@ -104,7 +126,11 @@ export const updateRoom = (updatecache = false) => {
             data.haspresentations = !!(data.presentations && data.presentations.length);
             return Templates.renderForPromise('mod_bigbluebuttonbn/room_view', data);
         })
+<<<<<<< HEAD
+        .then(({html, js}) => Templates.replaceNodeContents(bbbRoomViewElement, html, js))
+=======
         .then(({html, js}) => Templates.replaceNode(bbbRoomViewElement, html, js))
+>>>>>>> master
         .then(() => pendingPromise.resolve())
         .catch(displayException);
 };

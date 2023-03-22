@@ -15,6 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
+<<<<<<<< HEAD:mod/quiz/accessrule/seb/templates/loading.mustache
     @template quizaccess_seb/loading
 
     Loading container.
@@ -32,3 +33,20 @@
         {{> core/loading }}
     </div>
 </div>
+========
+    @template qbank_usage/last_used
+
+    Example context (json):
+    {
+        "displaydata": [
+            {
+                "lastused": "Never"
+            }
+        ]
+    }
+}}
+
+<span class="date">
+    {{lastused}}
+</span>
+>>>>>>>> master:question/bank/usage/templates/last_used.mustache

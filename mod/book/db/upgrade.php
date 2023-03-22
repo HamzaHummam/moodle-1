@@ -48,6 +48,8 @@ function xmldb_book_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
+=======
     if ($oldversion < 2022053000) {
         // Define key course (foreign) to be added to book.
         $table = new xmldb_table('book');
@@ -61,6 +63,7 @@ function xmldb_book_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+>>>>>>> master
 
     return true;
 }

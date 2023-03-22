@@ -35,6 +35,8 @@ export const resetFilters = (reportId, reportParameters) => {
     const request = {
         methodname: 'core_reportbuilder_filters_reset',
         args: {reportid: reportId, parameters: reportParameters}
+<<<<<<< HEAD
+=======
     };
 
     return Ajax.call([request])[0];
@@ -53,6 +55,7 @@ export const setFilters = (reportId, reportParameters, filterValues) => {
     const request = {
         methodname: 'core_reportbuilder_set_filters',
         args: {reportid: reportId, parameters: reportParameters, values: filterValues}
+>>>>>>> master
     };
 
     return Ajax.call([request])[0];

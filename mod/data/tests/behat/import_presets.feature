@@ -18,6 +18,10 @@ Feature: Users can import presets
       | activity | name                | intro | course | idnumber |
       | data     | Mountain landscapes | n     | C1     | data1    |
 
+<<<<<<< HEAD
+  Scenario: Teacher can import from field page on a database with fields and previous fields will be
+    removed
+=======
   Scenario: Teacher can import from preset page on an empty database
     Given I am on the "Mountain landscapes" "data activity" page logged in as teacher1
     And I follow "Presets"
@@ -28,11 +32,19 @@ Feature: Users can import presets
     And I should see "Image" in the "image" "table_row"
 
   Scenario: Teacher can import from preset page on a database with fields
+>>>>>>> master
     Given the following "mod_data > fields" exist:
       | database | type | name              | description              |
       | data1    | text | Test field name   | Test field description   |
     And I am on the "Mountain landscapes" "data activity" page logged in as teacher1
     And I follow "Presets"
+<<<<<<< HEAD
+    And I click on "Import" "link"
+    And I upload "mod/data/tests/fixtures/image_gallery_preset.zip" file to "Choose file" filemanager
+    When I click on "Save" "button"
+    And I click on "Continue" "button"
+    Then I should see "The preset has been successfully applied."
+=======
     And I choose the "Import preset" item in the "Action" action menu
     And I upload "mod/data/tests/fixtures/image_gallery_preset.zip" file to "Preset file" filemanager
     When I click on "Import preset and apply" "button"
@@ -174,6 +186,7 @@ Feature: Users can import presets
     When I click on "Import preset and apply" "button"
     And I click on "Continue" "button"
     Then I should see "Preset applied."
+>>>>>>> master
     And I follow "Fields"
     And I should see "image"
     And I should see "title"

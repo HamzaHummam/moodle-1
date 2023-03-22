@@ -453,6 +453,44 @@ class mod_bigbluebuttonbn_generator extends \testing_module_generator {
     }
 
     /**
+     * Trigger a meeting event on BBB side
+     *
+     * @param object $user
+     * @param instance $instance
+     * @param string $eventtype
+     * @param string|null $eventdata
+     * @return void
+     */
+    public function add_meeting_event(object $user, instance $instance, string $eventtype, string $eventdata = ''): void {
+        $this->send_mock_request('backoffice/addMeetingEvent', [
+                'secret' => \mod_bigbluebuttonbn\local\config::DEFAULT_SHARED_SECRET,
+                'meetingID' => $instance->get_meeting_id(),
+                'attendeeID' => $user->id,
+                'attendeeName' => fullname($user),
+                'eventType' => $eventtype,
+                'eventData' => $eventdata
+            ]
+        );
+    }
+
+    /**
+     * Send all previously store events
+     *
+     * @param instance $instance
+     * @return object|null
+     */
+    public function send_all_events(instance $instance): ?object {
+        if (defined('TEST_MOD_BIGBLUEBUTTONBN_MOCK_SERVER')) {
+            return $this->send_mock_request('backoffice/sendAllEvents', [
+                'meetingID' => $instance->get_meeting_id(),
+                'sendQuery' => false, // We get the result directly here.
+                'secret' => \mod_bigbluebuttonbn\local\config::DEFAULT_SHARED_SECRET,
+            ]);
+        }
+        return null;
+    }
+
+    /**
      * Reset the mock server
      */
     public function reset_mock(): void {

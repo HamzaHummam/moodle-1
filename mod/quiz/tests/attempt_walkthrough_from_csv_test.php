@@ -17,7 +17,12 @@
 namespace mod_quiz;
 
 use question_engine;
+<<<<<<< HEAD
+use quiz;
+use quiz_attempt;
+=======
 use mod_quiz\quiz_settings;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

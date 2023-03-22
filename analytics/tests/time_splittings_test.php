@@ -34,12 +34,15 @@ require_once(__DIR__ . '/../../lib/enrollib.php');
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class time_splittings_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /** @var \stdClass course record. */
     protected $course;
 
     /** @var course Moodle course analysable. */
     protected $analysable;
+>>>>>>> master
 
     /**
      * setUp

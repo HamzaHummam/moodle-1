@@ -24,6 +24,16 @@
  */
 
 namespace qtype_numerical;
+<<<<<<< HEAD
+
+use qtype_numerical_answer_processor;
+
+defined('MOODLE_INTERNAL') || die();
+
+global $CFG;
+require_once($CFG->dirroot . '/question/type/numerical/questiontype.php');
+=======
+>>>>>>> master
 
 use qtype_numerical_answer_processor;
 
@@ -34,6 +44,13 @@ use qtype_numerical_answer_processor;
  * @category   test
  * @copyright  2008 The Open University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+<<<<<<< HEAD
+ */
+class answerprocessor_test extends \advanced_testcase {
+    public function test_parse_response() {
+        $ap = new testable_qtype_numerical_answer_processor(
+                array('m' => 1, 'cm' => 100), false, '.', ',');
+=======
  * @covers     \qtype_numerical_answer_processor
  */
 class answerprocessor_test extends \advanced_testcase {
@@ -42,6 +59,7 @@ class answerprocessor_test extends \advanced_testcase {
      */
     public function setUp(): void {
         global $CFG;
+>>>>>>> master
 
         require_once("{$CFG->dirroot}/question/type/numerical/questiontype.php");
     }
@@ -275,6 +293,10 @@ class answerprocessor_test extends \advanced_testcase {
         $this->assertEquals($expected, $ap->apply_units($params));
     }
 
+<<<<<<< HEAD
+    public function test_currency() {
+        $ap = new qtype_numerical_answer_processor(array('$' => 1, '£' => 1), true, '.', ',');
+=======
     /**
      * Data provider for apply_units with euro float separators.
      *
@@ -299,6 +321,7 @@ class answerprocessor_test extends \advanced_testcase {
         $ap = new qtype_numerical_answer_processor(['%' => 100], false, '.', ',');
         $this->assertEquals($expected, $ap->apply_units($params));
     }
+>>>>>>> master
 
     /**
      * Data provider for apply_units with percentages.

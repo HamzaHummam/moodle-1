@@ -25,6 +25,10 @@ Feature: Add H5P activity
     Given the following "activity" exists:
       | activity        | h5pactivity                   |
       | course          | C1                            |
+<<<<<<< HEAD
+      | section         | 1                             |
+=======
+>>>>>>> master
       | name            | Awesome H5P package           |
       | intro           | H5P activity Description      |
       | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
@@ -42,10 +46,20 @@ Feature: Add H5P activity
     Given the following "activity" exists:
       | activity        | h5pactivity                   |
       | course          | C1                            |
+<<<<<<< HEAD
+      | section         | 1                             |
+      | name            | Awesome H5P package           |
+      | intro           | description                   |
+      | displayoptions  | 12                            |
+      | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
+    When I am on the "Awesome H5P package" "h5pactivity activity" page
+    And I wait until the page is ready
+=======
       | name            | Awesome H5P package           |
       | displayoptions  | 12                            |
       | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
     When I am on the "Awesome H5P package" "h5pactivity activity" page
+>>>>>>> master
     Then I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And "Reuse" "text" should exist in the ".h5p-actions" "css_element"
@@ -57,10 +71,20 @@ Feature: Add H5P activity
     Given the following "activity" exists:
       | activity        | h5pactivity                   |
       | course          | C1                            |
+<<<<<<< HEAD
+      | section         | 1                             |
+      | name            | Awesome H5P package           |
+      | intro           | description                   |
+      | displayoptions  | 10                            |
+      | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
+    When I am on the "Awesome H5P package" "h5pactivity activity" page
+    And I wait until the page is ready
+=======
       | name            | Awesome H5P package           |
       | displayoptions  | 10                            |
       | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
     When I am on the "Awesome H5P package" "h5pactivity activity" page
+>>>>>>> master
     Then I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And "Reuse" "text" should not exist in the ".h5p-actions" "css_element"
@@ -72,10 +96,20 @@ Feature: Add H5P activity
     Given the following "activity" exists:
       | activity        | h5pactivity                             |
       | course          | C1                                      |
+<<<<<<< HEAD
+      | section         | 1                                       |
+      | name            | Awesome H5P package                     |
+      | intro           | description                             |
+      | displayoptions  | 6                                       |
+      | packagefilepath | h5p/tests/fixtures/guess-the-answer.h5p |
+    When I am on the "Awesome H5P package" "h5pactivity activity" page
+    And I wait until the page is ready
+=======
       | name            | Awesome H5P package                     |
       | displayoptions  | 6                                       |
       | packagefilepath | h5p/tests/fixtures/guess-the-answer.h5p |
     When I am on the "Awesome H5P package" "h5pactivity activity" page
+>>>>>>> master
     Then I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And "Reuse" "text" should not exist in the ".h5p-actions" "css_element"
@@ -87,10 +121,20 @@ Feature: Add H5P activity
     Given the following "activity" exists:
       | activity        | h5pactivity                   |
       | course          | C1                            |
+<<<<<<< HEAD
+      | section         | 1                             |
+      | name            | Awesome H5P package           |
+      | intro           | description                   |
+      | displayoptions  | 6                             |
+      | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
+    When I am on the "Awesome H5P package" "h5pactivity activity" page
+    And I wait until the page is ready
+=======
       | name            | Awesome H5P package           |
       | displayoptions  | 6                             |
       | packagefilepath | h5p/tests/fixtures/ipsums.h5p |
     When I am on the "Awesome H5P package" "h5pactivity activity" page
+>>>>>>> master
     Then I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And "Reuse" "text" should not exist in the ".h5p-actions" "css_element"
@@ -102,10 +146,20 @@ Feature: Add H5P activity
     Given the following "activity" exists:
       | activity        | h5pactivity                             |
       | course          | C1                                      |
+<<<<<<< HEAD
+      | section         | 1                                       |
+      | name            | Awesome H5P package                     |
+      | intro           | description                             |
+      | displayoptions  | 0                                       |
+      | packagefilepath | h5p/tests/fixtures/guess-the-answer.h5p |
+    When I am on the "Awesome H5P package" "h5pactivity activity" page
+    And I wait until the page is ready
+=======
       | name            | Awesome H5P package                     |
       | displayoptions  | 0                                       |
       | packagefilepath | h5p/tests/fixtures/guess-the-answer.h5p |
     When I am on the "Awesome H5P package" "h5pactivity activity" page
+>>>>>>> master
     Then I switch to "h5p-player" class iframe
     And I switch to "h5p-iframe" class iframe
     And "Reuse" "text" should exist in the ".h5p-actions" "css_element"

@@ -29,6 +29,10 @@ namespace core_reportbuilder\local\entities;
 use advanced_testcase;
 use coding_exception;
 use lang_string;
+<<<<<<< HEAD
+use ReflectionClass;
+=======
+>>>>>>> master
 use core_reportbuilder\local\filters\text;
 use core_reportbuilder\local\report\column;
 use core_reportbuilder\local\report\filter;
@@ -87,6 +91,8 @@ class base_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Test setting multiple table aliases
      */
     public function test_set_table_aliases(): void {
@@ -115,6 +121,7 @@ class base_test extends advanced_testcase {
     }
 
     /**
+>>>>>>> master
      * Test entity name
      */
     public function test_set_entity_name(): void {
@@ -159,7 +166,13 @@ class base_test extends advanced_testcase {
         $tablejoin = "JOIN {course} c2 ON c2.id = c1.id";
         $entity->add_join($tablejoin);
 
+<<<<<<< HEAD
+        $method = (new ReflectionClass(base_test_entity::class))->getMethod('get_joins');
+        $method->setAccessible(true);
+        $this->assertEquals([$tablejoin], $method->invoke($entity));
+=======
         $this->assertEquals([$tablejoin], $entity->get_joins());
+>>>>>>> master
     }
 
     /**
@@ -174,7 +187,13 @@ class base_test extends advanced_testcase {
         ];
         $entity->add_joins($tablejoins);
 
+<<<<<<< HEAD
+        $method = (new ReflectionClass(base_test_entity::class))->getMethod('get_joins');
+        $method->setAccessible(true);
+        $this->assertEquals($tablejoins, $method->invoke($entity));
+=======
         $this->assertEquals($tablejoins, $entity->get_joins());
+>>>>>>> master
     }
 
     /**
@@ -191,7 +210,13 @@ class base_test extends advanced_testcase {
             ->add_joins($tablejoins)
             ->add_joins($tablejoins);
 
+<<<<<<< HEAD
+        $method = (new ReflectionClass(base_test_entity::class))->getMethod('get_joins');
+        $method->setAccessible(true);
+        $this->assertEquals($tablejoins, $method->invoke($entity));
+=======
         $this->assertEquals($tablejoins, $entity->get_joins());
+>>>>>>> master
     }
 
     /**

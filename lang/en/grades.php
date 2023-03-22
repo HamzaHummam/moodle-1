@@ -570,7 +570,10 @@ $string['nolettergrade'] = 'No letter grade for';
 $string['nomode'] = 'NA';
 $string['nonnumericweight'] = 'Received non-numeric value for';
 $string['nonunlockableverbose'] = 'To unlock this grade, you need to unlock {$a->itemname}.';
+<<<<<<< HEAD
+=======
 $string['nonunhideableverbose'] = 'To unhide this grade, you need to unhide {$a->itemname}.';
+>>>>>>> master
 $string['nonweightedpct'] = 'non-weighted %';
 $string['nooutcome'] = 'No outcome';
 $string['nooutcomes'] = 'Outcome items must be linked to a course outcome, but there are no outcomes for this course. Would you like to add one?';

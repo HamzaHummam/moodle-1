@@ -17,9 +17,15 @@
 namespace qbank_statistics;
 
 use core_question\statistics\questions\all_calculated_for_qubaid_condition;
+<<<<<<< HEAD
+use quiz;
+use question_engine;
+use quiz_attempt;
+=======
 use mod_quiz\quiz_attempt;
 use mod_quiz\quiz_settings;
 use question_engine;
+>>>>>>> master
 
 /**
  * Tests for question statistics.

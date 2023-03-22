@@ -16,8 +16,11 @@
 
 namespace core;
 
+<<<<<<< HEAD
+=======
 use core_group\visibility;
 
+>>>>>>> master
 /**
  * Unit tests for lib/grouplib.php
  *

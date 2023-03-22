@@ -244,7 +244,11 @@ function my_reset_page_for_all_users(
                   JOIN {context} ctx ON ctx.instanceid = p.userid AND ctx.contextlevel = :usercontextlevel
                   JOIN {block_instances} bi ON bi.parentcontextid = ctx.id
                    AND bi.pagetypepattern = :pagetypepattern
+<<<<<<< HEAD
+                   AND (bi.subpagepattern IS NULL OR bi.subpagepattern = " . $DB->sql_concat(':empty', 'p.id') . ")
+=======
                    AND (bi.subpagepattern IS NULL OR bi.subpagepattern = " . $DB->sql_cast_to_char('p.id') . ")
+>>>>>>> master
                  WHERE p.private = :private
                    AND p.name = :name
                    AND p.userid $infragment";
@@ -253,6 +257,7 @@ function my_reset_page_for_all_users(
             'private' => $private,
             'usercontextlevel' => CONTEXT_USER,
             'pagetypepattern' => $pagetype,
+            'empty' => '',
             'name' => $pagename
         ], $inparams);
         $blockids = $DB->get_fieldset_sql($sql, $params);

@@ -2,6 +2,14 @@ This files describes API changes for quiz report plugins.
 
 Overview of this plugin type at http://docs.moodle.org/dev/Quiz_reports
 
+<<<<<<< HEAD
+=== 4.0.6 ===
+
+There was an ill-advised, never documented, API change in quiz_report_get_significant_questions
+in Moodle 4.0. The API has now been reverted to how it was before 4.0. Hopefully this
+will not cause anyone a problem. (The API revert did not require any changes in any automated tests
+or standard quiz reports.)
+=======
 === 4.2 ===
 
 * There was an ill-advised, never documented, API change in quiz_report_get_significant_questions
@@ -33,6 +41,7 @@ Overview of this plugin type at http://docs.moodle.org/dev/Quiz_reports
   - The file mod/quiz/report/overview/overviewgraph.php - deprecated since 3.2
   - The file mod/quiz/report/statistics/statistics_graph.php - deprecated since 3.2
 
+>>>>>>> master
 
 === 3.9 ===
 

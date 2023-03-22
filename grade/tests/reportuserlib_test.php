@@ -17,7 +17,11 @@
 namespace core_grades;
 
 use grade_plugin_return;
+<<<<<<< HEAD
+use grade_report_user;
+=======
 use gradereport_user\report\user as user_report;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

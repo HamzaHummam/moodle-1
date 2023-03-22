@@ -31,9 +31,12 @@ require_once($CFG->dirroot . '/course/lib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class markerallocation_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
 
     /** @var \stdClass course record. */
     private $course;
+>>>>>>> master
 
     /**
      * Create all the needed elements to test the difference between both functions.

@@ -133,6 +133,8 @@ class groupconcat_test extends core_reportbuilder_testcase {
             'uniqueidentifier' => 'user:confirmed',
             'aggregation' => groupconcat::get_class_name(),
         ]);
+<<<<<<< HEAD
+=======
 
         // Add callback to format the column.
         $instance = manager::get_report_from_persistent($report);
@@ -141,6 +143,7 @@ class groupconcat_test extends core_reportbuilder_testcase {
                 // Simple callback to return the given value, and append aggregation type.
                 return "{$value} ({$aggregation})";
             });
+>>>>>>> master
 
         // Assert confirmed column was aggregated, and sorted predictably with callback applied.
         $content = $this->get_custom_report_content($report->get('id'));

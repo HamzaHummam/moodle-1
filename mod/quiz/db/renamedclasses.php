@@ -25,6 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $renamedclasses = [
+<<<<<<< HEAD
+    // Since Moodle 4.0.5.
+    'mod_quiz\local\views\secondary' => 'mod_quiz\navigation\views\secondary',
+=======
     // Since Moodle 4.1.
     'mod_quiz\local\views\secondary' => 'mod_quiz\navigation\views\secondary',
     // Since Moodle 4.2.
@@ -66,4 +70,5 @@ $renamedclasses = [
     'quiz_review_nav_panel' => 'mod_quiz\output\navigation_panel_review',
     'quiz_attempt' => 'mod_quiz\quiz_attempt',
     'quiz' => 'mod_quiz\quiz_settings',
+>>>>>>> master
 ];

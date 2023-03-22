@@ -1268,7 +1268,11 @@ class rule_test extends \advanced_testcase {
         $this->setAdminUser();
 
         $this->quiz = $this->create_test_quiz($this->course, settings_provider::USE_SEB_CONFIG_MANUALLY);
+<<<<<<< HEAD
+        $quizsettings = quiz_settings::get_record(['quizid' => $this->quiz->id]);
+=======
         $quizsettings = seb_quiz_settings::get_record(['quizid' => $this->quiz->id]);
+>>>>>>> master
         $quizsettings->save();
         // Set access for Moodle session.
         $SESSION->quizaccess_seb_access = [$this->quiz->cmid => true];

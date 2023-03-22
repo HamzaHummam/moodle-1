@@ -16,9 +16,16 @@
 
 namespace mod_quiz;
 
+<<<<<<< HEAD
+use question_bank;
+use question_engine;
+use quiz;
+use quiz_attempt;
+=======
 use moodle_url;
 use question_bank;
 use question_engine;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -28,12 +35,21 @@ require_once($CFG->dirroot . '/mod/quiz/locallib.php');
 /**
  * Quiz attempt walk through.
  *
+<<<<<<< HEAD
+ * @package    mod_quiz
+ * @category   test
+ * @copyright  2013 The Open University
+ * @author     Jamie Pratt <me@jamiep.org>
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers \quiz_attempt
+=======
  * @package   mod_quiz
  * @category  test
  * @copyright 2013 The Open University
  * @author    Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @covers \mod_quiz\quiz_attempt
+>>>>>>> master
  */
 class attempt_walkthrough_test extends \advanced_testcase {
 
@@ -154,10 +170,16 @@ class attempt_walkthrough_test extends \advanced_testcase {
      * The quiz is set to close 1 hour from now.
      * The quiz is set to use a grade period of 1 hour once time expires.
      *
+<<<<<<< HEAD
+     * @return \stdClass the quiz that was created.
+     */
+    protected function create_quiz_with_one_question(): \stdClass {
+=======
      * @param string $overduehandling value for the overduehandling quiz setting.
      * @return \stdClass the quiz that was created.
      */
     protected function create_quiz_with_one_question(string $overduehandling = 'graceperiod'): \stdClass {
+>>>>>>> master
         global $SITE;
         $this->resetAfterTest();
 
@@ -167,18 +189,30 @@ class attempt_walkthrough_test extends \advanced_testcase {
 
         $quiz = $quizgenerator->create_instance(
                 ['course' => $SITE->id, 'timeclose' => $timeclose,
+<<<<<<< HEAD
+                        'overduehandling' => 'graceperiod', 'graceperiod' => HOURSECS]);
+=======
                         'overduehandling' => $overduehandling, 'graceperiod' => HOURSECS]);
+>>>>>>> master
 
         // Create a question.
         /** @var \core_question_generator $questiongenerator */
         $questiongenerator = $this->getDataGenerator()->get_plugin_generator('core_question');
         $cat = $questiongenerator->create_question_category();
+<<<<<<< HEAD
+        $saq = $questiongenerator->create_question('shortanswer', null, array('category' => $cat->id));
+
+        // Add them to the quiz.
+        quiz_add_quiz_question($saq->id, $quiz, 0, 1);
+        quiz_update_sumgrades($quiz);
+=======
         $saq = $questiongenerator->create_question('shortanswer', null, ['category' => $cat->id]);
 
         // Add them to the quiz.
         $quizobj = quiz_settings::create($quiz->id);
         quiz_add_quiz_question($saq->id, $quiz, 0, 1);
         $quizobj->get_grade_calculator()->recompute_quiz_sumgrades();
+>>>>>>> master
 
         return $quiz;
     }
@@ -190,14 +224,21 @@ class attempt_walkthrough_test extends \advanced_testcase {
         // Make a user to do the quiz.
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
+<<<<<<< HEAD
+        $quizobj = quiz::create($quiz->id, $user->id);
+=======
         $quizobj = quiz_settings::create($quiz->id, $user->id);
+>>>>>>> master
 
         // Start the attempt.
         $attempt = quiz_prepare_and_start_new_attempt($quizobj, 1, null);
 
         // Process some responses from the student.
         $attemptobj = quiz_attempt::create($attempt->id);
+<<<<<<< HEAD
+=======
         $this->assertEquals(1, $attemptobj->get_number_of_unanswered_questions());
+>>>>>>> master
         $attemptobj->process_submitted_actions($quiz->timeclose - 30 * MINSECS, false, [1 => ['answer' => 'frog']]);
 
         // Attempt goes overdue (e.g. if cron ran).
@@ -211,7 +252,10 @@ class attempt_walkthrough_test extends \advanced_testcase {
         $this->assertEquals(0, $attemptobj->get_submitted_date());
         $this->assertEquals($user->id, $attemptobj->get_userid());
         $this->assertTrue($attemptobj->has_response_to_at_least_one_graded_question());
+<<<<<<< HEAD
+=======
         $this->assertEquals(0, $attemptobj->get_number_of_unanswered_questions());
+>>>>>>> master
 
         // Student submits the attempt during the grace period.
         $attemptobj = quiz_attempt::create($attempt->id);
@@ -224,7 +268,10 @@ class attempt_walkthrough_test extends \advanced_testcase {
         $this->assertEquals($quiz->timeclose + 30 * MINSECS, $attemptobj->get_submitted_date());
         $this->assertEquals($user->id, $attemptobj->get_userid());
         $this->assertTrue($attemptobj->has_response_to_at_least_one_graded_question());
+<<<<<<< HEAD
+=======
         $this->assertEquals(0, $attemptobj->get_number_of_unanswered_questions());
+>>>>>>> master
     }
 
     public function test_quiz_attempt_walkthrough_close_time_extended_at_last_minute() {
@@ -236,7 +283,11 @@ class attempt_walkthrough_test extends \advanced_testcase {
         // Make a user to do the quiz.
         $user = $this->getDataGenerator()->create_user();
         $this->setUser($user);
+<<<<<<< HEAD
+        $quizobj = quiz::create($quiz->id, $user->id);
+=======
         $quizobj = quiz_settings::create($quiz->id, $user->id);
+>>>>>>> master
 
         // Start the attempt.
         $attempt = quiz_prepare_and_start_new_attempt($quizobj, 1, null);

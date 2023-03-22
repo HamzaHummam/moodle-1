@@ -36,6 +36,8 @@ function xmldb_logstore_standard_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.0.0 release upgrade line.
     // Put any upgrade step following this.
+<<<<<<< HEAD
+=======
     if ($oldversion < 2022053000) {
         // Define index relateduserid (not unique) to be added to logstore_standard_log.
         $table = new xmldb_table('logstore_standard_log');
@@ -62,6 +64,7 @@ function xmldb_logstore_standard_upgrade($oldversion) {
 
     // Automatically generated Moodle v4.1.0 release upgrade line.
     // Put any upgrade step following this.
+>>>>>>> master
 
     return true;
 }

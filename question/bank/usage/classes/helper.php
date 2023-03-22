@@ -134,6 +134,8 @@ class helper {
         return $sql;
     }
 
+<<<<<<< HEAD
+=======
 
     /**
      * Get the question last used sql.
@@ -152,4 +154,5 @@ class helper {
         return $sql;
     }
 
+>>>>>>> master
 }

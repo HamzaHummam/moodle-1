@@ -153,6 +153,10 @@ Feature: Attempt a quiz
     And I should see "Second question"
     And I should not see "First question"
     And I follow "Previous page"
+<<<<<<< HEAD
+    And I should see "Text of the first question"
+    And I should not see "Text of the second question"
+=======
     And I should see "First question"
     And I should not see "Second question"
 
@@ -183,6 +187,7 @@ Feature: Attempt a quiz
     And I follow "Previous page"
     And I should see "First question"
     And I should not see "Second question"
+>>>>>>> master
 
   @javascript
   Scenario: Take a quiz with number of attempts set
@@ -205,8 +210,13 @@ Feature: Attempt a quiz
     And I should see "First question"
     And I click on "Finish attempt ..." "button" in the "region-main" "region"
     And I press "Submit all and finish"
+<<<<<<< HEAD
+    And I should see "Once you submit, you will no longer be able to change your answers for this attempt." in the "Confirmation" "dialogue"
+    And I click on "Submit all and finish" "button" in the "Confirmation" "dialogue"
+=======
     And I should see "Once you submit your answers, you won’t be able to change them." in the "Submit all your answers and finish?" "dialogue"
     And I click on "Submit all and finish" "button" in the "Submit all your answers and finish?" "dialogue"
+>>>>>>> master
     And I follow "Finish review"
     And I should not see "Re-attempt quiz"
     And I should see "No more attempts are allowed"

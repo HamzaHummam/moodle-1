@@ -199,6 +199,8 @@ function expand_value(array &$dest, array $source, array $option, string $option
         $dest[$optionname] = clean_param($source[$optionname], $option['type'] ?? PARAM_RAW);
     }
 }
+<<<<<<< HEAD
+=======
 
 /**
  * Course-module fragment renderer method.
@@ -259,3 +261,4 @@ function core_courseformat_output_fragment_section($args): string {
     $renderer = $format->get_renderer($PAGE);
     return $renderer->course_section_updated($format, $section);
 }
+>>>>>>> master

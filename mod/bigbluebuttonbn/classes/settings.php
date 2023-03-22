@@ -138,6 +138,10 @@ class settings {
      */
     protected function add_general_settings(): admin_settingpage {
         global $CFG;
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
         $settingsgeneral = new admin_settingpage(
             $this->section,
             get_string('config_general', 'bigbluebuttonbn'),
@@ -150,6 +154,19 @@ class settings {
                 '',
                 get_string('config_general_description', 'bigbluebuttonbn')
             );
+<<<<<<< HEAD
+
+            if (empty($CFG->bigbluebuttonbn_default_dpa_accepted)) {
+                $settingsgeneral->add(new admin_setting_configcheckbox(
+                    'bigbluebuttonbn_default_dpa_accepted',
+                    get_string('acceptdpa', 'mod_bigbluebuttonbn'),
+                    get_string('enablingbigbluebuttondpainfo', 'mod_bigbluebuttonbn', config::DEFAULT_DPA_URL),
+                    0
+                ));
+            }
+
+=======
+>>>>>>> master
             $settingsgeneral->add($item);
 
             if (empty($CFG->bigbluebuttonbn_default_dpa_accepted)) {
@@ -191,6 +208,8 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+<<<<<<< HEAD
+=======
 
             $item = new admin_setting_configselect(
                 'bigbluebuttonbn_checksum_algorithm',
@@ -205,6 +224,7 @@ class settings {
                 $settingsgeneral
             );
 
+>>>>>>> master
             $item = new \admin_setting_description(
                 'bigbluebuttonbn_dpa_info',
                 '',
@@ -215,6 +235,8 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+<<<<<<< HEAD
+=======
             $item = new admin_setting_configtext(
                 'bigbluebuttonbn_poll_interval',
                 get_string('config_poll_interval', 'bigbluebuttonbn'),
@@ -227,6 +249,7 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+>>>>>>> master
         }
         return $settingsgeneral;
     }

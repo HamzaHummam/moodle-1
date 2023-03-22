@@ -59,12 +59,15 @@ Feature: In a lesson activity, a non editing teacher can grade essay questions
     And I am on the "Test lesson name" "lesson activity" page logged in as student2
     And I set the field "Your answer" to "<p>Once upon a time there were two little green frogs."
     And I press "Submit"
+<<<<<<< HEAD
+=======
     And I am on the "Test lesson name" "lesson activity" page logged in as student4
     And I set the field "Your answer" to "<p>Once upon a time there were four little green frogs."
     And I press "Submit"
     And I am on the "Test lesson name" "lesson activity" page logged in as student5
     And I set the field "Your answer" to "<p>Once upon a time there were five little green frogs."
     And I press "Submit"
+>>>>>>> master
     When I am on the "Test lesson name" "lesson activity" page logged in as teacher1
     Then I should see "Grade essays"
     And I grade lesson essays
@@ -93,7 +96,10 @@ Feature: In a lesson activity, a non editing teacher can grade essay questions
     And I should not see "Student 5"
     And I select "Group C" from the "Separate groups" singleselect
     And I should see "No one in Group C has answered an essay question yet."
+<<<<<<< HEAD
+=======
     And I should not see "Group D" in the "Separate groups" "select"
+>>>>>>> master
     And I am on the "Test lesson name" "lesson activity" page logged in as teacher2
     Then I should see "Grade essays"
     And I grade lesson essays

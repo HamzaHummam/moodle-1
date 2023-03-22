@@ -21,7 +21,10 @@ use custom_menu;
 use custom_menu_item;
 use paging_bar;
 use renderer_base;
+<<<<<<< HEAD
+=======
 use single_button;
+>>>>>>> master
 use single_select;
 use theme_config;
 use url_select;
