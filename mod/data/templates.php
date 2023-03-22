@@ -23,151 +23,96 @@
  * @package mod_data
  */
 
+use mod_data\manager;
+
 require_once('../../config.php');
 require_once('lib.php');
 
 $id    = optional_param('id', 0, PARAM_INT);  // course module id
 $d     = optional_param('d', 0, PARAM_INT);   // database id
-$mode  = optional_param('mode', 'listtemplate', PARAM_ALPHA);
+$mode  = optional_param('mode', 'addtemplate', PARAM_ALPHA);
+$action  = optional_param('action', '', PARAM_ALPHA);
 $useeditor = optional_param('useeditor', null, PARAM_BOOL);
 
 $url = new moodle_url('/mod/data/templates.php');
 
 if ($id) {
-    $url->param('id', $id);
-    if (! $cm = get_coursemodule_from_id('data', $id)) {
-        print_error('invalidcoursemodule');
-    }
-    if (! $course = $DB->get_record('course', array('id'=>$cm->course))) {
-        print_error('coursemisconf');
-    }
-    if (! $data = $DB->get_record('data', array('id'=>$cm->instance))) {
-        print_error('invalidcoursemodule');
-    }
-
-} else {
+    list($course, $cm) = get_course_and_cm_from_cmid($id, manager::MODULE);
+    $manager = manager::create_from_coursemodule($cm);
+    $url->param('d', $cm->instance);
+} else {   // We must have $d.
+    $instance = $DB->get_record('data', ['id' => $d], '*', MUST_EXIST);
+    $manager = manager::create_from_instance($instance);
+    $cm = $manager->get_coursemodule();
+    $course = get_course($cm->course);
     $url->param('d', $d);
-    if (! $data = $DB->get_record('data', array('id'=>$d))) {
-        print_error('invalidid', 'data');
-    }
-    if (! $course = $DB->get_record('course', array('id'=>$data->course))) {
-        print_error('coursemisconf');
-    }
-    if (! $cm = get_coursemodule_from_instance('data', $data->id, $course->id)) {
-        print_error('invalidcoursemodule');
-    }
 }
+
+$instance = $manager->get_instance();
+$context = $manager->get_context();
 
 $url->param('mode', $mode);
 $PAGE->set_url($url);
 
 require_login($course, false, $cm);
-
-$context = context_module::instance($cm->id);
 require_capability('mod/data:managetemplates', $context);
+
+if ($action == 'resetalltemplates') {
+    require_sesskey();
+    $manager->reset_all_templates();
+    redirect($PAGE->url, get_string('templateresetall', 'mod_data'), null, \core\output\notification::NOTIFY_SUCCESS);
+}
+
+$manager->set_template_viewed();
 
 if ($useeditor !== null) {
     // The useeditor param was set. Update the value for this template.
-    data_set_config($data, "editor_{$mode}", !!$useeditor);
-}
-
-if (!$DB->count_records('data_fields', array('dataid'=>$data->id))) {      // Brand new database!
-    redirect($CFG->wwwroot.'/mod/data/field.php?d='.$data->id);  // Redirect to field entry
-}
-
-// Trigger an event for viewing templates.
-$event = \mod_data\event\template_viewed::create(array(
-    'context' => $context,
-    'courseid' => $course->id,
-    'other' => array(
-        'dataid' => $data->id
-    )
-));
-$event->add_record_snapshot('data', $data);
-$event->trigger();
-
-/// Print the page header
-
-$strdata = get_string('modulenameplural','data');
-
-// For the javascript for inserting template tags: initialise the default textarea to
-// 'edit_template' - it is always present in all different possible views.
-
-if ($mode == 'singletemplate') {
-    $PAGE->navbar->add(get_string($mode,'data'));
+    data_set_config($instance, "editor_{$mode}", !!$useeditor);
 }
 
 $PAGE->requires->js('/mod/data/data.js');
-$PAGE->set_title($data->name);
+$PAGE->set_title($instance->name);
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagelayout('admin');
 $PAGE->force_settings_menu(true);
 $PAGE->activityheader->disable();
+$PAGE->add_body_class('mediumwidth');
 
 echo $OUTPUT->header();
 
-$actionbar = new \mod_data\output\action_bar($data->id, $url);
+$renderer = $manager->get_renderer();
+// Check if it is an empty database with no fields.
+if (!$manager->has_fields()) {
+    echo $renderer->render_templates_zero_state($manager);
+    echo $OUTPUT->footer();
+    // Don't check the rest of the options. There is no field, there is nothing else to work with.
+    exit;
+}
+
+$actionbar = new \mod_data\output\action_bar($instance->id, $url);
 echo $actionbar->get_templates_action_bar();
 
-echo $OUTPUT->heading(get_string($mode, 'data'), 2, 'mb-4');
-
-/// Processing submitted data, i.e updating form.
-$resettemplate = false;
-
-if (($mytemplate = data_submitted()) && confirm_sesskey()) {
-    $newtemplate = new stdClass();
-    $newtemplate->id = $data->id;
-    $newtemplate->{$mode} = $mytemplate->template;
-
-    if (!empty($mytemplate->defaultform)) {
-        // Reset the template to default, but don't save yet.
-        $resettemplate = true;
-        $data->{$mode} = data_generate_default_template($data, $mode, 0, false, false);
-        if ($mode == 'listtemplate') {
-            $data->listtemplateheader = '';
-            $data->listtemplatefooter = '';
+if (($formdata = data_submitted()) && confirm_sesskey()) {
+    if (!empty($formdata->defaultform)) {
+        // Reset the template to default.
+        if (!empty($formdata->resetall)) {
+            $manager->reset_all_templates();
+            $notificationstr = get_string('templateresetall', 'mod_data');
+        } else {
+            $manager->reset_template($mode);
+            $notificationstr = get_string('templatereset', 'data');
         }
     } else {
-        if (isset($mytemplate->listtemplateheader)){
-            $newtemplate->listtemplateheader = $mytemplate->listtemplateheader;
-        }
-        if (isset($mytemplate->listtemplatefooter)){
-            $newtemplate->listtemplatefooter = $mytemplate->listtemplatefooter;
-        }
-        if (isset($mytemplate->rsstitletemplate)){
-            $newtemplate->rsstitletemplate = $mytemplate->rsstitletemplate;
-        }
-
-        // Check for multiple tags, only need to check for add template.
-        if ($mode != 'addtemplate' or data_tags_check($data->id, $newtemplate->{$mode})) {
-            $DB->update_record('data', $newtemplate);
-            echo $OUTPUT->notification(get_string('templatesaved', 'data'), 'notifysuccess');
-
-            // Trigger an event for saving the templates.
-            $event = \mod_data\event\template_updated::create(array(
-                'context' => $context,
-                'courseid' => $course->id,
-                'other' => array(
-                    'dataid' => $data->id,
-                )
-            ));
-            $event->trigger();
-        }
+        $manager->update_templates($formdata);
+        $notificationstr = get_string('templatesaved', 'data');
     }
-} else {
-    echo '<div class="template_heading">'.get_string('header'.$mode,'data').'</div>';
 }
 
-/// If everything is empty then generate some defaults
-if (empty($data->addtemplate) and empty($data->singletemplate) and
-    empty($data->listtemplate) and empty($data->rsstemplate)) {
-    data_generate_default_template($data, 'singletemplate');
-    data_generate_default_template($data, 'listtemplate');
-    data_generate_default_template($data, 'addtemplate');
-    data_generate_default_template($data, 'asearchtemplate');           //Template for advanced searches.
-    data_generate_default_template($data, 'rsstemplate');
+if (!empty($notificationstr)) {
+    echo $OUTPUT->notification($notificationstr, 'notifysuccess');
 }
 
+<<<<<<< HEAD
 editors_head_setup();
 
 // Determine whether to use HTML editors.
@@ -387,6 +332,10 @@ echo html_writer::end_div();
 echo $OUTPUT->box_end();
 echo '</div>';
 echo '</form>';
+=======
+$templateeditor = new \mod_data\output\template_editor($manager, $mode);
+echo $renderer->render($templateeditor);
+>>>>>>> master
 
 /// Finish the page
 echo $OUTPUT->footer();

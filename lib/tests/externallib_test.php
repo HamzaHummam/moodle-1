@@ -16,19 +16,18 @@
 
 namespace core;
 
-defined('MOODLE_INTERNAL') || die();
-
-global $CFG;
-require_once($CFG->libdir . '/externallib.php');
-
+// phpcs:disable moodle.PHPUnit.TestCaseNames.Missing
 /**
- * Unit tests for /lib/externallib.php.
+ * Just a wrapper to access protected apis for testing.
+ *
+ * Note: This is deprecated. Please use Reflection instead.
  *
  * @package    core
  * @subpackage phpunit
  * @copyright  2009 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+<<<<<<< HEAD
 class externallib_test extends \advanced_testcase {
     protected $DB;
 
@@ -690,7 +689,37 @@ class externallib_test extends \advanced_testcase {
  */
 class test_exernal_api extends \external_api {
 
+=======
+class test_exernal_api extends \core_external\external_api {
+>>>>>>> master
     public static function get_context_wrapper($params) {
+        debugging(
+            'test_exernal_api::get_context_wrapper() is deprecated. Please use Reflection instead.',
+            DEBUG_DEVELOPER
+        );
         return self::get_context_from_params($params);
+    }
+}
+
+/**
+ * Test external API functions.
+ *
+ * @package core
+ * @subpackage phpunit
+ */
+class core_externallib_test extends \advanced_testcase {
+    /**
+     * Test the get_context_wrapper helper.
+     *
+     * @covers \core\test_exernal_api::get_context_wrapper
+     */
+    public function test_get_context_wrapper(): void {
+        $this->assertEquals(
+            \context_system::instance(),
+            \core\test_exernal_api::get_context_wrapper(['contextid' => \context_system::instance()->id])
+        );
+        $this->assertDebuggingCalled(
+            'test_exernal_api::get_context_wrapper() is deprecated. Please use Reflection instead.'
+        );
     }
 }

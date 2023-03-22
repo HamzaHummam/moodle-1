@@ -25,7 +25,10 @@ use core_reportbuilder\local\filters\boolean_select;
 use core_reportbuilder\local\filters\date;
 use core_reportbuilder\local\filters\select;
 use core_reportbuilder\local\filters\text;
+<<<<<<< HEAD
 use core_reportbuilder\local\helpers\user_filter_manager;
+=======
+>>>>>>> master
 use core_reportbuilder\local\report\column;
 use core_reportbuilder\local\report\filter;
 use core_user\reportbuilder\datasource\users;
@@ -200,7 +203,7 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_checkbox']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_datetime']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_menu']);
-        $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_Social']);
+        $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_social']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_text']);
         $generator->create_column(['reportid' => $report->get('id'), 'uniqueidentifier' => 'user:profilefield_textarea']);
 
@@ -257,12 +260,21 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
                 'user:profilefield_menu_operator' => select::NOT_EQUAL_TO,
                 'user:profilefield_menu_value' => 'Dog',
             ], 'admin'],
+<<<<<<< HEAD
             'Filter by social profile field' => ['user:profilefield_Social', [
                 'user:profilefield_Social_operator' => text::IS_EQUAL_TO,
                 'user:profilefield_Social_value' => '12345',
             ], 'testuser'],
             'Filter by social profile field (empty)' => ['user:profilefield_Social', [
                 'user:profilefield_Social_operator' => text::IS_EMPTY,
+=======
+            'Filter by social profile field' => ['user:profilefield_social', [
+                'user:profilefield_social_operator' => text::IS_EQUAL_TO,
+                'user:profilefield_social_value' => '12345',
+            ], 'testuser'],
+            'Filter by social profile field (empty)' => ['user:profilefield_social', [
+                'user:profilefield_social_operator' => text::IS_EMPTY,
+>>>>>>> master
             ], 'admin'],
             'Filter by text profile field' => ['user:profilefield_text', [
                 'user:profilefield_text_operator' => text::IS_EQUAL_TO,
@@ -317,9 +329,13 @@ class user_profile_fields_test extends core_reportbuilder_testcase {
 
         // Add filter, set it's values.
         $generator->create_filter(['reportid' => $report->get('id'), 'uniqueidentifier' => $filtername]);
+<<<<<<< HEAD
         user_filter_manager::set($report->get('id'), $filtervalues);
 
         $content = $this->get_custom_report_content($report->get('id'));
+=======
+        $content = $this->get_custom_report_content($report->get('id'), 0, $filtervalues);
+>>>>>>> master
 
         $this->assertCount(1, $content);
         $this->assertEquals($expectmatchuser, reset($content[0]));

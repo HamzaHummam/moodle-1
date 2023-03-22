@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @core @core_completion
+=======
+@core @core_completion @javascript
+>>>>>>> master
 Feature: Students will be shown relevant completion state based on grade item visibility.
   In order to understand completion states of course modules
   As a student

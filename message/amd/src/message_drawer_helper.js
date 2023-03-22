@@ -20,16 +20,8 @@
  * @copyright  2018 Ryan Wyllie <ryan@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define(
-[
-    'core/pubsub',
-    'core_message/message_drawer_events'
-],
-function(
-    PubSub,
-    MessageDrawerEvents
-) {
 
+<<<<<<< HEAD
     /** @property {boolean} Whether the drawer is ready or not */
     var drawerMarkedReady = false;
 
@@ -120,4 +112,77 @@ function(
         showSettings: showSettings,
         markDrawerReady: markDrawerReady,
     };
+=======
+import {publish, subscribe} from 'core/pubsub';
+import MessageDrawerEvents from 'core_message/message_drawer_events';
+
+/** @property {boolean} Whether the drawer is ready or not */
+let drawerMarkedReady = false;
+
+/**
+ * Trigger an event to create a new conversation in the message drawer.
+ *
+ * @param {object} args
+ * @param {Number} args.userId The user id to start a conversation.
+ */
+export const createConversationWithUser = async(args) => {
+    await waitForDrawerToLoad();
+    publish(MessageDrawerEvents.CREATE_CONVERSATION_WITH_USER, args);
+};
+
+/**
+ * Trigger an event to hide the message drawer.
+ */
+export const hide = async() => {
+    await waitForDrawerToLoad();
+    publish(MessageDrawerEvents.HIDE);
+};
+
+/**
+ * Trigger an event to show the message drawer.
+ */
+export const show = async() => {
+    await waitForDrawerToLoad();
+    publish(MessageDrawerEvents.SHOW);
+};
+
+/**
+ * Trigger an event to show the given conversation.
+ *
+ * @param {object} args
+ * @param {int} args.conversationId Id for the conversation to show.
+ */
+export const showConversation = async(args) => {
+    await waitForDrawerToLoad();
+    publish(MessageDrawerEvents.SHOW_CONVERSATION, args);
+};
+
+/**
+ * Trigger an event to show messaging settings.
+ */
+export const showSettings = async() => {
+    await waitForDrawerToLoad();
+    publish(MessageDrawerEvents.SHOW_SETTINGS);
+};
+
+/**
+ * Helper to wait for the drawer to be ready before performing an action.
+ *
+ * @returns {Promise<void>}
+ */
+export const waitForDrawerToLoad = () => new Promise((resolve) => {
+    if (drawerMarkedReady) {
+        resolve();
+    } else {
+        subscribe(MessageDrawerEvents.READY, resolve);
+    }
+>>>>>>> master
 });
+
+/**
+ * Helper to allow the drawer to mark itself as ready.
+ */
+export const markDrawerReady = () => {
+    drawerMarkedReady = true;
+    publish(MessageDrawerEvents.READY);
+};

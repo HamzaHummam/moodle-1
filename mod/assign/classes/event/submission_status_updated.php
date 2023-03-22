@@ -97,6 +97,7 @@ class submission_status_updated extends base {
     }
 
     /**
+<<<<<<< HEAD
      * Return legacy data for add_to_log().
      *
      * @return array
@@ -114,6 +115,8 @@ class submission_status_updated extends base {
     }
 
     /**
+=======
+>>>>>>> master
      * Custom validation.
      *
      * @throws \coding_exception

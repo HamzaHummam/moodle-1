@@ -41,6 +41,7 @@
         "extraclasses": "foo bar"
     }
 }}
+<<<<<<< HEAD
 <div class="alert alert-danger alert-block fade in {{ extraclasses }} {{#closebutton}}alert-dismissible{{/closebutton}}" {{!
     }}{{# announce }} role="alert" data-aria-autofocus="true"{{/ announce }}{{!
     }}>
@@ -52,3 +53,8 @@
     </button>{{!
     }}{{/ closebutton }}
 </div>
+=======
+{{< core/notification_base}}
+    {{$alertclass}}alert-danger{{/alertclass}}
+{{/core/notification_base}}
+>>>>>>> master

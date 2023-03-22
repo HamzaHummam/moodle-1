@@ -27,6 +27,7 @@ Feature: In a participation report, admin can filter student actions
       | book    | Test book name       |
       | title   | Test chapter         |
       | content | Test chapter content |
+<<<<<<< HEAD
 
   @javascript
   Scenario: Filter participation report when only legacy log reader is enabled
@@ -46,15 +47,21 @@ Feature: In a participation report, admin can filter student actions
     And I set the field "roleid" to "Student"
     And I press "Go"
     Then I should see "Yes (1)"
+=======
+>>>>>>> master
 
   @javascript
   Scenario: Filter participation report when standard log reader is enabled later
     Given I log in as "admin"
     And I navigate to "Plugins > Logging > Manage log stores" in site administration
     And I click on "Disable" "link" in the "Standard log" "table_row"
+<<<<<<< HEAD
     And I click on "Enable" "link" in the "Legacy log" "table_row"
     And the following config values are set as admin:
       | loglegacy | 1 | logstore_legacy |
+=======
+    And I log out
+>>>>>>> master
 
     And I am on the "Test book name" "book activity" page logged in as student1
     And I log out
@@ -71,7 +78,7 @@ Feature: In a participation report, admin can filter student actions
     And I set the field "instanceid" to "Test book name"
     And I set the field "roleid" to "Student"
     And I press "Go"
-    Then I should see "Yes (2)"
+    Then I should see "Yes (1)"
 
   @javascript
   Scenario: Filter participation report when only standard log reader is enabled by default

@@ -15,11 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace webservice_rest;
+<<<<<<< HEAD
+=======
+
+use core_external\external_multiple_structure;
+use core_external\external_single_structure;
+use core_external\external_value;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 global $CFG;
 
-require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/webservice/rest/locallib.php');
 
 /**

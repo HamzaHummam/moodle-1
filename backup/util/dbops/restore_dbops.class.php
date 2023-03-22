@@ -1019,21 +1019,26 @@ abstract class restore_dbops {
                 continue;
             }
 
+            // Updated the times of the new record.
+            // The file record should reflect when the file entered the system,
+            // and when this record was created.
+            $time = time();
+
             // The file record to restore.
             $file_record = array(
-                'contextid'   => $newcontextid,
-                'component'   => $component,
-                'filearea'    => $filearea,
-                'itemid'      => $rec->newitemid,
-                'filepath'    => $file->filepath,
-                'filename'    => $file->filename,
-                'timecreated' => $file->timecreated,
-                'timemodified'=> $file->timemodified,
-                'userid'      => $mappeduserid,
-                'source'      => $file->source,
-                'author'      => $file->author,
-                'license'     => $file->license,
-                'sortorder'   => $file->sortorder
+                'contextid'    => $newcontextid,
+                'component'    => $component,
+                'filearea'     => $filearea,
+                'itemid'       => $rec->newitemid,
+                'filepath'     => $file->filepath,
+                'filename'     => $file->filename,
+                'timecreated'  => $time,
+                'timemodified' => $time,
+                'userid'       => $mappeduserid,
+                'source'       => $file->source,
+                'author'       => $file->author,
+                'license'      => $file->license,
+                'sortorder'    => $file->sortorder
             );
 
             if (empty($file->repositoryid)) {
@@ -1167,9 +1172,10 @@ abstract class restore_dbops {
      * @param string $restoreid Restore ID
      * @param int $userid Default userid for files
      * @param \core\progress\base $progress Object used for progress tracking
+     * @param int $courseid Course ID
      */
     public static function create_included_users($basepath, $restoreid, $userid,
-            \core\progress\base $progress) {
+            \core\progress\base $progress, int $courseid = 0) {
         global $CFG, $DB;
         require_once($CFG->dirroot.'/user/profile/lib.php');
         $progress->start_progress('Creating included users');
@@ -1290,6 +1296,9 @@ abstract class restore_dbops {
                         }
                     }
                 }
+
+                // Trigger event that user was created.
+                \core\event\user_created::create_from_user_id_on_restore($newuserid, $restoreid, $courseid)->trigger();
 
                 // Process tags
                 if (core_tag_tag::is_enabled('core', 'user') && isset($user->tags)) { // If enabled in server and present in backup.

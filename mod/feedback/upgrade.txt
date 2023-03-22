@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 === 4.0.7 ===
+=======
+=== 4.2 ===
+>>>>>>> master
 * The external methods get_items() and get_page_items() now only return the items when the user can access the feedback; if the
 user can't see them, a warning message will be returned, with the reasons.
 

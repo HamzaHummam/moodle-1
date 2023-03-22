@@ -17,6 +17,10 @@
 namespace core;
 
 use core_grading_external;
+<<<<<<< HEAD
+=======
+use core_external\external_api;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

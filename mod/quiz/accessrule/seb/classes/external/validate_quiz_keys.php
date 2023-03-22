@@ -20,6 +20,7 @@ defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
 
+<<<<<<< HEAD
 use external_api;
 use external_function_parameters;
 use external_single_structure;
@@ -32,6 +33,16 @@ use quizaccess_seb\access_manager;
 require_once($CFG->dirroot . '/mod/quiz/accessmanager.php');
 require_once($CFG->dirroot . '/mod/quiz/attemptlib.php');
 require_once($CFG->libdir . '/externallib.php');
+=======
+use core_external\external_api;
+use core_external\external_function_parameters;
+use core_external\external_single_structure;
+use core_external\external_value;
+use invalid_parameter_exception;
+use mod_quiz\quiz_settings;
+use quizaccess_seb\event\access_prevented;
+use quizaccess_seb\seb_access_manager;
+>>>>>>> master
 
 /**
  * Validate browser exam key and config key.
@@ -97,7 +108,11 @@ class validate_quiz_keys extends external_api {
 
         $result = ['configkey' => true, 'browserexamkey' => true];
 
+<<<<<<< HEAD
         $accessmanager = new access_manager(quiz::create($quizid));
+=======
+        $accessmanager = new seb_access_manager(quiz_settings::create($quizid));
+>>>>>>> master
 
         // Check if there is a valid config key.
         if (!$accessmanager->validate_config_key($configkey, $url)) {
@@ -152,4 +167,7 @@ class validate_quiz_keys extends external_api {
         return $quizid;
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> master

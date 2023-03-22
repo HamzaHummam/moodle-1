@@ -54,6 +54,8 @@ class qformat_default {
     protected $importcontext = null;
     /** @var bool $displayprogress Whether to display progress. */
     public $displayprogress = true;
+    /** @var context[] */
+    public $contexts;
 
     // functions to indicate import/export functionality
     // override to return true if implemented
@@ -166,7 +168,7 @@ class qformat_default {
 
     /**
      * set an array of contexts.
-     * @param array $contexts Moodle course variable
+     * @param context[] $contexts
      */
     public function setContexts($contexts) {
         $this->contexts = $contexts;
@@ -1029,7 +1031,7 @@ class qformat_default {
 
         // did we actually process anything
         if ($count==0) {
-            print_error('noquestions', 'question', $continuepath);
+            throw new \moodle_exception('noquestions', 'question', $continuepath);
         }
 
         // final pre-process on exported data
@@ -1066,7 +1068,7 @@ class qformat_default {
         global $DB;
 
         if (!$category = $DB->get_record('question_categories', array('id' => $id))) {
-            print_error('cannotfindcategory', 'error', '', $id);
+            throw new \moodle_exception('cannotfindcategory', 'error', '', $id);
         }
         $contextstring = $this->translator->context_to_string($category->contextid);
 

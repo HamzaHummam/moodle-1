@@ -21,6 +21,7 @@ use admin_setting;
 use admin_setting_configcheckbox;
 use admin_setting_configmultiselect;
 use admin_setting_configpasswordunmask;
+use admin_setting_configselect;
 use admin_setting_configstoredfile;
 use admin_setting_configtext;
 use admin_setting_configtextarea;
@@ -30,6 +31,7 @@ use cache_helper;
 use lang_string;
 use mod_bigbluebuttonbn\local\config;
 use mod_bigbluebuttonbn\local\helpers\roles;
+use mod_bigbluebuttonbn\local\proxy\bigbluebutton_proxy;
 
 /**
  * The mod_bigbluebuttonbn settings helper
@@ -136,7 +138,10 @@ class settings {
      */
     protected function add_general_settings(): admin_settingpage {
         global $CFG;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         $settingsgeneral = new admin_settingpage(
             $this->section,
             get_string('config_general', 'bigbluebuttonbn'),
@@ -149,6 +154,7 @@ class settings {
                 '',
                 get_string('config_general_description', 'bigbluebuttonbn')
             );
+<<<<<<< HEAD
 
             if (empty($CFG->bigbluebuttonbn_default_dpa_accepted)) {
                 $settingsgeneral->add(new admin_setting_configcheckbox(
@@ -159,7 +165,19 @@ class settings {
                 ));
             }
 
+=======
+>>>>>>> master
             $settingsgeneral->add($item);
+
+            if (empty($CFG->bigbluebuttonbn_default_dpa_accepted)) {
+                $settingsgeneral->add(new admin_setting_configcheckbox(
+                    'bigbluebuttonbn_default_dpa_accepted',
+                    get_string('acceptdpa', 'mod_bigbluebuttonbn'),
+                    get_string('enablingbigbluebuttondpainfo', 'mod_bigbluebuttonbn', config::DEFAULT_DPA_URL),
+                    0
+                ));
+            }
+
             $item = new admin_setting_configtext(
                 'bigbluebuttonbn_server_url',
                 get_string('config_server_url', 'bigbluebuttonbn'),
@@ -190,6 +208,23 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+<<<<<<< HEAD
+=======
+
+            $item = new admin_setting_configselect(
+                'bigbluebuttonbn_checksum_algorithm',
+                get_string('config_checksum_algorithm', 'bigbluebuttonbn'),
+                get_string('config_checksum_algorithm_description', 'bigbluebuttonbn'),
+                config::DEFAULT_CHECKSUM_ALGORITHM,
+                array_combine(config::CHECKSUM_ALGORITHMS, config::CHECKSUM_ALGORITHMS)
+            );
+            $this->add_conditional_element(
+                'checksum_algorithm',
+                $item,
+                $settingsgeneral
+            );
+
+>>>>>>> master
             $item = new \admin_setting_description(
                 'bigbluebuttonbn_dpa_info',
                 '',
@@ -200,6 +235,21 @@ class settings {
                 $item,
                 $settingsgeneral
             );
+<<<<<<< HEAD
+=======
+            $item = new admin_setting_configtext(
+                'bigbluebuttonbn_poll_interval',
+                get_string('config_poll_interval', 'bigbluebuttonbn'),
+                get_string('config_poll_interval_description', 'bigbluebuttonbn'),
+                bigbluebutton_proxy::DEFAULT_POLL_INTERVAL,
+                PARAM_INT
+            );
+            $this->add_conditional_element(
+                'poll_interval',
+                $item,
+                $settingsgeneral
+            );
+>>>>>>> master
         }
         return $settingsgeneral;
     }
@@ -817,7 +867,6 @@ class settings {
             $this->add_lock_setting_from_name('disablepublicchat', $lockingsetting);
             $this->add_lock_setting_from_name('disablenote', $lockingsetting);
             $this->add_lock_setting_from_name('hideuserlist', $lockingsetting);
-            $this->add_lock_setting_from_name('lockonjoin', $lockingsetting);
         }
         $this->admin->add($this->parent, $lockingsetting);
     }
@@ -921,6 +970,18 @@ class settings {
             );
             $this->add_conditional_element(
                 'meetingevents_enabled',
+                $item,
+                $experimentalfeaturessetting
+            );
+            // UI for 'register meeting events' feature.
+            $item = new admin_setting_configcheckbox(
+                'bigbluebuttonbn_guestaccess_enabled',
+                get_string('config_guestaccess_enabled', 'bigbluebuttonbn'),
+                get_string('config_guestaccess_enabled_description', 'bigbluebuttonbn'),
+                0
+            );
+            $this->add_conditional_element(
+                'guestaccess_enabled',
                 $item,
                 $experimentalfeaturessetting
             );

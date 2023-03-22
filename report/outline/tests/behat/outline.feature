@@ -23,6 +23,7 @@ Feature: View an outline report
       | forum      | Forum name                | Forum description        | C1     | forum1   |
       | book       | Book name                 |                          | C1     | book1    |
     When I am on the "Course 1" course page logged in as admin
+<<<<<<< HEAD
 
   Scenario: View the outline report when only the legacy log reader is enabled
     Given I navigate to "Plugins > Logging > Manage log stores" in site administration
@@ -41,10 +42,11 @@ Feature: View an outline report
     And I click on "Activity report" "link"
     Then I should see "2 views by 2 users" in the "Book name" "table_row"
     And I should see "1 views by 1 users" in the "Forum name" "table_row"
+=======
+>>>>>>> master
 
   Scenario: View the outline report when only the standard log reader is enabled
     Given I navigate to "Plugins > Logging > Manage log stores" in site administration
-    And "Enable" "link" should exist in the "Legacy log" "table_row"
     And "Disable" "link" should exist in the "Standard log" "table_row"
     And I am on the "Course 1" course page logged in as student1
     And I follow "Forum name"
@@ -53,6 +55,7 @@ Feature: View an outline report
     And I am on the "Course 1" course page logged in as student2
     And I follow "Book name"
     And I am on the "Course 1" course page logged in as admin
+<<<<<<< HEAD
     When I navigate to "Reports" in current page administration
     And I click on "Activity report" "link"
     Then I should see "2 views by 2 users" in the "Book name" "table_row"
@@ -71,6 +74,8 @@ Feature: View an outline report
     And I am on the "Course 1" course page logged in as student2
     And I follow "Book name"
     And I am on the "Course 1" course page logged in as teacher1
+=======
+>>>>>>> master
     When I navigate to "Reports" in current page administration
     And I click on "Activity report" "link"
     Then I should see "2 views by 2 users" in the "Book name" "table_row"
@@ -78,7 +83,6 @@ Feature: View an outline report
 
   Scenario: View the outline report when no log reader is enabled
     Given I navigate to "Plugins > Logging > Manage log stores" in site administration
-    And "Enable" "link" should exist in the "Legacy log" "table_row"
     And I click on "Disable" "link" in the "Standard log" "table_row"
     And I am on "Course 1" course homepage
     When I navigate to "Reports" in current page administration

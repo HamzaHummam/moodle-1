@@ -17,7 +17,11 @@
 namespace mod_quiz;
 
 use mod_quiz\question\bank\qbank_helper;
+<<<<<<< HEAD
 use quiz;
+=======
+use mod_quiz\quiz_settings;
+>>>>>>> master
 
 /**
  * Test the restore of random question tags.
@@ -56,7 +60,11 @@ class tags_test extends \advanced_testcase {
         // Get the information about the resulting course and check that it is set up correctly.
         $modinfo = get_fast_modinfo($newcourseid);
         $quiz = array_values($modinfo->get_instances_of('quiz'))[0];
+<<<<<<< HEAD
         $quizobj = quiz::create($quiz->instance);
+=======
+        $quizobj = quiz_settings::create($quiz->instance);
+>>>>>>> master
         $structure = structure::create_for_quiz($quizobj);
 
         // Are the correct slots returned?

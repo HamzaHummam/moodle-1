@@ -155,7 +155,7 @@ class core_question_renderer extends plugin_renderer_base {
      * @return HTML fragment.
      */
     protected function number($number) {
-        if (trim($number) === '') {
+        if (trim($number ?? '') === '') {
             return '';
         }
         if (trim($number) === 'i') {

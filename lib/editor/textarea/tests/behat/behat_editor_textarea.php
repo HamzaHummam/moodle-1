@@ -37,9 +37,15 @@ class behat_editor_textarea extends behat_base implements \core_behat\settable_e
     public function set_editor_value(string $editorid, string $value): void {
         $js = <<<EOF
             (function() {
+<<<<<<< HEAD
                 const editor = document.getElementById("${editorid}");
                 if (editor && editor.tagName.toLowerCase() === 'textarea') {
                     editor.value = "${value}";
+=======
+                const editor = document.getElementById("{$editorid}");
+                if (editor && editor.tagName.toLowerCase() === 'textarea') {
+                    editor.value = "{$value}";
+>>>>>>> master
                 }
             })();
         EOF;

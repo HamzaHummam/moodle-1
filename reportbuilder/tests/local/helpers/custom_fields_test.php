@@ -22,7 +22,10 @@ use core_customfield_generator;
 use core_reportbuilder_generator;
 use core_reportbuilder_testcase;
 use core_reportbuilder\local\entities\course;
+<<<<<<< HEAD
 use core_reportbuilder\local\helpers\user_filter_manager;
+=======
+>>>>>>> master
 use core_reportbuilder\local\filters\boolean_select;
 use core_reportbuilder\local\filters\date;
 use core_reportbuilder\local\filters\select;
@@ -260,9 +263,13 @@ class custom_fields_test extends core_reportbuilder_testcase {
 
         // Add filter, set it's values.
         $generator->create_filter(['reportid' => $report->get('id'), 'uniqueidentifier' => $filtername]);
+<<<<<<< HEAD
         user_filter_manager::set($report->get('id'), $filtervalues);
 
         $content = $this->get_custom_report_content($report->get('id'));
+=======
+        $content = $this->get_custom_report_content($report->get('id'), 0, $filtervalues);
+>>>>>>> master
 
         if ($expectmatch) {
             $this->assertCount(1, $content);

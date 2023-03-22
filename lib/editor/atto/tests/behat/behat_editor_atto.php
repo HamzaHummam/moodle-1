@@ -49,6 +49,7 @@ class behat_editor_atto extends behat_base implements \core_behat\settable_edito
     public function set_editor_value(string $editorid, string $value): void {
         $js = <<<EOF
             (function() {
+<<<<<<< HEAD
                 const editableEditor = document.getElementById("${editorid}editable");
                 if (editableEditor && editableEditor.classList.contains('editor_atto_content')) {
                     editableEditor.innerHTML = "${value}";
@@ -56,6 +57,15 @@ class behat_editor_atto extends behat_base implements \core_behat\settable_edito
                 const editor = document.getElementById("${editorid}");
                 if (editor) {
                     editor.value = "${value}";
+=======
+                const editableEditor = document.getElementById("{$editorid}editable");
+                if (editableEditor && editableEditor.classList.contains('editor_atto_content')) {
+                    editableEditor.innerHTML = "{$value}";
+                }
+                const editor = document.getElementById("{$editorid}");
+                if (editor) {
+                    editor.value = "{$value}";
+>>>>>>> master
                 }
             })();
         EOF;

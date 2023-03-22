@@ -100,6 +100,7 @@ use \mod_assign\output\grading_app;
 use \mod_assign\output\assign_header;
 use \mod_assign\output\assign_submission_status;
 use mod_assign\output\timelimit_panel;
+use mod_assign\downloader;
 
 /**
  * Standard base class for mod_assign (assignment types).
@@ -194,6 +195,12 @@ class assign {
     /** @var mixed This var can vary between false for no overrides to a stdClass of the overrides for a group */
     private $overridedata;
 
+<<<<<<< HEAD
+=======
+    /** @var float grade value. */
+    public $grade;
+
+>>>>>>> master
     /**
      * Constructor for the base assign class.
      *
@@ -209,8 +216,6 @@ class assign {
      *                      otherwise this class will load one from the context as required.
      */
     public function __construct($coursemodulecontext, $coursemodule, $course) {
-        global $SESSION;
-
         $this->context = $coursemodulecontext;
         $this->course = $course;
 
@@ -225,10 +230,6 @@ class assign {
 
         // Extra entropy is required for uniqid() to work on cygwin.
         $this->useridlistid = clean_param(uniqid('', true), PARAM_ALPHANUM);
-
-        if (!isset($SESSION->mod_assign_useridlist)) {
-            $SESSION->mod_assign_useridlist = [];
-        }
     }
 
     /**
@@ -781,13 +782,13 @@ class assign {
             // Call save_settings hook for submission plugins.
             foreach ($this->submissionplugins as $plugin) {
                 if (!$this->update_plugin_instance($plugin, $formdata)) {
-                    print_error($plugin->get_error());
+                    throw new \moodle_exception($plugin->get_error());
                     return false;
                 }
             }
             foreach ($this->feedbackplugins as $plugin) {
                 if (!$this->update_plugin_instance($plugin, $formdata)) {
-                    print_error($plugin->get_error());
+                    throw new \moodle_exception($plugin->get_error());
                     return false;
                 }
             }
@@ -841,13 +842,13 @@ class assign {
 
         foreach ($this->submissionplugins as $plugin) {
             if (!$plugin->delete_instance()) {
-                print_error($plugin->get_error());
+                throw new \moodle_exception($plugin->get_error());
                 $result = false;
             }
         }
         foreach ($this->feedbackplugins as $plugin) {
             if (!$plugin->delete_instance()) {
-                print_error($plugin->get_error());
+                throw new \moodle_exception($plugin->get_error());
                 $result = false;
             }
         }
@@ -1305,7 +1306,7 @@ class assign {
             if (!empty($formdata->$enabledname)) {
                 $plugin->enable();
                 if (!$plugin->save_settings($formdata)) {
-                    print_error($plugin->get_error());
+                    throw new \moodle_exception($plugin->get_error());
                     return false;
                 }
             } else {
@@ -1547,13 +1548,13 @@ class assign {
         // Call save_settings hook for submission plugins.
         foreach ($this->submissionplugins as $plugin) {
             if (!$this->update_plugin_instance($plugin, $formdata)) {
-                print_error($plugin->get_error());
+                throw new \moodle_exception($plugin->get_error());
                 return false;
             }
         }
         foreach ($this->feedbackplugins as $plugin) {
             if (!$this->update_plugin_instance($plugin, $formdata)) {
-                print_error($plugin->get_error());
+                throw new \moodle_exception($plugin->get_error());
                 return false;
             }
         }
@@ -2643,6 +2644,17 @@ class assign {
     }
 
     /**
+     * Is user id filtered by user filters and table preferences.
+     *
+     * @param int $userid User id that needs to be checked.
+     * @return bool
+     */
+    public function is_userid_filtered($userid) {
+        $users = $this->get_grading_userid_list();
+        return in_array($userid, $users);
+    }
+
+    /**
      * Finds all assignment notifications that have yet to be mailed out, and mails them.
      *
      * Cron function to be run periodically according to the moodle cron.
@@ -2738,7 +2750,7 @@ class assign {
 
                 // Override the language and timezone of the "current" user, so that
                 // mail is customised for the receiver.
-                cron_setup_user($user, $course);
+                \core\cron::setup_user($user, $course);
 
                 // Context lookups are already cached.
                 $coursecontext = context_course::instance($course->id);
@@ -2818,7 +2830,7 @@ class assign {
             }
             mtrace('Done processing ' . count($submissions) . ' assignment submissions');
 
-            cron_setup_user();
+            \core\cron::setup_user();
 
             // Free up memory just to be sure.
             unset($courses);
@@ -3104,7 +3116,7 @@ class assign {
      * @param bool $create If set to true a new submission object will be created in the database
      *                     with the status set to "new".
      * @param int $attemptnumber - -1 means the latest attempt
-     * @return stdClass The submission
+     * @return stdClass|false The submission
      */
     public function get_group_submission($userid, $groupid, $create, $attemptnumber=-1) {
         global $DB;
@@ -3291,7 +3303,7 @@ class assign {
 
         $plugin = $this->get_plugin_by_type($pluginsubtype, $plugintype);
         if (!$plugin) {
-            print_error('invalidformdata', '');
+            throw new \moodle_exception('invalidformdata', '');
             return;
         }
 
@@ -3339,7 +3351,7 @@ class assign {
         }
 
         $grouping = $this->get_instance()->teamsubmissiongroupingid;
-        $return = groups_get_all_groups($this->get_course()->id, $userid, $grouping);
+        $return = groups_get_all_groups($this->get_course()->id, $userid, $grouping, 'g.*', false, true);
 
         $this->usergroups[$userid] = $return;
 
@@ -3662,170 +3674,30 @@ class assign {
     /**
      * Download a zip file of all assignment submissions.
      *
-     * @param array $userids Array of user ids to download assignment submissions in a zip file
+     * @param array|null $userids Array of user ids to download assignment submissions in a zip file
      * @return string - If an error occurs, this will contain the error page.
      */
-    protected function download_submissions($userids = false) {
-        global $CFG, $DB;
-
-        // More efficient to load this here.
-        require_once($CFG->libdir.'/filelib.php');
-
-        // Increase the server timeout to handle the creation and sending of large zip files.
-        core_php_time_limit::raise();
-
-        $this->require_view_grades();
-
-        // Load all users with submit.
-        $students = get_enrolled_users($this->context, "mod/assign:submit", null, 'u.*', null, null, null,
-                        $this->show_only_active_users());
-
-        // Build a list of files to zip.
-        $filesforzipping = array();
-        $fs = get_file_storage();
-
-        $groupmode = groups_get_activity_groupmode($this->get_course_module());
-        // All users.
-        $groupid = 0;
-        $groupname = '';
-        if ($groupmode) {
-            $groupid = groups_get_activity_group($this->get_course_module(), true);
-            if (!empty($groupid)) {
-                $groupname = groups_get_group_name($groupid) . '-';
-            }
+    protected function download_submissions($userids = null) {
+        $downloader = new downloader($this, $userids ?: null);
+        if ($downloader->load_filelist()) {
+            $downloader->download_zip();
         }
-
-        // Construct the zip file name.
-        $filename = clean_filename($this->get_course()->shortname . '-' .
-                                   $this->get_instance()->name . '-' .
-                                   $groupname.$this->get_course_module()->id . '.zip');
-
-        // Get all the files for each student.
-        foreach ($students as $student) {
-            $userid = $student->id;
-            // Download all assigments submission or only selected users.
-            if ($userids and !in_array($userid, $userids)) {
-                continue;
-            }
-
-            if ((groups_is_member($groupid, $userid) or !$groupmode or !$groupid)) {
-                // Get the plugins to add their own files to the zip.
-
-                $submissiongroup = false;
-                $groupname = '';
-                if ($this->get_instance()->teamsubmission) {
-                    $submission = $this->get_group_submission($userid, 0, false);
-                    $submissiongroup = $this->get_submission_group($userid);
-                    if ($submissiongroup) {
-                        $groupname = $submissiongroup->name . '-';
-                    } else {
-                        $groupname = get_string('defaultteam', 'assign') . '-';
-                    }
-                } else {
-                    $submission = $this->get_user_submission($userid, false);
-                }
-
-                if ($this->is_blind_marking()) {
-                    $prefix = str_replace('_', ' ', $groupname . get_string('participant', 'assign'));
-                    $prefix = clean_filename($prefix . '_' . $this->get_uniqueid_for_user($userid));
-                } else {
-                    $fullname = fullname($student, has_capability('moodle/site:viewfullnames', $this->get_context()));
-                    $prefix = str_replace('_', ' ', $groupname . $fullname);
-                    $prefix = clean_filename($prefix . '_' . $this->get_uniqueid_for_user($userid));
-                }
-
-                if ($submission) {
-                    $downloadasfolders = get_user_preferences('assign_downloadasfolders', 1);
-                    foreach ($this->submissionplugins as $plugin) {
-                        if ($plugin->is_enabled() && $plugin->is_visible()) {
-                            if ($downloadasfolders) {
-                                // Create a folder for each user for each assignment plugin.
-                                // This is the default behavior for version of Moodle >= 3.1.
-                                $submission->exportfullpath = true;
-                                $pluginfiles = $plugin->get_files($submission, $student);
-                                foreach ($pluginfiles as $zipfilepath => $file) {
-                                    $subtype = $plugin->get_subtype();
-                                    $type = $plugin->get_type();
-                                    $zipfilename = basename($zipfilepath);
-                                    $prefixedfilename = clean_filename($prefix .
-                                                                       '_' .
-                                                                       $subtype .
-                                                                       '_' .
-                                                                       $type .
-                                                                       '_');
-                                    if ($type == 'file') {
-                                        $pathfilename = $prefixedfilename . $file->get_filepath() . $zipfilename;
-                                    } else if ($type == 'onlinetext') {
-                                        $pathfilename = $prefixedfilename . '/' . $zipfilename;
-                                    } else {
-                                        $pathfilename = $prefixedfilename . '/' . $zipfilename;
-                                    }
-                                    $pathfilename = clean_param($pathfilename, PARAM_PATH);
-                                    $filesforzipping[$pathfilename] = $file;
-                                }
-                            } else {
-                                // Create a single folder for all users of all assignment plugins.
-                                // This was the default behavior for version of Moodle < 3.1.
-                                $submission->exportfullpath = false;
-                                $pluginfiles = $plugin->get_files($submission, $student);
-                                foreach ($pluginfiles as $zipfilename => $file) {
-                                    $subtype = $plugin->get_subtype();
-                                    $type = $plugin->get_type();
-                                    $prefixedfilename = clean_filename($prefix .
-                                                                       '_' .
-                                                                       $subtype .
-                                                                       '_' .
-                                                                       $type .
-                                                                       '_' .
-                                                                       $zipfilename);
-                                    $filesforzipping[$prefixedfilename] = $file;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        $result = '';
-        if (count($filesforzipping) == 0) {
-            $header = new assign_header($this->get_instance(),
-                                        $this->get_context(),
-                                        '',
-                                        $this->get_course_module()->id,
-                                        get_string('downloadall', 'assign'));
-            $result .= $this->get_renderer()->render($header);
-            $result .= $this->get_renderer()->notification(get_string('nosubmission', 'assign'));
-            $url = new moodle_url('/mod/assign/view.php', array('id'=>$this->get_course_module()->id,
-                                                                    'action'=>'grading'));
-            $result .= $this->get_renderer()->continue_button($url);
-            $result .= $this->view_footer();
-
-            return $result;
-        }
-
-        // Log zip as downloaded.
-        \mod_assign\event\all_submissions_downloaded::create_from_assign($this)->trigger();
-
-        // Close the session.
-        \core\session\manager::write_close();
-
-        $zipwriter = \core_files\archive_writer::get_stream_writer($filename, \core_files\archive_writer::ZIP_WRITER);
-
-        // Stream the files into the zip.
-        foreach ($filesforzipping as $pathinzip => $file) {
-            if ($file instanceof \stored_file) {
-                // Most of cases are \stored_file.
-                $zipwriter->add_file_from_stored_file($pathinzip, $file);
-            } else if (is_array($file)) {
-                // Save $file as contents, from onlinetext subplugin.
-                $content = reset($file);
-                $zipwriter->add_file_from_string($pathinzip, $content);
-            }
-        }
-
-        // Finish the archive.
-        $zipwriter->finish();
-        exit();
+        // Show some notification if we have nothing to download.
+        $cm = $this->get_course_module();
+        $renderer = $this->get_renderer();
+        $header = new assign_header(
+            $this->get_instance(),
+            $this->get_context(),
+            '',
+            $cm->id,
+            get_string('downloadall', 'mod_assign')
+        );
+        $result = $renderer->render($header);
+        $result .= $renderer->notification(get_string('nosubmission', 'mod_assign'));
+        $url = new moodle_url('/mod/assign/view.php', ['id' => $cm->id, 'action' => 'grading']);
+        $result .= $renderer->continue_button($url);
+        $result .= $this->view_footer();
+        return $result;
     }
 
     /**
@@ -3891,7 +3763,7 @@ class assign {
      * @param int $userid The id of the user whose submission we want or 0 in which case USER->id is used
      * @param bool $create If set to true a new submission object will be created in the database with the status set to "new".
      * @param int $attemptnumber - -1 means the latest attempt
-     * @return stdClass The submission
+     * @return stdClass|false The submission
      */
     public function get_user_submission($userid, $create, $attemptnumber=-1) {
         global $DB, $USER;
@@ -4468,7 +4340,7 @@ class assign {
         $userid = optional_param('userid', $USER->id, PARAM_INT);
 
         if (!$this->can_edit_submission($userid, $USER->id)) {
-            print_error('nopermission');
+            throw new \moodle_exception('nopermission');
         }
         $user = core_user::get_user($userid, '*', MUST_EXIST);
 
@@ -4794,6 +4666,10 @@ class assign {
             $userid = $this->get_user_id_for_uniqueid($blindid);
         }
 
+        // Instantiate table object to apply table preferences.
+        $gradingtable = new assign_grading_table($this, 10, '', 0, false);
+        $gradingtable->setup();
+
         $currentgroup = groups_get_activity_group($this->get_course_module(), true);
         $framegrader = new grading_app($userid, $currentgroup, $this);
 
@@ -4931,7 +4807,7 @@ class assign {
 
         if ($userid == $USER->id) {
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                print_error('nopermission');
+                throw new \moodle_exception('nopermission');
             }
             // User is editing their own submission.
             require_capability('mod/assign:submit', $this->context);
@@ -4939,7 +4815,7 @@ class assign {
         } else {
             // User is editing another user's submission.
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                print_error('nopermission');
+                throw new \moodle_exception('nopermission');
             }
 
             $name = $this->fullname($user);
@@ -5121,7 +4997,7 @@ class assign {
                 return;
             }
         }
-        print_error('invalidformdata', '');
+        throw new \moodle_exception('invalidformdata', '');
     }
 
     /**
@@ -6881,7 +6757,7 @@ class assign {
             require_capability('mod/assign:submit', $this->context);
         } else {
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                print_error('nopermission');
+                throw new \moodle_exception('nopermission');
             }
         }
 
@@ -7727,7 +7603,7 @@ class assign {
         } else {
             $user = $DB->get_record('user', array('id'=>$userid), '*', MUST_EXIST);
             if (!$this->can_edit_submission($userid, $USER->id)) {
-                print_error('nopermission');
+                throw new \moodle_exception('nopermission');
             }
         }
         $instance = $this->get_instance();
@@ -7763,7 +7639,7 @@ class assign {
 
         // Get the flags to check if it is locked.
         if ($flags && $flags->locked) {
-            print_error('submissionslocked', 'assign');
+            throw new \moodle_exception('submissionslocked', 'assign');
             return true;
         }
 
@@ -8748,7 +8624,7 @@ class assign {
                 if ($gradingmodified) {
                     if (!$plugin->save($grade, $formdata)) {
                         $result = false;
-                        print_error($plugin->get_error());
+                        throw new \moodle_exception($plugin->get_error());
                     }
                     // If $feedbackmodified is true, keep it true.
                     $feedbackmodified = $feedbackmodified || $gradingmodified;
@@ -9478,6 +9354,13 @@ class assign {
      * @return string The key for the id, or new entry if no $id is passed.
      */
     public function get_useridlist_key($id = null) {
+        global $SESSION;
+
+        // Ensure the user id list cache is initialised.
+        if (!isset($SESSION->mod_assign_useridlist)) {
+            $SESSION->mod_assign_useridlist = [];
+        }
+
         if ($id === null) {
             $id = $this->get_useridlist_key_id();
         }

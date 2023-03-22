@@ -19,6 +19,7 @@ Feature: Users can be required to specify certain fields when adding entries to 
     And the following "activities" exist:
       | activity | name               | intro | course | idnumber |
       | data     | Test database name | n     | C1     | data1    |
+<<<<<<< HEAD
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     And I add a "Short text" field to "Test database name" database and I fill the form with:
@@ -122,6 +123,31 @@ Feature: Users can be required to specify certain fields when adding entries to 
       | Options | Option 1 |
     And I navigate to "Templates" in current page administration
     And I log out
+=======
+    And the following "mod_data > fields" exist:
+      | database | type        | name                          | required | description                   | param1                         |
+      | data1    | text        | Base Text input               | 1        | Base Text input               |                                |
+      | data1    | checkbox    | Required Checkbox             | 1        | Base Text input               | Required Checkbox Option 1     |
+      | data1    | checkbox    | Required Two-Option Checkbox  | 1        | Required Two-Option Checkbox  | RTOC Option 1\nRTOC Option 2   |
+      | data1    | latlong     | Required Coordinates          | 1        | Required Coordinates          |                                |
+      | data1    | menu        | Required Menu                 | 1        | Required Menu                 | Option 1                       |
+      | data1    | number      | Required Number               | 1        | Required Number               |                                |
+      | data1    | radiobutton | Required Radio                | 1        | Required Radio                | Required Radio Option 1        |
+      | data1    | text        | Required Text input           | 1        | Required Text input           |                                |
+      | data1    | textarea    | Required Text area            | 1        | Required Text area            |                                |
+      | data1    | url         | Required URL                  | 1        | Required URL                  |                                |
+      | data1    | multimenu   | Required Multimenu            | 1        | Required Multimenu            | Option 1                       |
+      | data1    | multimenu   | Required Two-Option Multimenu | 1        | Required Two-Option Multimenu | Option 1\nOption 2             |
+      | data1    | checkbox    | Not required Checkbox         | 0        | Not required Checkbox         | Not required Checkbox Option 1 |
+      | data1    | latlong     | Not required Coordinates      | 0        | Not required Coordinates      |                                |
+      | data1    | menu        | Not required Menu             | 0        | Not required Menu             | Option 1                       |
+      | data1    | number      | Not required Number           | 0        | Not required Number           |                                |
+      | data1    | radiobutton | Not required Radio            | 0        | Not required Radio            | Not required Radio Option 1    |
+      | data1    | text        | Not required Text input       | 0        | Not required Text input       |                                |
+      | data1    | textarea    | Not required Text area        | 0        | Not required Text area        |                                |
+      | data1    | url         | Not required URL              | 0        | Not required URL              |                                |
+      | data1    | multimenu   | Not required Multimenu        | 0        | Not required Multimenu        | Option 1                       |
+>>>>>>> master
 
   Scenario: Students receive errors for empty required fields but not for optional fields
     When I log in as "student1"
@@ -129,6 +155,7 @@ Feature: Users can be required to specify certain fields when adding entries to 
     And I add an entry to "Test database name" database with:
        | Base Text input | Some input to allow us to submit the otherwise empty form |
     And I press "Save"
+<<<<<<< HEAD
     Then ".alert" "css_element" should exist in the "Required Checkbox" "table_row"
     And ".alert" "css_element" should exist in the "Required Two-Option Checkbox" "table_row"
     And ".alert" "css_element" should exist in the "Required Coordinates" "table_row"
@@ -149,9 +176,32 @@ Feature: Users can be required to specify certain fields when adding entries to 
     And ".alert" "css_element" should not exist in the "Not required Text area" "table_row"
     And ".alert" "css_element" should not exist in the "Not required URL" "table_row"
     And ".alert" "css_element" should not exist in the "Not required Multimenu" "table_row"
+=======
+#    Then ".alert" "css_element" should exist in the "//div[contains(@id,'defaulttemplate-addentry']//div[position()=1]]" "xpath_element"
+    Then ".alert" "css_element" should appear after "Checkbox" "text"
+    And ".alert" "css_element" should appear before "Required Checkbox" "text"
+    And ".alert" "css_element" should appear after "Two-Option Checkbox" "text"
+    And ".alert" "css_element" should appear before "Required Two-Option Checkbox" "text"
+    And ".alert" "css_element" should appear after "Coordinates" "text"
+    And ".alert" "css_element" should appear before "Required Coordinates" "text"
+    And ".alert" "css_element" should appear after "Menu" "text"
+    And ".alert" "css_element" should appear before "Required Menu" "text"
+    And ".alert" "css_element" should appear after "Radio" "text"
+    And ".alert" "css_element" should appear before "Required Radio" "text"
+    And ".alert" "css_element" should appear after "Text input" "text"
+    And ".alert" "css_element" should appear before "Required Text input" "text"
+    And ".alert" "css_element" should appear after "Text area" "text"
+    And ".alert" "css_element" should appear before "Required Text area" "text"
+    And ".alert" "css_element" should appear after "URL" "text"
+    And ".alert" "css_element" should appear before "Required URL" "text"
+    And ".alert" "css_element" should appear after "Multimenu" "text"
+    And ".alert" "css_element" should appear before "Required Multimenu" "text"
+    And ".alert" "css_element" should appear after "Two-Option Multimenu" "text"
+    And ".alert" "css_element" should appear before "Required Two-Option Multimenu" "text"
+>>>>>>> master
     And I am on "Course 1" course homepage
     And I follow "Test database name"
-    And I should see "No entries in database"
+    And I should see "No entries yet"
 
   Scenario: Students recieve no error for filled in required fields
     When I log in as "student1"
@@ -204,6 +254,7 @@ Feature: Users can be required to specify certain fields when adding entries to 
        | Required Multimenu            | Option 1            |
        | Required Two-Option Multimenu | Option 1            |
 
+  @javascript
   Scenario: A student fills in Latitude but not Longitude will see an error
     Given I log in as "student1"
     And I am on "Course 1" course homepage
@@ -220,10 +271,17 @@ Feature: Users can be required to specify certain fields when adding entries to 
        | Required URL                  | http://example.com/                                       |
        | Required Multimenu            | 1                                                         |
        | Required Two-Option Multimenu | 1                                                         |
+<<<<<<< HEAD
     And I set the field with xpath "//div[@title='Not required Coordinates']//tr[td/label[normalize-space(.)='Latitude']]/td/input" to "20"
     And I press "Save"
     Then ".alert" "css_element" should exist in the "Required Coordinates" "table_row"
     And ".alert" "css_element" should exist in the "Not required Coordinates" "table_row"
+=======
+    And I set the field "Latitude" to "20"
+    #And I set the field with xpath "//div[@title='Not required Coordinates']//tr[td/label[normalize-space(.)='Latitude']]/td/input" to "20"
+    And I press "Save"
+    Then I should see "Both latitude and longitude are required."
+>>>>>>> master
 
   Scenario: A student filling in number and text fields with zero will not see an error.
     Given I log in as "student1"

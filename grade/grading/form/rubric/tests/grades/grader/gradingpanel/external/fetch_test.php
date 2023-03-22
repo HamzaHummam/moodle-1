@@ -22,7 +22,7 @@ use advanced_testcase;
 use coding_exception;
 use core_grades\component_gradeitem;
 use core_grades\component_gradeitems;
-use external_api;
+use core_external\external_api;
 use mod_forum\local\entities\forum as forum_entity;
 use moodle_exception;
 
@@ -35,12 +35,15 @@ use moodle_exception;
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class fetch_test extends advanced_testcase {
+<<<<<<< HEAD
 
     public static function setupBeforeClass(): void {
         global $CFG;
         require_once("{$CFG->libdir}/externallib.php");
     }
 
+=======
+>>>>>>> master
     /**
      * Ensure that an execute with an invalid component is rejected.
      */

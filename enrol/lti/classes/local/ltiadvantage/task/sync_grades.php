@@ -18,18 +18,6 @@ namespace enrol_lti\local\ltiadvantage\task;
 
 use core\task\scheduled_task;
 use enrol_lti\helper;
-use enrol_lti\local\ltiadvantage\lib\http_client;
-use enrol_lti\local\ltiadvantage\lib\issuer_database;
-use enrol_lti\local\ltiadvantage\lib\launch_cache_session;
-use enrol_lti\local\ltiadvantage\repository\application_registration_repository;
-use enrol_lti\local\ltiadvantage\repository\deployment_repository;
-use enrol_lti\local\ltiadvantage\repository\resource_link_repository;
-use enrol_lti\local\ltiadvantage\repository\user_repository;
-use Packback\Lti1p3\LtiAssignmentsGradesService;
-use Packback\Lti1p3\LtiGrade;
-use Packback\Lti1p3\LtiLineitem;
-use Packback\Lti1p3\LtiRegistration;
-use Packback\Lti1p3\LtiServiceConnector;
 
 /**
  * LTI Advantage task responsible for pushing grades to tool platforms.
@@ -50,6 +38,7 @@ class sync_grades extends scheduled_task {
     }
 
     /**
+<<<<<<< HEAD
      * Sync grades to the platform using the Assignment and Grade Services.
      *
      * @param \stdClass $resource the enrol_lti_tools data record for the shared resource.
@@ -259,15 +248,13 @@ class sync_grades extends scheduled_task {
 
     /**
      * Performs the synchronisation of grades from the tool to any registered platforms.
+=======
+     * Creates adhoc tasks (one per resource) to synchronize grades from the tool to any registered platforms.
+>>>>>>> master
      *
      * @return bool|void
      */
     public function execute() {
-        global $CFG;
-
-        require_once($CFG->dirroot . '/lib/completionlib.php');
-        require_once($CFG->libdir . '/gradelib.php');
-        require_once($CFG->dirroot . '/grade/querylib.php');
 
         if (!is_enabled_auth('lti')) {
             mtrace('Skipping task - ' . get_string('pluginnotenabled', 'auth', get_string('pluginname', 'auth_lti')));
@@ -289,13 +276,12 @@ class sync_grades extends scheduled_task {
         }
 
         foreach ($resources as $resource) {
-            mtrace("Starting - LTI Advantage grade sync for shared resource '$resource->id' in course '$resource->courseid'.");
-
-            [$usercount, $sendcount] = $this->sync_grades_for_resource($resource);
-
-            mtrace("Completed - Synced grades for tool '$resource->id' in the course '$resource->courseid'. " .
-                "Processed $usercount users; sent $sendcount grades.");
-            mtrace("");
+            $task = new \enrol_lti\local\ltiadvantage\task\sync_tool_grades();
+            $task->set_custom_data($resource);
+            $task->set_component('enrol_lti');
+            \core\task\manager::queue_adhoc_task($task, true);
         }
+
+        mtrace('Spawned ' . count($resources) . ' adhoc tasks to sync grades.');
     }
 }

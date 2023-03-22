@@ -1094,6 +1094,7 @@ $capabilities = array(
         'clonepermissionsfrom' => 'moodle/course:update'
     ),
 
+    // Ability to set a forced language for a course or activity.
     'moodle/course:setforcedlanguage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
@@ -1150,6 +1151,17 @@ $capabilities = array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_COURSE,
         'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+
+    'moodle/course:viewhiddengroups' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'READ',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => array(
+            'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,
             'manager' => CAP_ALLOW
         )

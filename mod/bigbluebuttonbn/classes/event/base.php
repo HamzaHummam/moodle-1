@@ -79,6 +79,7 @@ abstract class base extends \core\event\base {
      */
     public function get_url() {
         return new moodle_url('/mod/bigbluebuttonbn/view.php', ['id' => $this->contextinstanceid]);
+<<<<<<< HEAD
     }
 
     /**
@@ -104,15 +105,17 @@ abstract class base extends \core\event\base {
         }
 
         return null;
+=======
+>>>>>>> master
     }
 
     /**
-     * Sets the legacy event log data.
+     * Init method.
      *
-     * @param string $action The current action
-     * @param string $info A detailed description of the change. But no more than 255 characters.
-     * @param string $url The url to the assign module instance.
+     * @param string $crud
+     * @param int $edulevel
      */
+<<<<<<< HEAD
     public function set_legacy_logdata($action = '', $info = '', $url = '') {
         $fullurl = 'view.php?id=' . $this->contextinstanceid;
         if ($url != '') {
@@ -120,6 +123,12 @@ abstract class base extends \core\event\base {
         }
 
         $this->legacylogdata = [$this->courseid, 'bigbluebuttonbn', $action, $fullurl, $info, $this->contextinstanceid];
+=======
+    protected function init($crud = 'r', $edulevel = self::LEVEL_PARTICIPATING) {
+        $this->data['crud'] = $crud;
+        $this->data['edulevel'] = $edulevel;
+        $this->data['objecttable'] = 'bigbluebuttonbn';
+>>>>>>> master
     }
 
     /**

@@ -27,6 +27,13 @@ use mod_forum\local\exporters\discussion as discussion_exporter;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class exporters_discussion_test extends \advanced_testcase {
+<<<<<<< HEAD
+=======
+
+    /** @var \mod_forum\local\builders\exported_posts */
+    private $builder;
+
+>>>>>>> master
     /**
      * Test set up function.
      */

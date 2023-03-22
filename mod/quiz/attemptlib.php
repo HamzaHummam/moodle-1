@@ -14,19 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-/**
- * Back-end code for handling data about quizzes and the current user's attempt.
- *
- * There are classes for loading all the information about a quiz and attempts,
- * and for displaying the navigation panel.
- *
- * @package   mod_quiz
- * @copyright 2008 onwards Tim Hunt
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 
+/**
+ * File only retained to prevent fatal errors in code that tries to require/include this.
+ *
+ * @todo MDL-76612 delete this file as part of Moodle 4.6 development.
+ * @deprecated This file is no longer required in Moodle 4.2+.
+ */
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 use mod_quiz\question\bank\qbank_helper;
 
 
@@ -2967,3 +2964,6 @@ class quiz_review_nav_panel extends quiz_nav_panel_base {
         return $html;
     }
 }
+=======
+debugging('This file is no longer required in Moodle 4.2+. Please do not include/require it.', DEBUG_DEVELOPER);
+>>>>>>> master

@@ -91,8 +91,12 @@ abstract class base {
     ): string {
         global $DB;
 
+        // We need to ensure all values are char.
+        $sqlfieldrequirescast = in_array($DB->get_dbfamily(), ['mssql', 'oracle', 'postgres']);
+
         $concatfields = [];
         foreach ($sqlfields as $sqlfield) {
+<<<<<<< HEAD
 
             // We need to ensure all values are char (this ought to be done in the DML drivers, see MDL-72184).
             switch ($DB->get_dbfamily()) {
@@ -105,6 +109,10 @@ abstract class base {
                 case 'oracle' :
                     $sqlfield = "TO_CHAR({$sqlfield})";
                     break;
+=======
+            if ($sqlfieldrequirescast) {
+                $sqlfield = $DB->sql_cast_to_char($sqlfield);
+>>>>>>> master
             }
 
             // Coalesce all the SQL fields. Ensure cross-DB compatibility, and that we always get string data back.
@@ -134,12 +142,13 @@ abstract class base {
      * @param mixed $value
      * @param array $values
      * @param array $callbacks Array of column callbacks, {@see column::add_callback} for definition
+     * @param int $columntype The original type of the column, to ensure it is preserved for callbacks
      * @return mixed
      */
-    public static function format_value($value, array $values, array $callbacks) {
+    public static function format_value($value, array $values, array $callbacks, int $columntype) {
         foreach ($callbacks as $callback) {
             [$callable, $arguments] = $callback;
-            $value = ($callable)($value, (object) $values, $arguments);
+            $value = ($callable)($value, (object) $values, $arguments, static::get_class_name());
         }
 
         return $value;

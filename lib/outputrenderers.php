@@ -2055,12 +2055,16 @@ class core_renderer extends renderer_base {
         $displayoptions['cancelstr'] = $displayoptions['cancelstr'] ?? get_string('cancel');
 
         if ($continue instanceof single_button) {
-            // ok
-            $continue->primary = true;
+            // Continue button should be primary if set to secondary type as it is the fefault.
+            if ($continue->type === single_button::BUTTON_SECONDARY) {
+                $continue->type = single_button::BUTTON_PRIMARY;
+            }
         } else if (is_string($continue)) {
-            $continue = new single_button(new moodle_url($continue), $displayoptions['continuestr'], 'post', true);
+            $continue = new single_button(new moodle_url($continue), $displayoptions['continuestr'], 'post',
+                $displayoptions['type'] ?? single_button::BUTTON_PRIMARY);
         } else if ($continue instanceof moodle_url) {
-            $continue = new single_button($continue, $displayoptions['continuestr'], 'post', true);
+            $continue = new single_button($continue, $displayoptions['continuestr'], 'post',
+                $displayoptions['type'] ?? single_button::BUTTON_PRIMARY);
         } else {
             throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL (string/moodle_url) or a single_button instance.');
         }
@@ -2095,7 +2099,7 @@ class core_renderer extends renderer_base {
         $output .= html_writer::tag('p', $message);
         $output .= $this->box_end();
         $output .= $this->box_start('modal-footer', 'modal-footer');
-        $output .= html_writer::tag('div', $this->render($continue) . $this->render($cancel), array('class' => 'buttons'));
+        $output .= html_writer::tag('div', $this->render($cancel) . $this->render($continue), ['class' => 'buttons']);
         $output .= $this->box_end();
         $output .= $this->box_end();
         $output .= $this->box_end();
@@ -2909,9 +2913,8 @@ EOD;
     /**
      * Do not call this function directly.
      *
-     * To terminate the current script with a fatal error, call the {@link print_error}
-     * function, or throw an exception. Doing either of those things will then call this
-     * function to display the error, before terminating the execution.
+     * To terminate the current script with a fatal error, throw an exception.
+     * Doing this will then call this function to display the error, before terminating the execution.
      *
      * @param string $message The message to output
      * @param string $moreinfourl URL where more info can be found about the error
@@ -3125,7 +3128,7 @@ EOD;
         if (!($url instanceof moodle_url)) {
             $url = new moodle_url($url);
         }
-        $button = new single_button($url, get_string('continue'), 'get', true);
+        $button = new single_button($url, get_string('continue'), 'get', single_button::BUTTON_PRIMARY);
         $button->class = 'continuebutton';
 
         return $this->render($button);
@@ -3170,10 +3173,11 @@ EOD;
      * @param string $urlvar URL parameter name for this initial.
      * @param string $url URL object.
      * @param array $alpha of letters in the alphabet.
+     * @param bool $minirender Return a trimmed down view of the initials bar.
      * @return string the HTML to output.
      */
-    public function initials_bar($current, $class, $title, $urlvar, $url, $alpha = null) {
-        $ib = new initials_bar($current, $class, $title, $urlvar, $url, $alpha);
+    public function initials_bar($current, $class, $title, $urlvar, $url, $alpha = null, bool $minirender = false) {
+        $ib = new initials_bar($current, $class, $title, $urlvar, $url, $alpha, $minirender);
         return $this->render($ib);
     }
 
@@ -3849,7 +3853,11 @@ EOD;
                 if ($langtype !== $currentlang) {
                     $attributes[] = [
                         'key' => 'lang',
+<<<<<<< HEAD
                         'value' => str_replace('_', '-', $langtype),
+=======
+                        'value' => get_html_lang_attribute_value($langtype),
+>>>>>>> master
                     ];
                 }
                 $this->language->add($langname, new moodle_url($this->page->url, ['lang' => $langtype]), null, null, $attributes);
@@ -4200,6 +4208,14 @@ EOD;
     public function supportemail(array $customattribs = []): string {
         global $CFG;
 
+        // Do not provide a link to contact site support if it is unavailable to this user. This would be where the site has
+        // disabled support, or limited it to authenticated users and the current user is a guest or not logged in.
+        if (!isset($CFG->supportavailability) ||
+                $CFG->supportavailability == CONTACT_SUPPORT_DISABLED ||
+                ($CFG->supportavailability == CONTACT_SUPPORT_AUTHENTICATED && (!isloggedin() || isguestuser()))) {
+            return '';
+        }
+
         $label = get_string('contactsitesupport', 'admin');
         $icon = $this->pix_icon('t/email', '');
         $content = $icon . $label;
@@ -4232,7 +4248,13 @@ EOD;
 
         $liferingicon = $this->pix_icon('t/life-ring', '', 'moodle', ['class' => 'fa fa-life-ring']);
         $newwindowicon = $this->pix_icon('i/externallink', get_string('opensinnewwindow'), 'moodle', ['class' => 'ml-1']);
+<<<<<<< HEAD
         $link = 'https://moodle.com/help/?utm_source=CTA-banner&utm_medium=platform&utm_campaign=name~Moodle4+cat~lms+mp~no';
+=======
+        $link = !empty($CFG->servicespage)
+            ? $CFG->servicespage
+            : 'https://moodle.com/help/?utm_source=CTA-banner&utm_medium=platform&utm_campaign=name~Moodle4+cat~lms+mp~no';
+>>>>>>> master
         $content = $liferingicon . get_string('moodleservicesandsupport') . $newwindowicon;
 
         return html_writer::tag('a', $content, ['target' => '_blank', 'href' => $link]);
@@ -4274,7 +4296,17 @@ EOD;
      * @return moodle_url The moodle_url for the favicon
      */
     public function favicon() {
-        return $this->image_url('favicon', 'theme');
+        $logo = null;
+        if (!during_initial_install()) {
+            $logo = get_config('core_admin', 'favicon');
+        }
+        if (empty($logo)) {
+            return $this->image_url('favicon', 'theme');
+        }
+
+        // Use $CFG->themerev to prevent browser caching when the file changes.
+        return moodle_url::make_pluginfile_url(context_system::instance()->id, 'core_admin', 'favicon', '64x64/',
+            theme_get_revision(), $logo);
     }
 
     /**
@@ -5553,11 +5585,13 @@ class core_renderer_maintenance extends core_renderer {
         // We need plain styling of confirm boxes on upgrade because we don't know which stylesheet we have (it could be
         // from any previous version of Moodle).
         if ($continue instanceof single_button) {
-            $continue->primary = true;
+            $continue->type = single_button::BUTTON_PRIMARY;
         } else if (is_string($continue)) {
-            $continue = new single_button(new moodle_url($continue), get_string('continue'), 'post', true);
+            $continue = new single_button(new moodle_url($continue), get_string('continue'), 'post',
+                $displayoptions['type'] ?? single_button::BUTTON_PRIMARY);
         } else if ($continue instanceof moodle_url) {
-            $continue = new single_button($continue, get_string('continue'), 'post', true);
+            $continue = new single_button($continue, get_string('continue'), 'post',
+                $displayoptions['type'] ?? single_button::BUTTON_PRIMARY);
         } else {
             throw new coding_exception('The continue param to $OUTPUT->confirm() must be either a URL' .
                                        ' (string/moodle_url) or a single_button instance.');
@@ -5577,7 +5611,7 @@ class core_renderer_maintenance extends core_renderer {
         $output = $this->box_start('generalbox', 'notice');
         $output .= html_writer::tag('h4', get_string('confirm'));
         $output .= html_writer::tag('p', $message);
-        $output .= html_writer::tag('div', $this->render($continue) . $this->render($cancel), array('class' => 'buttons'));
+        $output .= html_writer::tag('div', $this->render($cancel) . $this->render($continue), ['class' => 'buttons']);
         $output .= $this->box_end();
         return $output;
     }

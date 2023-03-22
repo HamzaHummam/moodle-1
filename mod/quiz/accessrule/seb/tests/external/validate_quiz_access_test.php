@@ -16,6 +16,7 @@
 
 namespace quizaccess_seb\external;
 
+<<<<<<< HEAD
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
@@ -23,6 +24,13 @@ global $CFG;
 use quizaccess_seb\quiz_settings;
 
 require_once($CFG->libdir . '/externallib.php');
+=======
+use quizaccess_seb\seb_quiz_settings;
+
+defined('MOODLE_INTERNAL') || die();
+
+require_once(__DIR__ . '/../test_helper_trait.php');
+>>>>>>> master
 
 /**
  * PHPUnit tests for external function.
@@ -115,7 +123,11 @@ class validate_quiz_access_test extends \advanced_testcase {
 
         $this->expectException(\invalid_parameter_exception::class);
         $this->expectExceptionMessageMatches($messageregex);
+<<<<<<< HEAD
         \external_api::validate_parameters(validate_quiz_keys::execute_parameters(), $params);
+=======
+        \core_external\external_api::validate_parameters(validate_quiz_keys::execute_parameters(), $params);
+>>>>>>> master
     }
 
     /**
@@ -147,7 +159,11 @@ class validate_quiz_access_test extends \advanced_testcase {
         $this->setAdminUser();
         $forum = $this->getDataGenerator()->create_module('forum', ['course' => $this->course->id]);
         $this->expectException(\invalid_parameter_exception::class);
+<<<<<<< HEAD
         $this->expectExceptionMessage('Quiz not found matching course module id: ' . $forum->cmid);
+=======
+        $this->expectExceptionMessage('Quiz not found matching course module ID: ' . $forum->cmid);
+>>>>>>> master
         validate_quiz_keys::execute($forum->cmid, 'https://www.example.com/moodle', 'configkey');
     }
 
@@ -164,7 +180,11 @@ class validate_quiz_access_test extends \advanced_testcase {
         $url = 'https://www.example.com/moodle';
 
         // Create the quiz settings.
+<<<<<<< HEAD
         $quizsettings = new quiz_settings(0, $settings);
+=======
+        $quizsettings = new seb_quiz_settings(0, $settings);
+>>>>>>> master
         $quizsettings->save();
 
         $fullconfigkey = hash('sha256', $url . $quizsettings->get_config_key());
@@ -188,7 +208,11 @@ class validate_quiz_access_test extends \advanced_testcase {
         ]);
 
         // Create the quiz settings.
+<<<<<<< HEAD
         $quizsettings = new quiz_settings(0, $settings);
+=======
+        $quizsettings = new seb_quiz_settings(0, $settings);
+>>>>>>> master
         $quizsettings->save();
 
         $result = validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/moodle', 'badconfigkey');
@@ -217,7 +241,11 @@ class validate_quiz_access_test extends \advanced_testcase {
         ]);
 
         // Create the quiz settings.
+<<<<<<< HEAD
         $quizsettings = new quiz_settings(0, $settings);
+=======
+        $quizsettings = new seb_quiz_settings(0, $settings);
+>>>>>>> master
         $quizsettings->save();
 
         $fullbrowserexamkey = hash('sha256', $url . $validbrowserexamkey);
@@ -243,7 +271,11 @@ class validate_quiz_access_test extends \advanced_testcase {
         ]);
 
         // Create the quiz settings.
+<<<<<<< HEAD
         $quizsettings = new quiz_settings(0, $settings);
+=======
+        $quizsettings = new seb_quiz_settings(0, $settings);
+>>>>>>> master
         $quizsettings->save();
 
         $result = validate_quiz_keys::execute($this->quiz->cmid, 'https://www.example.com/moodle', null,

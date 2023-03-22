@@ -16,6 +16,11 @@
 
 namespace mod_lti\external;
 
+<<<<<<< HEAD
+=======
+use core_external\external_api;
+
+>>>>>>> master
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;

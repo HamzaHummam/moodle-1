@@ -101,7 +101,11 @@ class language_menu implements \renderable, \templatable {
                 // Set the lang attribute for languages different from the page's current language.
                 $attributes[] = [
                     'key' => 'lang',
+<<<<<<< HEAD
                     'value' => str_replace('_', '-', $langtype),
+=======
+                    'value' => get_html_lang_attribute_value($langtype),
+>>>>>>> master
                 ];
             }
             $node = [

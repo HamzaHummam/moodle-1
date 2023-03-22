@@ -61,10 +61,13 @@ class user_graded_test extends \advanced_testcase {
 
         $event = \core\event\user_graded::create_from_grade($grade_grade);
 
+<<<<<<< HEAD
         $this->assertEventLegacyLogData(
             array($course->id, 'grade', 'update', '/report/grader/index.php?id=' . $course->id, $grade_item->itemname . ': ' . fullname($user)),
             $event
         );
+=======
+>>>>>>> master
         $this->assertEquals(\context_course::instance($course->id), $event->get_context());
         $this->assertSame($event->objecttable, 'grade_grades');
         $this->assertEquals($event->objectid, $grade_grade->id);

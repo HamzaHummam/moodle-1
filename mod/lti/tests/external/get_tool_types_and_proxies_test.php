@@ -15,6 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace mod_lti\external;
+<<<<<<< HEAD
+=======
+
+use core_external\external_api;
+>>>>>>> master
 
 defined('MOODLE_INTERNAL') || die();
 

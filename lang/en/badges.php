@@ -129,6 +129,7 @@ $string['backpackemailverifypending'] = 'A verification email has been sent to <
 $string['backpackemailverifysuccess'] = 'Thanks for verifying your email address. You are now connected to your backpack.';
 $string['backpackemailverifytokenmismatch'] = 'The token in the link you clicked does not match the stored token. Make sure you clicked the link in most recent email you received.';
 $string['backpackexporterror'] = 'Can\'t export the badge to backpack';
+$string['backpackexporterrorwithinfo'] = 'Can\'t export the badge "{$a->badgename}" to backpack. Error: {$a->error}';
 $string['backpackimport'] = 'Badge import settings';
 $string['backpackimport_help'] = 'After the backpack connection is successfully established, badges from your backpack can be displayed on your badges page and your profile page.
 
@@ -141,7 +142,7 @@ $string['badges'] = 'Badges';
 $string['badgedetails'] = 'Badge details';
 $string['badgeimage'] = 'Image';
 $string['badgeimage_help'] = 'The image should be at least 300 x 300 pixels in size. It will be displayed as 300 x 300 pixels on the badge page and 100 x 100 pixels on the user\'s profile page.';
-
+$string['badgeissued'] = 'Badge issued';
 $string['badgeprivacysetting'] = 'Badge privacy settings';
 $string['badgeprivacysetting_help'] = 'Badges you earn can be displayed on your account profile page. This setting allows you to automatically set the visibility of the newly earned badges.
 
@@ -493,6 +494,7 @@ $string['privacy:metadata:manualaward:datemet'] = 'The date when the user was aw
 $string['privacy:metadata:manualaward:issuerid'] = 'The ID of the user awarding the badge';
 $string['privacy:metadata:manualaward:issuerrole'] = 'The role of the user awarding the badge';
 $string['privacy:metadata:manualaward:recipientid'] = 'The ID of the user who is manually awarded a badge';
+$string['recipient'] = 'Badge recipient';
 $string['recipients'] = 'Badge recipients';
 $string['recipientvalidationproblem'] = 'This user cannot be verified as a recipient of this badge.';
 $string['relative'] = 'Relative date';
@@ -556,6 +558,7 @@ $string['targetcode_help'] = 'A unique string identifier for referencing the ext
 $string['testbackpack'] = 'Test backpack \'{$a}\'';
 $string['testsettings'] = 'Test settings';
 $string['type'] = 'Type';
+$string['userbadges'] = 'User badges';
 $string['variablesubstitution'] = 'Variable substitution in messages.';
 $string['variablesubstitution_help'] = 'In a badge message, certain variables can be inserted into the subject and/or body of a message so that they will be replaced with real values when the message is sent. The variables should be inserted into the text exactly as they are shown below. The following variables can be used:
 
@@ -574,13 +577,6 @@ $string['version_help'] = 'The version field may be used to keep track of the ba
 $string['warnexpired'] = ' (This badge has expired!)';
 $string['year'] = 'Year(s)';
 $string['includeauthdetails'] = "Include authentication details with the backpack";
-
-// Deprecated since Moodle 3.9.
-$string['editsettings'] = 'Edit settings';
-$string['sitebackpackverify'] = 'Backpack connection';
-
-// Deprecated since Moodle 3.10.
-$string['backpackneedsupdate'] = 'The backpack connected to this profile does not match the backpack for the site. You need to disconnect and reconnect the backpack.';
 
 // Deprecated since Moodle 3.11.
 $string['addbackpack'] = 'Add backpack';

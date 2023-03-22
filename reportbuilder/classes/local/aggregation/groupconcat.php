@@ -62,16 +62,6 @@ class groupconcat extends base {
     }
 
     /**
-     * We cannot sort this aggregation type
-     *
-     * @param bool $columnsortable
-     * @return bool
-     */
-    public static function sortable(bool $columnsortable): bool {
-        return false;
-    }
-
-    /**
      * Override base method to ensure all SQL fields are concatenated together if there are multiple
      *
      * @param array $sqlfields
@@ -107,13 +97,22 @@ class groupconcat extends base {
      * @param mixed $value
      * @param array $values
      * @param array $callbacks
+     * @param int $columntype
      * @return mixed
      */
+<<<<<<< HEAD
     public static function format_value($value, array $values, array $callbacks) {
+=======
+    public static function format_value($value, array $values, array $callbacks, int $columntype) {
+>>>>>>> master
         $firstvalue = reset($values);
         if ($firstvalue === null) {
             return '';
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
         $formattedvalues = [];
 
         // Store original names of all values that would be present without aggregation.
@@ -131,14 +130,22 @@ class groupconcat extends base {
             }
 
             // Re-construct original values, also ensuring any nulls contained within are restored.
+<<<<<<< HEAD
             $originalvalue = array_map(static function(string $value): ?string {
                 return $value === self::COLUMN_NULL_COALESCE ? null : $value;
             }, array_combine($valuenames, $valuedata));
 
             $originalfirstvalue = reset($originalvalue);
+=======
+            $originalvalues = array_map(static function(string $value): ?string {
+                return $value === self::COLUMN_NULL_COALESCE ? null : $value;
+            }, array_combine($valuenames, $valuedata));
+
+            $originalvalue = column::get_default_value($originalvalues, $columntype);
+>>>>>>> master
 
             // Once we've re-constructed each value, we can apply callbacks to it.
-            $formattedvalues[] = parent::format_value($originalfirstvalue, $originalvalue, $callbacks);
+            $formattedvalues[] = parent::format_value($originalvalue, $originalvalues, $callbacks, $columntype);
         }
 
         $listseparator = get_string('listsep', 'langconfig') . ' ';

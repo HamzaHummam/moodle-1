@@ -1143,7 +1143,7 @@ class restore_create_included_users extends restore_execution_step {
     protected function define_execution() {
 
         restore_dbops::create_included_users($this->get_basepath(), $this->get_restoreid(),
-                $this->task->get_userid(), $this->task->get_progress());
+                $this->task->get_userid(), $this->task->get_progress(), $this->task->get_courseid());
     }
 }
 
@@ -1933,6 +1933,9 @@ class restore_course_structure_step extends restore_structure_step {
 
         $showactivitydatesdefault = ($courseconfig->showactivitydates ?? null);
         $data->showactivitydates = $data->showactivitydates ?? $showactivitydatesdefault;
+
+        $pdffontdefault = ($courseconfig->pdfexportfont ?? null);
+        $data->pdfexportfont = $data->pdfexportfont ?? $pdffontdefault;
 
         $languages = get_string_manager()->get_list_of_translations(); // Get languages for quick search
         if (isset($data->lang) && !array_key_exists($data->lang, $languages)) {
@@ -3749,6 +3752,7 @@ class restore_activity_competencies_structure_step extends restore_structure_ste
             // Sortorder is ignored by precaution, anyway we should walk through the records in the right order.
             $record = (object) $params;
             $record->ruleoutcome = $data->ruleoutcome;
+            $record->overridegrade = $data->overridegrade;
             $coursemodulecompetency = new \core_competency\course_module_competency(0, $record);
             $coursemodulecompetency->create();
         }
@@ -4509,6 +4513,10 @@ class restore_module_structure_step extends restore_structure_step {
             $data->availability = upgrade_group_members_only($data->groupingid, $data->availability);
         }
 
+        if (!has_capability('moodle/course:setforcedlanguage', context_course::instance($data->course))) {
+            unset($data->lang);
+        }
+
         // course_module record ready, insert it
         $newitemid = $DB->insert_record('course_modules', $data);
         // save mapping
@@ -4687,7 +4695,11 @@ class restore_userscompletion_structure_step extends restore_structure_step {
 
         $paths = array();
 
+        // Restore completion.
         $paths[] = new restore_path_element('completion', '/completions/completion');
+
+        // Restore completion view.
+        $paths[] = new restore_path_element('completionview', '/completions/completionviews/completionview');
 
         return $paths;
     }
@@ -4717,6 +4729,29 @@ class restore_userscompletion_structure_step extends restore_structure_step {
             // Normal entry where it doesn't exist already
             $DB->insert_record('course_modules_completion', $data);
         }
+
+        // Add viewed to course_modules_viewed.
+        if (isset($data->viewed) && $data->viewed) {
+            $dataview = clone($data);
+            unset($dataview->id);
+            unset($dataview->viewed);
+            $dataview->timecreated = $data->timemodified;
+            $DB->insert_record('course_modules_viewed', $dataview);
+        }
+    }
+
+    /**
+     * Process the completioinview data.
+     * @param array $data The data from the XML file.
+     */
+    protected function process_completionview(array $data) {
+        global $DB;
+
+        $data = (object)$data;
+        $data->coursemoduleid = $this->task->get_moduleid();
+        $data->userid = $this->get_mappingid('user', $data->userid);
+
+        $DB->insert_record('course_modules_viewed', $data);
     }
 }
 

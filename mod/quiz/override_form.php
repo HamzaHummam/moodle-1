@@ -20,11 +20,13 @@
  * @package    mod_quiz
  * @copyright  2010 Matt Petro
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @todo MDL-76612 delete this file as part of Moodle 4.6 development.
+ * @deprecated This file is no longer required in Moodle 4.2+.
  */
-
 
 defined('MOODLE_INTERNAL') || die();
 
+<<<<<<< HEAD
 require_once($CFG->libdir . '/formslib.php');
 require_once($CFG->dirroot . '/mod/quiz/mod_form.php');
 
@@ -311,3 +313,6 @@ class quiz_override_form extends moodleform {
         return $errors;
     }
 }
+=======
+debugging('This file is no longer required in Moodle 4.2+. Please do not include/require it.', DEBUG_DEVELOPER);
+>>>>>>> master

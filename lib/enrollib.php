@@ -214,13 +214,14 @@ function enrol_is_enabled($enrol) {
 /**
  * Check all the login enrolment information for the given user object
  * by querying the enrolment plugins
- *
  * This function may be very slow, use only once after log-in or login-as.
  *
- * @param stdClass $user
+ * @param stdClass $user User object.
+ * @param bool $ignoreintervalcheck Force to ignore checking configured sync intervals.
+ *
  * @return void
  */
-function enrol_check_plugins($user) {
+function enrol_check_plugins($user, bool $ignoreintervalcheck = true) {
     global $CFG;
 
     if (empty($user->id) or isguestuser($user)) {
@@ -237,12 +238,26 @@ function enrol_check_plugins($user) {
         return;
     }
 
+    $syncinterval = isset($CFG->enrolments_sync_interval) ? (int)$CFG->enrolments_sync_interval : HOURSECS;
+    $needintervalchecking = !$ignoreintervalcheck && !empty($syncinterval);
+
+    if ($needintervalchecking) {
+        $lastsync = get_user_preferences('last_time_enrolments_synced', 0, $user);
+        if (time() - $lastsync < $syncinterval) {
+            return;
+        }
+    }
+
     $inprogress[$user->id] = true;  // Set the flag
 
     $enabled = enrol_get_plugins(true);
 
     foreach($enabled as $enrol) {
         $enrol->sync_user_enrolments($user);
+    }
+
+    if ($needintervalchecking) {
+        set_user_preference('last_time_enrolments_synced', time(), $user);
     }
 
     unset($inprogress[$user->id]);  // Unset the flag
@@ -515,8 +530,8 @@ function enrol_add_course_navigation(navigation_node $coursenode, $course) {
                 }
                 $plugin = $plugins[$instance->enrol];
                 if ($unenrollink = $plugin->get_unenrolself_link($instance)) {
-                    $shortname = format_string($course->shortname, true, array('context' => $coursecontext));
-                    $coursenode->add(get_string('unenrolme', 'core_enrol', $shortname), $unenrollink, navigation_node::TYPE_SETTING, null, 'unenrolself', new pix_icon('i/user', ''));
+                    $coursenode->add(get_string('unenrolme', 'core_enrol'), $unenrollink,
+                        navigation_node::TYPE_SETTING, null, 'unenrolself', new pix_icon('i/user', ''));
                     $coursenode->get('unenrolself')->set_force_into_more_menu(true);
                     break;
                     //TODO. deal with multiple unenrol links - not likely case, but still...
@@ -1447,13 +1462,13 @@ function is_enrolled(context $context, $user = null, $withcapability = '', $only
  * @param string|array $capability optional, may include a capability name, or array of names.
  *      If an array is provided then this is the equivalent of a logical 'OR',
  *      i.e. the user needs to have one of these capabilities.
- * @param int $group optional, 0 indicates no current group and USERSWITHOUTGROUP users without any group; otherwise the group id
+ * @param int|array $groupids The groupids, 0 or [] means all groups and USERSWITHOUTGROUP no group
  * @param bool $onlyactive consider only active enrolments in enabled plugins and time restrictions
  * @param bool $onlysuspended inverse of onlyactive, consider only suspended enrolments
  * @param int $enrolid The enrolment ID. If not 0, only users enrolled using this enrolment method will be returned.
  * @return \core\dml\sql_join Contains joins, wheres, params and cannotmatchanyrows
  */
-function get_enrolled_with_capabilities_join(context $context, $prefix = '', $capability = '', $group = 0,
+function get_enrolled_with_capabilities_join(context $context, $prefix = '', $capability = '', $groupids = 0,
         $onlyactive = false, $onlysuspended = false, $enrolid = 0) {
     $uid = $prefix . 'u.id';
     $joins = array();
@@ -1474,8 +1489,8 @@ function get_enrolled_with_capabilities_join(context $context, $prefix = '', $ca
         $cannotmatchanyrows = $cannotmatchanyrows || $capjoin->cannotmatchanyrows;
     }
 
-    if ($group) {
-        $groupjoin = groups_get_members_join($group, $uid, $context);
+    if ($groupids) {
+        $groupjoin = groups_get_members_join($groupids, $uid, $context);
         $joins[] = $groupjoin->joins;
         $params = array_merge($params, $groupjoin->params);
         if (!empty($groupjoin->wheres)) {
@@ -1499,13 +1514,13 @@ function get_enrolled_with_capabilities_join(context $context, $prefix = '', $ca
  *
  * @param context $context
  * @param string $withcapability
- * @param int $groupid 0 means ignore groups, USERSWITHOUTGROUP without any group and any other value limits the result by group id
+ * @param int|array $groupids The groupids, 0 or [] means all groups and USERSWITHOUTGROUP no group
  * @param bool $onlyactive consider only active enrolments in enabled plugins and time restrictions
  * @param bool $onlysuspended inverse of onlyactive, consider only suspended enrolments
  * @param int $enrolid The enrolment ID. If not 0, only users enrolled using this enrolment method will be returned.
  * @return array list($sql, $params)
  */
-function get_enrolled_sql(context $context, $withcapability = '', $groupid = 0, $onlyactive = false, $onlysuspended = false,
+function get_enrolled_sql(context $context, $withcapability = '', $groupids = 0, $onlyactive = false, $onlysuspended = false,
                           $enrolid = 0) {
 
     // Use unique prefix just in case somebody makes some SQL magic with the result.
@@ -1514,7 +1529,7 @@ function get_enrolled_sql(context $context, $withcapability = '', $groupid = 0, 
     $prefix = 'eu' . $i . '_';
 
     $capjoin = get_enrolled_with_capabilities_join(
-            $context, $prefix, $withcapability, $groupid, $onlyactive, $onlysuspended, $enrolid);
+            $context, $prefix, $withcapability, $groupids, $onlyactive, $onlysuspended, $enrolid);
 
     $sql = "SELECT DISTINCT {$prefix}u.id
               FROM {user} {$prefix}u
@@ -1625,7 +1640,7 @@ function get_enrolled_join(context $context, $useridcolumn, $onlyactive = false,
  *
  * @param context $context
  * @param string $withcapability
- * @param int $groupid 0 means ignore groups, USERSWITHOUTGROUP without any group and any other value limits the result by group id
+ * @param int|array $groupids The groupids, 0 or [] means all groups and USERSWITHOUTGROUP no group
  * @param string $userfields requested user record fields
  * @param string $orderby
  * @param int $limitfrom return a subset of records, starting at this point (optional, required if $limitnum is set).
@@ -1633,11 +1648,11 @@ function get_enrolled_join(context $context, $useridcolumn, $onlyactive = false,
  * @param bool $onlyactive consider only active enrolments in enabled plugins and time restrictions
  * @return array of user records
  */
-function get_enrolled_users(context $context, $withcapability = '', $groupid = 0, $userfields = 'u.*', $orderby = null,
+function get_enrolled_users(context $context, $withcapability = '', $groupids = 0, $userfields = 'u.*', $orderby = null,
         $limitfrom = 0, $limitnum = 0, $onlyactive = false) {
     global $DB;
 
-    list($esql, $params) = get_enrolled_sql($context, $withcapability, $groupid, $onlyactive);
+    list($esql, $params) = get_enrolled_sql($context, $withcapability, $groupids, $onlyactive);
     $sql = "SELECT $userfields
               FROM {user} u
               JOIN ($esql) je ON je.id = u.id
@@ -1659,15 +1674,15 @@ function get_enrolled_users(context $context, $withcapability = '', $groupid = 0
  *
  * @param context $context
  * @param string $withcapability
- * @param int $groupid 0 means ignore groups, any other value limits the result by group id
+ * @param int|array $groupids The groupids, 0 or [] means all groups and USERSWITHOUTGROUP no group
  * @param bool $onlyactive consider only active enrolments in enabled plugins and time restrictions
  * @return int number of users enrolled into course
  */
-function count_enrolled_users(context $context, $withcapability = '', $groupid = 0, $onlyactive = false) {
+function count_enrolled_users(context $context, $withcapability = '', $groupids = 0, $onlyactive = false) {
     global $DB;
 
     $capjoin = get_enrolled_with_capabilities_join(
-            $context, '', $withcapability, $groupid, $onlyactive);
+            $context, '', $withcapability, $groupids, $onlyactive);
 
     $sql = "SELECT COUNT(DISTINCT u.id)
               FROM {user} u

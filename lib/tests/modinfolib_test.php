@@ -274,7 +274,9 @@ class modinfolib_test extends advanced_testcase {
         $prevcacherev = $cacherev;
 
         // Little trick to check that cache is not rebuilt druing the next step - substitute the value in MUC and later check that it is still there.
+        $cache->acquire_lock($course->id);
         $cache->set_versioned($course->id, $cacherev, (object)array_merge((array)$cachedvalue, array('secretfield' => 1)));
+        $cache->release_lock($course->id);
 
         // Clear static cache and call get_fast_modinfo() again (pretend we are in another request). Cache should not be rebuilt.
         course_modinfo::clear_instance_cache();
@@ -801,7 +803,7 @@ class modinfolib_test extends advanced_testcase {
             get_course_and_cm_from_cmid($page->cmid, 'forum');
             $this->fail();
         } catch (moodle_exception $e) {
-            $this->assertEquals('invalidcoursemodule', $e->errorcode);
+            $this->assertEquals('invalidcoursemoduleid', $e->errorcode);
         }
 
         // Invalid module name.
@@ -1098,6 +1100,39 @@ class modinfolib_test extends advanced_testcase {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Test get_cm() method to output course module id in the exception text.
+     *
+     * @covers \course_modinfo::get_cm
+     * @return void
+     */
+    public function test_invalid_course_module_id(): void {
+        global $DB;
+        $this->resetAfterTest();
+
+        $course = $this->getDataGenerator()->create_course();
+        $forum0 = $this->getDataGenerator()->create_module('assign', ['course' => $course->id], ['section' => 0]);
+        $forum1 = $this->getDataGenerator()->create_module('assign', ['course' => $course->id], ['section' => 0]);
+        $forum2 = $this->getDataGenerator()->create_module('assign', ['course' => $course->id], ['section' => 0]);
+
+        // Break section sequence.
+        $modinfo = get_fast_modinfo($course->id);
+        $sectionid = $modinfo->get_section_info(0)->id;
+        $section = $DB->get_record('course_sections', ['id' => $sectionid]);
+        $sequence = explode(',', $section->sequence);
+        $sequence = array_diff($sequence, [$forum1->cmid]);
+        $section->sequence = implode(',', $sequence);
+        $DB->update_record('course_sections', $section);
+
+        // Assert exception text.
+        $this->expectException(\moodle_exception::class);
+        $this->expectExceptionMessage('Invalid course module ID: ' . $forum1->cmid);
+        delete_course($course, false);
+    }
+
+    /**
+>>>>>>> master
      * Tests that if the modinfo cache returns a newer-than-expected version, Moodle won't rebuild
      * it.
      *
